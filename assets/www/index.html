@@ -17,53 +17,50 @@
 
 <!-- page scripts -->
 <script type="text/javascript" charset="utf-8" src="index.js"></script>
+<script type="text/javascript" charset="utf-8" src="add/add.js"></script>
 <script type="text/javascript" charset="utf-8" src="add/map.js"></script>
 <script type="text/javascript" charset="utf-8" src="add/browser.js"></script>
 </head>
 
 <body>
-
+  <!-- ADD -->
   <div data-role="page" id="view">
     <div data-role="header">
       <a href="#legend" data-direction="reverse" data-transition="slide" data-icon="list">manage</a>
       <h1>View Data</h1>
       <a href="#add" data-transition="slide" data-role="button" data-icon="plus">add</a>
     </div>
-    <div data-role="content">
-      <h2>view</h2>
-      <i class="ui-icon-phone"></i>
+    <div data-role="content" id="view-content"></div>
+  </div>
+
+  <!-- ADD -->
+  <div data-role="page" id="legend">
+    <div data-role="header">
+      <h1>legend</h1>
+      <a href="#view" data-transition="slide" data-role="button" data-icon="bar-chart" class="ui-btn-right">view</a>
+    </div>
+    <div data-role="content" id="legend-content">
+      <h2>legend</h2>
+      <input type="text" />
     </div>
   </div>
 
+  <!-- ADD -->
   <div data-role="page" id="add">
     <div data-role="header" id="add-header">
       <a href="#view" data-transition="slide" data-direction="reverse" data-role="button" data-icon="bar-chart">view</a>
       <h1>add</h1>
       <div data-role="navbar" id="add-navbar">
         <ul>
-          <li><a href="#" id="add-browser" class="ui-btn-active">BROWSER</a></li>
-          <li><a href="#" id="add-map">MAP</a></li>
-          <li><a href="#" id="add-search">SEARCH</a></li>
-          <li><a href="#" id="add-history">HISTORY</a></li>
+          <li><a href="#" data-page="add" data-subpage="browser" class="navigation-btn ui-btn-active">BROWSER</a></li>
+          <li><a href="#" data-page="add" data-subpage="map" class="navigation-btn">MAP</a></li>
+          <li><a href="#" data-page="add" data-subpage="search" class="navigation-btn">SEARCH</a></li>
+          <li><a href="#" data-page="add" data-subpage="history" class="navigation-btn">HISTORY</a></li>
         </ul>
       </div>
     </div>
-    <div id="add-page-content" data-role="content">
-      
-    </div>
+    <div id="add-content" data-role="content"></div>
   </div>
-
-  <div data-role="page" id="legend">
-    <div data-role="header">
-      <h1>legend</h1>
-      <a href="#view" data-transition="slide" data-role="button" data-icon="bar-chart" class="ui-btn-right">view</a>
-    </div>
-    <div data-role="content">
-      <h2>legend</h2>
-      <input type="text" />
-    </div>
-  </div>
-
 
   <script type="text/javascript" charset="utf-8" src="assets/apis/accelerometer.js"></script>
   <script type="text/javascript" charset="utf-8" src="assets/apis/camera.js"></script>
