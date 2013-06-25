@@ -18,6 +18,7 @@ $(document).on('click', ".navigation-btn", function(e) {
       //console.log("loading: " + path);
       content.load(path, function() {
         content.attr('data-contains-content', subPage);
+        $("#" + page).trigger("create");
       });
     }
   }
