@@ -19,7 +19,10 @@ $(document).on('click', ".navigation-btn", function(e) {
       content.load(path, function() {
         content.attr('data-contains-content', subPage);
         $("#" + page).trigger("create");
+        $(document).trigger("navigated");
       });
     }
+  } else {
+    $(document).trigger("navigated");
   }
 });

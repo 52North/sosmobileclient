@@ -11,7 +11,6 @@ $(function() {
   });
 });
 
-
 //HELPERS
 function calcContentHeight() {
   return ($('#add').height() - $('#add-header').height() - $('#add-navbar').height());
