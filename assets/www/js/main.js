@@ -27,7 +27,9 @@ require.config({
     'jquery': 'libs/jquery-1.7.2.min',
     'jquerymobile': 'libs/jquery.mobile/jquery.mobile-1.3.1',
     'underscore': 'libs/underscore',
-    'backbone': 'libs/backbone-1.0.0'
+    'backbone': 'libs/backbone-1.0.0',
+    'phonegap': 'js/libs/phonegap/cordova-1.9.0',
+    'jquerygeo': 'js/libs/jquery.geo-1.0b1.min'
   },
   shim: {
     underscore: {
@@ -50,8 +52,8 @@ require([
     // Prevents all anchor click and hash change handling
     $.mobile.linkBindingEnabled = false;
     $.mobile.hashListeningEnabled = false;
-
-    alert("main loaded " + $.mobile.linkBindingEnabled + $.mobile.hashListeningEnabled);
+    $.mobile.defaultPageTransition = "flip";
+    console.log("main.js loaded; jQm-linkBindingEnabled/hashListeningEnabled: " + $.mobile.linkBindingEnabled + "/" + $.mobile.hashListeningEnabled);
 
     require(['app'], function(App){
       App.initialize();

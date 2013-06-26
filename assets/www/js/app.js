@@ -1,11 +1,12 @@
 define([
     'jquery',
+    'jquerymobile',
     'underscore',
     'backbone',
     'router',
   ],
-  function($, _, Backbone, Router) {
-    alert("app js loaded");
+  function($, jqm, _, Backbone, Router) {
+    console.log("app js loaded");
     var initialize = function() {
       // Pass in our Router module and call it's initialize function
       Router.initialize();
