@@ -30,3 +30,9 @@ The UI will be Android-oriented but with JQuery Mobile styling. It consists of 3
 7. [Google Chart Library](https://developers.google.com/chart/)
    Not implemented yet.
 
+## How to build and run this app
+Warning: This app is under development and not ready to use so far.
+You can view the current version either in browser or as a native app on your Android phone.
+- To get it to run on your phone install the [Android ADT package](http://developer.android.com/sdk/installing/bundle.html), clone this repo and import it in your ADT Eclipse. Build it, connect your phone in debug mode to your PC and click run.
+- To simply view the app an your pc, download or clone this repo, navigate to (repo home)/assets/www and open the indx.html file. I prefer [Google Chrome](https://www.google.com/intl/de/chrome/browser/) since phonegap is build on the same engine.
+
