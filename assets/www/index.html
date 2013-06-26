@@ -2,25 +2,13 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<meta http-equiv="Content-type" name="viewport"
-  content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
-<title>SOS Mobile Client</title>
+  <meta http-equiv="Content-type" name="viewport"
+    content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
+  <title>SOS Mobile Client</title>
 
-<link rel="stylesheet" href="js/libs/jquery.mobile/jquery.mobile-1.3.1.min.css" />
-<link rel="stylesheet" href="css/jqm-icon-pack-fa.css" />
-<link rel="stylesheet" href="css/additions.css" />
-
-<!-- JQUERY -->
-<script src="js/libs/jquery.mobile/jquery-1.7.2.min.js"></script>
-<!-- Jquery Mobile -->
-<script src="js/libs/jquery.mobile/jquery.mobile-1.3.1.js"></script>
-<!-- Phonegap -->
-<script src="js/libs/phonegap/cordova-1.9.0.js"></script>
-<!-- JQuery Geo -->
-<script src="js/libs/jquery.geo-1.0b1.min.js"></script>
-
-<!-- RequireJS -->
-<script data-main="js/main" src="js/require.js"></script>
+  <link rel="stylesheet" href="js/libs/jquery.mobile/jquery.mobile-1.3.1.min.css" />
+  <link rel="stylesheet" href="css/jqm-icon-pack-fa.css" />
+  <link rel="stylesheet" href="css/additions.css" />
 </head>
 
 <body>
@@ -31,14 +19,14 @@
       <h1>View Data</h1>
       <a href="#add" data-transition="slide" data-role="button" data-icon="plus">add</a>
     </div>
-    <div data-role="content" id="view-content"></div>
-  </div>
+    <div data-role="content" class="view-content">bla</div>
+  </div> 
 
   <!-- LEGEND -->
   <div data-role="page" id="legend">
     <div data-role="header">
       <h1>legend</h1>
-      <a href="#view" data-transition="slide" data-role="button" data-icon="bar-chart" class="ui-btn-right">view</a>
+       <a href="#view" data-transition="slide" data-role="button" data-icon="bar-chart" class="ui-btn-right">view</a>
     </div>
     <div data-role="content" id="legend-content">
       <h2>legend</h2>
@@ -60,10 +48,25 @@
         </ul>
       </div>
     </div>
-    <div id="add-content" data-role="content"></div>
+    <div class="add-content" data-role="content"></div>
   </div>
 
+
+  <!-- JQUERY -->
+  <script src="js/libs/jquery-1.7.2.min.js"></script>
+  <!-- Jquery Mobile -->
+  <script src="js/libs/jquery.mobile/jquery.mobile-1.3.1.js"></script>
+  <!-- Phonegap 
+  <script src="js/libs/phonegap/cordova-1.9.0.js"></script>
+  <!- - JQuery Geo 
+  <script src="js/libs/jquery.geo-1.0b1.min.js"></script>
+  -->
+  <!-- Backbone -->
+  <script src="js/libs/underscore.js"></script>
+  <script src="js/libs/backbone-1.0.0.js"></script>
+
   <!-- Phonegap API -->
+  <!--
   <script src="js/libs/phonegap/apis/accelerometer.js"></script>
   <script src="js/libs/phonegap/apis/camera.js"></script>
   <script src="js/libs/phonegap/apis/capture.js"></script>
@@ -73,9 +76,62 @@
   <script src="js/libs/phonegap/apis/device.js"></script>
   <script src="js/libs/phonegap/apis/events.js"></script>
   <script src="js/libs/phonegap/apis/file.js"></script>
+
   <script src="js/libs/phonegap/apis/geolocation.js"></script>
+  <!- -
   <script src="js/libs/phonegap/apis/media.js"></script>
   <script src="js/libs/phonegap/apis/notification.js"></script>
   <script src="js/libs/phonegap/apis/storage.js"></script>
+  -->
+  <!-- RequireJS 
+  <script data-main="js/main" src="js/require.js"></script>
+  -->
+
+  <script>
+    var DataView = Backbone.View.extend({
+      el: '.view-content',
+      render: function() {
+        console.log(this.$el);
+        this.$el.html("TEST");
+      }
+    });
+
+    var Router = Backbone.Router.extend({
+      routes: {
+        ['', 'view']:        'view',
+        'add':     'add',
+        'legend':  'legend'
+      }
+    });
+
+    var dataView = new DataView();
+
+    // Prevents all anchor click handling, prevents jQuery Mobile from handling hash changes
+    $.mobile.linkBindingEnabled = false;
+    $.mobile.hashListeningEnabled = false;
+
+    var router = new Router();
+    router.on('route:view', function (){
+      console.log("route view");
+      dataView.render();
+    });
+    router.on('route:add', function() {
+      $.mobile.changePage( "#add", {
+        transition: "slide",
+        reverse: false,
+        changeHash: false
+      });
+    });
+    router.on('route:legend', function() {
+      $.mobile.changePage( "#legend", {
+        transition: "slide",
+        reverse: true,
+        changeHash: false
+      });
+    });
+
+    Backbone.history.start();
+
+  </script>
 </body>
 </html>
