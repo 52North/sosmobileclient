@@ -30,19 +30,39 @@
   -->
 */
 
-
 require.config({ 
   paths: { 
-    jquery: 'libs/jquery-1.7.2.min',
-    jquerymobile: 'libs/jquery.mobile/jquery.mobile-1.3.1',
-    underscore: 'libs/underscore',
-    backbone: 'libs/backbone-1.0.0' }
-  });
+    'jquery': 'libs/jquery-1.7.2.min',
+    'jquerymobile': 'libs/jquery.mobile/jquery.mobile-1.3.1',
+    'underscore': 'libs/underscore',
+    'backbone': 'libs/backbone-1.0.0'
+  },
+  shim: {
+    underscore: {
+      exports: '_'
+    },
+    backbone: {
+      deps: ["underscore", "jquery"],
+      exports: "Backbone"
+    }
+  }
+});
 
 require([
-    'jquery','jquerymobile', 'underscore', 'backbone' 
+    'jquery',
+    'jquerymobile',
+    'underscore',
+    'backbone'
   ], 
   function($, jqm, _, Backbone){
-    alert("loaded");
+    // Prevents all anchor click handling, prevents jQuery Mobile from handling hash changes
+    $.mobile.linkBindingEnabled = false;
+    $.mobile.hashListeningEnabled = false;
+
+    alert("main loaded " + $.mobile.linkBindingEnabled + $.mobile.hashListeningEnabled);
+
+    require(['app'], function(App){
+      App.initialize();
+    });
   }
 );

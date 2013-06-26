@@ -1,15 +1,20 @@
-$(function() {
-  //Load initial views on startup (only once)  
-  $("#view-content").load("view/view.html", function() {
-    $("#view").trigger("create");
-  });
-  $("#legend-content").load("legend/legend.html", function() {
-    $("#legend").trigger("create");
-  });
-  $("#add-content").load("add/add.html", function() {
-    $("#add").trigger("create");
-  });
-});
+define([
+    'jquery',
+    'underscore',
+    'backbone',
+    'router',
+  ],
+  function($, _, Backbone, Router) {
+    alert("app js loaded");
+    var initialize = function() {
+      // Pass in our Router module and call it's initialize function
+      Router.initialize();
+    }
+    return {
+      initialize: initialize
+    };
+  }
+);
 
 //HELPERS
 function calcContentHeight() {

@@ -54,6 +54,7 @@
   <script data-main="js/main" src="js/require.js"></script>
   
   <script>
+  /*
     var DataView = Backbone.View.extend({
       el: '.view-content',
       render: function() {
@@ -62,42 +63,10 @@
       }
     });
 
-    var Router = Backbone.Router.extend({
-      routes: {
-        ['', 'view']:        'view',
-        'add':     'add',
-        'legend':  'legend'
-      }
-    });
+    
 
     var dataView = new DataView();
-
-    // Prevents all anchor click handling, prevents jQuery Mobile from handling hash changes
-    $.mobile.linkBindingEnabled = false;
-    $.mobile.hashListeningEnabled = false;
-
-    var router = new Router();
-    router.on('route:view', function (){
-      console.log("route view");
-      dataView.render();
-    });
-    router.on('route:add', function() {
-      $.mobile.changePage( "#add", {
-        transition: "slide",
-        reverse: false,
-        changeHash: false
-      });
-    });
-    router.on('route:legend', function() {
-      $.mobile.changePage( "#legend", {
-        transition: "slide",
-        reverse: true,
-        changeHash: false
-      });
-    });
-
-    Backbone.history.start();
-
+*/
   </script>
 </body>
 </html>
