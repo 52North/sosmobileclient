@@ -43,7 +43,7 @@ function($, jqm, _, Backbone){ //, ProjectsCollection, projectsListTemplate
       for (var key in this.titles) {
         this.$el.append(template({url:key,visible:this.titles[key],active:route === key ? 'ui-btn-active' : ''}));
       }
-      $(document).trigger("create");
+      this.$el.parent().navbar(); 
     }
   });
 

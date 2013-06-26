@@ -11,7 +11,7 @@ function($, _, Backbone){ //, ProjectsCollection, projectsListTemplate
       console.log("init data view");
     },
     render: function() {
-      this.$el.html("RICHITG");
+      this.$el.html("RICHTIG");
     }
   });
 
