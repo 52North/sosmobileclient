@@ -12,7 +12,7 @@ The UI will be Android-oriented but with JQuery Mobile styling. It consists of 3
   This is the main page. It shows the data in different ways (eg. as table data or line chart)
 - "add"
   You can add new time series in four different ways: via a map, a browser, a search or your personal time series history.
-[target l+f](https://raw.github.com/marfnk/sosmobileclient/master/target_app.PNG "Target look and feel")
+![target l+f](https://raw.github.com/marfnk/sosmobileclient/master/target_app.PNG "Target look and feel")
 
 ## 3. Party Libraries
 1. [Phonegap 1.9.0](http://phonegap.com/)
