@@ -12,7 +12,7 @@ define([
     console.log("router loaded");
     var AppRouter = Backbone.Router.extend({
       routes: {
-        'add/browser': 'view', 
+        'browser': 'view', 
         //main routes
         '':            'view',
         'view':        'view',
@@ -55,7 +55,7 @@ define([
           changeHash: false
         });
       });
-      router.on('defaultAction', function(actions){
+      router.on('route:defaultAction', function(actions){
         // We have no matching route, lets just log what the URL was 
         console.log('No matching route for: ', actions);
       });

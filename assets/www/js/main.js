@@ -48,12 +48,12 @@ require([
     'underscore',
     'backbone'
   ], 
-  function($, jqm, _, Backbone){
+  function($, Jqm, _, Backbone){
     // Prevents all anchor click and hash change handling
-    $.mobile.linkBindingEnabled = false;
-    $.mobile.hashListeningEnabled = false;
-    $.mobile.defaultPageTransition = "flip";
-    console.log("main.js loaded; jQm-linkBindingEnabled/hashListeningEnabled: " + $.mobile.linkBindingEnabled + "/" + $.mobile.hashListeningEnabled);
+    //$.mobile.linkBindingEnabled = false;
+    //$.mobile.hashListeningEnabled = false;
+    //$.mobile.defaultPageTransition = "flip";
+    //console.log("main.js loaded; jQm-linkBindingEnabled/hashListeningEnabled: " + $.mobile.linkBindingEnabled + "/" + $.mobile.hashListeningEnabled);
 
     require(['app'], function(App){
       App.initialize();

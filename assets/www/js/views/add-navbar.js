@@ -19,10 +19,10 @@ function($, jqm, _, Backbone){ //, ProjectsCollection, projectsListTemplate
     //This is a collection of possible routes and their accompanying
     //user-friendly titles
     titles: {
-      "add/browser":"BROWSER",
-      "add/map":"MAP",
-      "add/search":"SEARCH",
-      "add/history":"HISTORY"
+      "#browser":"BROWSER",
+      "#map":"MAP",
+      "#search":"SEARCH",
+      "#history":"HISTORY"
     },
 
     events:{
