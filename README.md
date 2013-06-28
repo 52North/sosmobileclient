@@ -27,8 +27,8 @@ The UI will be Android-oriented but with JQuery Mobile styling. It consists of 3
    This project comes to a size, where the different javascript files become difficult to handle. Require.js priovides some functions to manage the loading of those files.
 6. [JQuery Geo 1.0b1](http://jquerygeo.com/)
    is a JQuery plug-in and basically provides a map with with access to a tile server API. This project uses [OpenStreetMap](http://www.openstreetmap.org/) to display its location data. It has a very easy-to-use API with many functions. You can easily add a map to any JQuery enhanced page with only about 28 characters. Ryan Westphal discusses the different [map plug-ins](http://trippingthebits.com/geopres/).
-7. [Google Chart Library](https://developers.google.com/chart/)
-   Not implemented yet.
+7. [Zurb Off Canvas](http://zurb.com/playground/off-canvas-layouts)
+   is a great responsive CSS layouting framework wich is used for sub-navigation in the "add-data" window.
 
 ## How to build and run this app
 Warning: This app is under development and not ready to use so far.

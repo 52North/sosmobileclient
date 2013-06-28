@@ -19,10 +19,10 @@ function($, jqm, _, Backbone){ //, ProjectsCollection, projectsListTemplate
     //This is a collection of possible routes and their accompanying
     //user-friendly titles
     titles: {
-      "#browser":"BROWSER",
-      "#map":"MAP",
-      "#search":"SEARCH",
-      "#history":"HISTORY"
+      "#add/browser":"BROWSER",
+      "#add/map":"MAP",
+      "#add/search":"SEARCH",
+      "#add/history":"HISTORY"
     },
 
     events:{
@@ -39,11 +39,14 @@ function($, jqm, _, Backbone){ //, ProjectsCollection, projectsListTemplate
     //Each time the routes changes, we refresh the navigation items.
     render:function(route){
       this.$el.empty();
+      ul = $("<ul>");
       var template = _.template("<li><a class='<%=active%>' href='<%=url%>'><%=visible%></a></li>");
       for (var key in this.titles) {
-        this.$el.append(template({url:key,visible:this.titles[key],active:route === key ? 'ui-btn-active' : ''}));
+        ul.append(template({url:key,visible:this.titles[key],active:route === key ? 'ui-btn-active' : ''}));
       }
-      this.$el.parent().navbar(); 
+      this.$el.append(ul);
+      this.$el.navbar();
+      //this.$el.trigger("create");
     }
   });
 

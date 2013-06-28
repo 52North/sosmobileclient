@@ -3,7 +3,7 @@ define([
     'jquerymobile',
     'underscore',
     'backbone',
-    'router',
+    'router'
   ],
   function($, jqm, _, Backbone, Router) {
     console.log("app js loaded");

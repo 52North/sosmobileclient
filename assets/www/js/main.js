@@ -28,8 +28,10 @@ require.config({
     'jquerymobile': 'libs/jquery.mobile/jquery.mobile-1.3.1',
     'underscore': 'libs/underscore',
     'backbone': 'libs/backbone-1.0.0',
-    'phonegap': 'js/libs/phonegap/cordova-1.9.0',
-    'jquerygeo': 'js/libs/jquery.geo-1.0b1.min'
+    'phonegap': 'libs/phonegap/cordova-1.9.0',
+    'jquerygeo': 'libs/jquery.geo-1.0b1.min',
+    'handlebars': 'libs/handlebars-1.0.0',
+    'offcanvas': 'libs/jquery.offcanvas-3.2'
   },
   shim: {
     underscore: {
@@ -38,6 +40,9 @@ require.config({
     backbone: {
       deps: ["underscore", "jquery"],
       exports: "Backbone"
+    },
+    handlebars: {
+      exports: "Handlebars"
     }
   }
 });
@@ -46,14 +51,34 @@ require([
     'jquery',
     'jquerymobile',
     'underscore',
-    'backbone'
+    'backbone',
+    'handlebars'
   ], 
-  function($, Jqm, _, Backbone){
+  function($, Jqm, _, Backbone, Handlebars){
     // Prevents all anchor click and hash change handling
-    //$.mobile.linkBindingEnabled = false;
-    //$.mobile.hashListeningEnabled = false;
-    //$.mobile.defaultPageTransition = "flip";
-    //console.log("main.js loaded; jQm-linkBindingEnabled/hashListeningEnabled: " + $.mobile.linkBindingEnabled + "/" + $.mobile.hashListeningEnabled);
+    $.mobile.linkBindingEnabled = false;
+    $.mobile.hashListeningEnabled = false;
+    console.log("main.js loaded; jQm-linkBindingEnabled/hashListeningEnabled: " + $.mobile.linkBindingEnabled + "/" + $.mobile.hashListeningEnabled);
+
+    //Loading the handlebars
+    Handlebars.registerHelper('getTemplate', function(name) {
+      if (Handlebars.templates === undefined || Handlebars.templates[name] === undefined) {
+          alert("ajax start");
+        $.ajax({
+          url : 'js/views/templates/' + name + '.hbs',
+          success : function(data) {
+            console.log(data);
+            if (Handlebars.templates === undefined) {
+              Handlebars.templates = {};
+            }
+            Handlebars.templates[name] = Handlebars.compile(data);
+          },
+          dataType: "text",
+          async : false
+        });
+      }
+      return Handlebars.templates[name];
+    });
 
     require(['app'], function(App){
       App.initialize();
