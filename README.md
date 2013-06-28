@@ -4,6 +4,10 @@ Mobile Sensor Web Client
 This project aims to build a mobile client for the Sensor Observation Network by [52north](https://wiki.52north.org/bin/view). You will be able to choose from a variety of sensors, add them to your current view and inspect the values.
 This project is attendet at the [University of Hamburg](http://www.uni-hamburg.de), Germany, dep. [VSIS](http://vsis-www.informatik.uni-hamburg.de/?lang=en).
 
+## Status (6/28/2013)
+- Navigation between the main pages
+- Frameworks play together
+
 ## Target look and feel
 The UI will be Android-oriented but with JQuery Mobile styling. It consists of 3 main pages:
 - "legend"
@@ -14,7 +18,7 @@ The UI will be Android-oriented but with JQuery Mobile styling. It consists of 3
   You can add new time series in four different ways: via a map, a browser, a search or your personal time series history.
 ![target l+f](https://raw.github.com/marfnk/sosmobileclient/master/target_app.PNG "Target look and feel")
 
-## 3. Party Libraries
+## Used frameworks
 1. [Phonegap 1.9.0](http://phonegap.com/)
     is wrapper for HTML5 web apps, that bundles and desploys the code as native app for nearly every device. It also provides access to the native phone API to enable features like camera, geolocation and data storage.
 2. [JQuery 1.7.2](http://jquery.com/)
@@ -24,11 +28,13 @@ The UI will be Android-oriented but with JQuery Mobile styling. It consists of 3
 4. [Backbone.js 1.0.0](http://backbonejs.org/) (with [underscore.js](http://underscorejs.org/))
     is a thin client-MVC framework which also handles the routing of the app. Since the Mobile SWC comes with no own server and only the [REST API](https://wiki.52north.org/bin/view/SensorWeb/SensorWebClientRESTInterface) there was a need for a flexible MVC-architecture style.
 5. [Require.js 2.1.6](http://requirejs.org/)
-   This project comes to a size, where the different javascript files become difficult to handle. Require.js priovides some functions to manage the loading of those files.
+   This project comes to a size where the different javascript files become difficult to handle. Require.js priovides some functions to manage the structured loading of those files.
 6. [JQuery Geo 1.0b1](http://jquerygeo.com/)
    is a JQuery plug-in and basically provides a map with with access to a tile server API. This project uses [OpenStreetMap](http://www.openstreetmap.org/) to display its location data. It has a very easy-to-use API with many functions. You can easily add a map to any JQuery enhanced page with only about 28 characters. Ryan Westphal discusses the different [map plug-ins](http://trippingthebits.com/geopres/).
 7. [Zurb Off Canvas](http://zurb.com/playground/off-canvas-layouts)
    is a great responsive CSS layouting framework wich is used for sub-navigation in the "add-data" window.
+8. [Handlebars](http://handlebarsjs.com/)
+   is a templating engine that works well with backbone.js.
 
 ## How to build and run this app
 Warning: This app is under development and not ready to use so far.

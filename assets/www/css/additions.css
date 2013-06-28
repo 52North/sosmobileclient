@@ -1,3 +1,14 @@
+@font-face {
+  font-family: 'OpenSans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Open Sans Light'), local('OpenSans-Light'), url(font/OpenSans.woff) format('woff');
+}
+
+* {
+  font-family: "OpenSans";
+}
+
 #map {
   width: 100%;
   padding: 0px;
