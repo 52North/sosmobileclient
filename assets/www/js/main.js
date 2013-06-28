@@ -30,8 +30,7 @@ require.config({
     'backbone': 'libs/backbone-1.0.0',
     'phonegap': 'libs/phonegap/cordova-1.9.0',
     'jquerygeo': 'libs/jquery.geo-1.0b1.min',
-    'handlebars': 'libs/handlebars-1.0.0',
-    'offcanvas': 'libs/jquery.offcanvas-3.2'
+    'handlebars': 'libs/handlebars-1.0.0'
   },
   shim: {
     underscore: {
@@ -56,18 +55,17 @@ require([
   ], 
   function($, Jqm, _, Backbone, Handlebars){
     // Prevents all anchor click and hash change handling
-    $.mobile.linkBindingEnabled = false;
-    $.mobile.hashListeningEnabled = false;
+    //$.mobile.linkBindingEnabled = false;
+    //$.mobile.hashListeningEnabled = false;
+    //$.mobile.defaultPageTransition = "flip";
     console.log("main.js loaded; jQm-linkBindingEnabled/hashListeningEnabled: " + $.mobile.linkBindingEnabled + "/" + $.mobile.hashListeningEnabled);
 
     //Loading the handlebars
     Handlebars.registerHelper('getTemplate', function(name) {
       if (Handlebars.templates === undefined || Handlebars.templates[name] === undefined) {
-          alert("ajax start");
         $.ajax({
           url : 'js/views/templates/' + name + '.hbs',
           success : function(data) {
-            console.log(data);
             if (Handlebars.templates === undefined) {
               Handlebars.templates = {};
             }

@@ -11,7 +11,10 @@ define([
     console.log("router loaded");
 
     AddView.render(); //only render at startup!
+    DataView.render();
 
+
+    //Do we even need Backbone Routing?
     var AppRouter = Backbone.Router.extend({
       routes: {
         //main routes
@@ -23,21 +26,12 @@ define([
       }, 
       view: function() {
         console.log("route:view");
-        DataView.render();
-        jqm.changePage( "#view", {
-          transition: "slide",
-          reverse: false,
-          changeHash: false
-        });
+        
       },
       add: function() {
         console.log("route:add");
-        AddView.render();
-        jqm.changePage( "#add", {
-          transition: "slide",
-          reverse: false,
-          changeHash: false
-        });
+        //AddView.render();
+        
       },
       addBrowser: function() {
         console.log("route:addBrowser");
@@ -45,11 +39,7 @@ define([
       },
       legend: function() {
         console.log("route:legend");
-        jqm.changePage( "#legend", {
-          transition: "slide",
-          reverse: true,
-          changeHash: false
-        });
+        
       }
     });
 
