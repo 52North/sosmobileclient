@@ -6,6 +6,8 @@
 (function(window, document, undefined)
 {
 
+  alert("hello");
+
     // helper functions
 
     var trim = function(str)

@@ -1,18 +1,16 @@
 define([
   'jquery',
-  'jquerymobile',
   'underscore',
   'backbone',
   'views/data',
   'views/add'
   //'views/legend'
   ],
-  function($, jqm, _, Backbone, DataView, AddView){ //, addView, legendView
+  function($, _, Backbone, DataView, AddView){ //, addView, legendView
     console.log("router loaded");
 
     AddView.render(); //only render at startup!
     DataView.render();
-
 
     //Do we even need Backbone Routing?
     var AppRouter = Backbone.Router.extend({
