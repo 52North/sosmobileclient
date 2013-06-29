@@ -1,0 +1,32 @@
+<div id="map">
+</div>
+<a href="#" id="locate" data-theme="b" class="ui-btn ui-btn-up-c ui-shadow map-button">
+  <i class="ui-icon-location-arrow"></i>
+</a>  
+
+<script>
+  $("#map").height(calcContentHeight());
+  if (typeof map == 'undefined') {
+    var map = $("#map").geomap(
+    {
+      center : [ 10.319823, 51.261915 ],
+      zoom : 10,
+      click : function(e, geo) {
+        map.geomap("append", geo);
+      },
+      services : [ {
+        "class" : "osm",
+        type : "tiled",
+        src : function(view) {
+          return "http://tile.openstreetmap.org/" + view.zoom + "/"
+              + view.tile.column + "/" + view.tile.row + ".png";
+        },
+        attr : "&copy; OpenStreetMap &amp; contributors, CC-BY-SA",
+        style : {
+          visibility : "visible",
+          opacity : 1.0
+        }
+      } ]
+    });
+  }
+</script>

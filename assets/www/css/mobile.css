@@ -1,0 +1,48 @@
+body {
+  position:absolute;
+}
+
+.page {
+    width: 100%;
+    display: -webkit-box;
+    margin: 0 0 0 0;
+    padding: 0;
+    height: 100%;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    -webkit-box-sizing: border-box;
+    -webkit-transition: all 0.25s  ease-in-out;
+    overflow-y: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.page-content {
+  position: absolute;
+  top: 60px;
+  bottom: 0px;
+  overflow-x: auto;
+  width: 100%;
+  /*height: 100%;*/
+
+  
+}
+#inner-wrap, #outer-wrap {
+  position: absolute !important;
+  top: 0px;
+  bottom: 0px;
+}
+
+#nav {
+    position: absolute !important;
+  top: 0px;
+  bottom: 0px;
+}
+
+.nav-content {
+  
+  width: 100%;
+}

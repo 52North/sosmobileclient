@@ -1,0 +1,23 @@
+@font-face {
+  font-family: 'OpenSans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Open Sans Light'), local('OpenSans-Light'), url(font/OpenSans.woff) format('woff');
+}
+
+* {
+  font-family: "OpenSans";
+}
+
+#map {
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+.map-button {
+  width: 40px;
+  height: 40px;
+  z-index: 4999;
+  position: relative;
+  top: -50px;
+}

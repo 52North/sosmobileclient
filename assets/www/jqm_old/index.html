@@ -1,0 +1,48 @@
+<!-- Copyright (c) 2012 Mobile Developer Solutions -->
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-type" name="viewport"
+    content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
+  <title>Mobile SWC</title>
+
+  <link rel="stylesheet" href="js/libs/jquery.mobile/jquery.mobile-1.3.1.min.css" />
+  <link rel="stylesheet" href="css/additions.css" />
+  <link rel="stylesheet" href="css/jqm-icon-pack-fa.css" />
+</head>
+
+<body>
+  <!-- VIEW -->
+  <div data-role="page" id="view">
+
+    <div data-role="panel" id="legend" data-theme="none">
+       <ul data-role="listview">
+        <li>Acura</li>
+        <li>Audi</li>
+        <li>BMW</li>
+        <li>Cadillac</li>
+        <li>Ferrari</li>
+      </ul>
+    </div><!-- /panel -->
+
+    <div data-role="header">
+      <a href="#legend" data-direction="reverse" data-transition="slide" data-icon="list">Legend</a>
+      <h1>Data View</h1>
+      <a href="#add" data-transition="slide" data-role="button" data-icon="plus">Data Browser</a>
+    </div>
+    <div data-role="content" class="view-content">falsch :(</div>
+  </div> 
+
+  <!-- ADD -->
+  <div data-role="page" id="add">
+    <div data-role="header" id="add-header">
+      <a href="#view" data-transition="slide" data-direction="reverse" data-role="button" data-icon="bar-chart">Data View</a>
+      <h1>Data Browser</h1>
+      <div id="add-navbar"></div>
+    </div>
+    <div class="add-content" data-role="content"></div>
+  </div>
+
+  <script data-main="js/main" src="js/require.js"></script>
+</body>
+</html>
