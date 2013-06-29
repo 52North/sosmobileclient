@@ -7,11 +7,7 @@
   width: device-width;
 }
 
-/*
- *
- *  Copyright (c) David Bushell | http://dbushell.com/
- *
- */
+/* Copyright (c) David Bushell | http://dbushell.com/ */
 /* normalize.css v2.0.1 | MIT License | git.io/normalize */
 article,
 aside,
@@ -309,26 +305,24 @@ body {
 
 .nav-btn {
   display: block;
-  width: 30px;
+  color: #fff;
+  width: 40px;
   height: 30px;
+  font-size: 30px;
   padding: 0;
   border: 0;
   outline: none;
-  background: #333333 url("../img/nav-icon.svg") left center no-repeat;
   background-size: 1.875em 1.5em;
   overflow: hidden;
   white-space: nowrap;
-  text-indent: 100%;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
   opacity: 0.7;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-.no-svg .nav-btn {
-  background-image: url("../img/nav-icon.png");
-}
 .nav-btn:hover, .nav-btn:focus {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   opacity: 1;
+  color: #fff;
 }
 
 #outer-wrap {

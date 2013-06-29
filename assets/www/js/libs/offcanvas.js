@@ -1,39 +1,21 @@
-/*!
- *
- *  Copyright (c) David Bushell | http://dbushell.com/
- *
- */
+/* Copyright (c) David Bushell | http://dbushell.com/  BSD & MIT license */
 (function(window, document, undefined)
 {
-
-  alert("hello");
-
-    // helper functions
-
-    var trim = function(str)
-    {
+    var trim = function(str) {
         return str.trim ? str.trim() : str.replace(/^\s+|\s+$/g,'');
     };
-
-    var hasClass = function(el, cn)
-    {
+    var hasClass = function(el, cn) {
         return (' ' + el.className + ' ').indexOf(' ' + cn + ' ') !== -1;
     };
-
-    var addClass = function(el, cn)
-    {
+    var addClass = function(el, cn) {
         if (!hasClass(el, cn)) {
             el.className = (el.className === '') ? cn : el.className + ' ' + cn;
         }
     };
-
-    var removeClass = function(el, cn)
-    {
+    var removeClass = function(el, cn) {
         el.className = trim((' ' + el.className + ' ').replace(' ' + cn + ' ', ' '));
     };
-
-    var hasParent = function(el, id)
-    {
+    var hasParent = function(el, id) {
         if (el) {
             do {
                 if (el.id === id) {
@@ -47,9 +29,6 @@
         }
         return false;
     };
-
-    // normalize vendor prefixes
-
     var doc = document.documentElement;
 
     var transform_prop = window.Modernizr.prefixed('transform'),
@@ -65,35 +44,26 @@
             return props.hasOwnProperty(transition_prop) ? props[transition_prop] : false;
         })();
 
-    window.App = (function()
-    {
-
+    window.App = (function() {
         var _init = false, app = { };
-
         var inner = document.getElementById('inner-wrap'),
-
             nav_open = false,
-
             nav_class = 'js-nav';
 
-
-        app.init = function()
-        {
+        app.init = function() {
             if (_init) {
                 return;
             }
             _init = true;
 
-            var closeNavEnd = function(e)
-            {
+            var closeNavEnd = function(e) {
                 if (e && e.target === inner) {
                     document.removeEventListener(transition_end, closeNavEnd, false);
                 }
                 nav_open = false;
             };
 
-            app.closeNav =function()
-            {
+            app.closeNav =function() {
                 if (nav_open) {
                     // close navigation after transition or immediately
                     var duration = (transition_end && transition_prop) ? parseFloat(window.getComputedStyle(inner, '')[transition_prop + 'Duration']) : 0;
@@ -106,8 +76,7 @@
                 removeClass(doc, nav_class);
             };
 
-            app.openNav = function()
-            {
+            app.openNav = function() {
                 if (nav_open) {
                     return;
                 }
@@ -115,8 +84,7 @@
                 nav_open = true;
             };
 
-            app.toggleNav = function(e)
-            {
+            app.toggleNav = function(e) {
                 if (nav_open && hasClass(doc, nav_class)) {
                     app.closeNav();
                 } else {
@@ -127,32 +95,20 @@
                 }
             };
 
-            // open nav with main "nav" button
             document.getElementById('nav-open-btn').addEventListener('click', app.toggleNav, false);
-
-            // close nav with main "close" button
             document.getElementById('nav-close-btn').addEventListener('click', app.toggleNav, false);
-
-            // close nav by touching the partial off-screen content
-            document.addEventListener('click', function(e)
-            {
+            document.addEventListener('click', function(e) {
                 if (nav_open && !hasParent(e.target, 'nav')) {
                     e.preventDefault();
                     app.closeNav();
                 }
             },
             true);
-
             addClass(doc, 'js-ready');
-
         };
-
         return app;
-
     })();
-
     if (window.addEventListener) {
         window.addEventListener('DOMContentLoaded', window.App.init, false);
     }
-
 })(window, window.document);
