@@ -99,8 +99,8 @@
             document.getElementById('nav-close-btn').addEventListener('click', app.toggleNav, false);
             document.addEventListener('click', function(e) {
                 if (nav_open && !hasParent(e.target, 'nav')) {
-                    e.preventDefault();
-                    app.closeNav();
+                    //e.preventDefault();
+                    //app.closeNav();
                 }
             },
             true);

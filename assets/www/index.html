@@ -5,10 +5,11 @@
 	<title>Gumby - A Flexible, Responsive CSS Framework - Powered by SASS</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
+  <link rel="stylesheet" href="css/pagetransitions.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/font-awesome.css">
   <link rel="stylesheet" href="css/gumby.css">
-	<link rel="stylesheet" href="css/mobile.css">
+  <link rel="stylesheet" href="css/mobile.css">
   <link rel="stylesheet" href="css/offcanvas.css">
 </head>
 
@@ -29,7 +30,8 @@
     </div>
   </div>
 
-  <div class="page" id="view-page">
+
+  <div class="page from-left in" id="view-page">
     <div id="outer-wrap">
       <div id="inner-wrap">
 
@@ -38,149 +40,56 @@
           <h1 class="block-title"><i class="icon-bar-chart"></i> Data View</h1>
           <a class="nav-btn nav-btn-right" href="#add"><i class="icon-plus"></i></a>
         </header>
-          
-          <nav id="nav" role="navigation">
-            <ul class="nav-content">
-              <li class="is-active">
-                  <a href="#">Chapter 1</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 2</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 3</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 4</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 4</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 4</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 4</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 4</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 4</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 4</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 4</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 4</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 4</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 4</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 4</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 4</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 4</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 4</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 4</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 4</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 4</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 4</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 4</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 4</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 4</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 4</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 4</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 4</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 4</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 4</a>
-              </li><!--
-           --><li>
-                  <a href="#">Chapter 4</a>
-              </li>
-            </ul>
-            <a class="close-btn" id="nav-close-btn" href="#view">Return to Content</a>
-          </nav>
-
+        <!-- LEGEND (belongs to view-page) -->
+        <nav id="nav" role="navigation">
+          <ul class="nav-content">
+            <li class="is-active">
+                <a href="#">Chapter 1</a>
+            </li><!--
+         --><li>
+                <a href="#">Chapter 2</a>
+            </li><!--
+         --><li>
+                <a href="#">Chapter 3</a>
+            </li><!--
+         --><li>
+                <a href="#">Chapter 4</a>
+            </li>
+          </ul>
+          <a class="close-btn" id="nav-close-btn" href="#view">Return to Content</a>
+        </nav>
           <div class="page-content" role="main">
-
-
-            <div class="row">
-            <div class="twelve columns">
-            <section class="pill tabs">
-            <ul class="tab-nav">
-            <li class="active"><a href="#">Tab 1</a></li>
-            <li><a href="#">Tab 2</a></li>
-            <li><a href="#">Tab 3</a></li>
-            </ul>
-            <div class="tab-content active">
-            <p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus...</p>
+            <div class="row"  gumby-fixed="top">
+              <div class="twelve columns">
+                <section class="pill tabs">
+                  <ul class="tab-nav">
+                    <li class="active"><a href="#">Tab 1</a></li>
+                    <li><a href="#">Tab 2</a></li>
+                    <li><a href="#">Tab 3</a></li>
+                  </ul>
+                  <div class="tab-content active">
+                    <p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus...</p>
+                  </div>
+                  <div class="tab-content">
+                    <p>Morbi tincidunt, dui sit amet facilisis feugiat...</p>
+                  </div>
+                  <div class="tab-content">
+                    <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti...</p>
+                  </div>
+                </section>
+              </div>
             </div>
-            <div class="tab-content">
-            <p>Morbi tincidunt, dui sit amet facilisis feugiat...</p>
-            </div>
-            <div class="tab-content">
-            <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti...</p>
-            </div>
-            </section>
-            </div>
-            </div>
-
-
             <article class="block prose">
-              <h1>HEadline</h1>
-              <p><a href="#" class="btn primary medium switch" gumby-trigger="#modal1">Open Modal</a>This is my awesome paragraph text, it is the base style/size for paragraph text. We love 16px for body copy as it provides for a more consistent cross browser experience. It is also digitally equivalent to to 12pt standard set in print design. We also love the golden ratio, all of the type set here is based off of that deliciously elegant ratio. Enjoy!</p>
-              <h2><i class="icon-music"></i>My Cool Second Level Headline</h2>
-              <p>This is my awesome paragraph text, it is the base style/size for paragraph text. We love 16px for body copy as it provides for a more consistent cross browser experience. It is also digitally equivalent to to 12pt standard set in print design. We also love the golden ratio, all of the type set here is based off of that deliciously elegant ratio. Enjoy!</p>
-              <h3>My Cool Third Level Headline</h3>
-              <p>This is my awesome paragraph text, it is the base style/size for paragraph text. We love 16px for body copy as it provides for a more consistent cross browser experience. It is also digitally equivalent to to 12pt standard set in print design. We also love the golden ratio, all of the type set here is based off of that deliciously elegant ratio. Enjoy!</p>
-              <h4>My Cool Fourth Level Headline</h4>
-              <p>This is my awesome paragraph text, it is the base style/size for paragraph text. We love 16px for body copy as it provides for a more consistent cross browser experience. It is also digitally equivalent to to 12pt standard set in print design. We also love the golden ratio, all of the type set here is based off of that deliciously elegant ratio. Enjoy!</p>
-              <h5>My Cool Fifth Level Headline</h5>
-              <p>This is my awesome paragraph text, it is the base style/size for paragraph text. We love 16px for body copy as it provides for a more consistent cross browser experience. It is also digitally equivalent to to 12pt standard set in print design. We also love the golden ratio, all of the type set here is based off of that deliciously elegant ratio. Enjoy!</p>
-              <h6>My Cool Sixth Level Headline</h6>
-              <p>This is my awesome paragraph text, it is the base style/size for paragraph text. We love 16px for body copy as it provides for a more consistent cross browser experience. It is also digitally equivalent to to 12pt standard set in print design. We also love the golden ratio, all of the type set here is based off of that deliciously elegant ratio. Enjoy!</p>
+              <h1>Content of Page</h1>
+              <p><a href="#" class="btn primary medium switch" gumby-trigger="#modal1">Open Modal</a></p>
             </article>
-
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="page from-right out" id="add-page">
+
     </div>
 
     <!-- SIDE PANEL - fix -->

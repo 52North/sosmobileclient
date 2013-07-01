@@ -447,10 +447,10 @@ footer[role="contentinfo"] {
 #nav li a {
   padding: 0.85714em 2.14286em;
 }
-
+/* set legend widht here */
 .js-ready #nav {
   height: 100%;
-  width: 70%;
+  width: 200px;
   background: #333333;
   -webkit-box-shadow: inset -1.5em 0 1.5em -0.75em rgba(0, 0, 0, 0.25);
   -moz-box-shadow: inset -1.5em 0 1.5em -0.75em rgba(0, 0, 0, 0.25);
@@ -468,16 +468,16 @@ footer[role="contentinfo"] {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   opacity: 1;
 }
-
+/* set legend widht here */
 .js-ready #nav {
-  left: -70%;
+  left: -200px;
 }
 .js-ready #inner-wrap {
   left: 0;
 }
-
+/* set legend widht here */
 .js-nav #inner-wrap {
-  left: 70%;
+  left: -200px;
 }
 
 .csstransforms3d.csstransitions.js-ready #nav {
@@ -511,12 +511,13 @@ footer[role="contentinfo"] {
   backface-visibility: hidden;
 }
 
+/* set legend widht here */
 .csstransforms3d.csstransitions.js-nav #inner-wrap {
-  -webkit-transform: translate3d(70%, 0, 0) scale3d(1, 1, 1);
-  -moz-transform: translate3d(70%, 0, 0) scale3d(1, 1, 1);
-  -ms-transform: translate3d(70%, 0, 0) scale3d(1, 1, 1);
-  -o-transform: translate3d(70%, 0, 0) scale3d(1, 1, 1);
-  transform: translate3d(70%, 0, 0) scale3d(1, 1, 1);
+  -webkit-transform: translate3d(200px, 0, 0) scale3d(1, 1, 1);
+  -moz-transform: translate3d(200px, 0, 0) scale3d(1, 1, 1);
+  -ms-transform: translate3d(200px, 0, 0) scale3d(1, 1, 1);
+  -o-transform: translate3d(200px, 0, 0) scale3d(1, 1, 1);
+  transform: translate3d(200px, 0, 0) scale3d(1, 1, 1);
 }
 
 .csstransforms3d.csstransitions.js-ready #nav .block {

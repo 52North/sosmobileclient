@@ -27,10 +27,6 @@ However, this blank file is available if you prefer
   src: local('Open Sans Bold'), local('OpenSans-Bold'), url('fonts/opensans-bold.woff') format('woff');
 }
 
-.nav-button-right {
-
-}
-
 .top {
   z-index: 100;
   position: relative;
