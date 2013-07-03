@@ -1,125 +1,162 @@
+@panel-size: 200px; //percentage or pixels
+
 body {
   position:absolute;
 }
 
-@panel-size: 0.4; //40% - always percentages!
 .panel {
   display: -webkit-box;
   margin: 0 0 0 0;
   padding: 0;
   height: 100%;
-  -webkit-box-orient: vertical;
-  -webkit-box-align: stretch;
-  -webkit-box-sizing: border-box;
-  -webkit-transition: all 0.25s ease-in-out;
   overflow-y: auto;
   position: absolute;
   top: 0;
   bottom: 0;
   background: yellow;
-  z-index: 20; //Panel always on top
+  z-index: 11; //Panel always on top
+  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  -webkit-box-sizing: border-box;
+  -moz-transform: translate3d(0, 0, 0);
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  -moz-box-sizing: border-box;
+  width: @panel-size;
+      
+   &.from-left,
+   &.from-right {
+    -webkit-transition: opacity 300ms 100ms, -webkit-transform 500ms ease;
+    -webkit-transition-delay: ease, 0s;
+    -moz-transition: opacity 300ms 100ms ease, -moz-transform 500ms ease;
+    -o-transition: opacity 300ms 100ms ease, -o-transform 500ms ease;
+    transition: opacity 300ms 100ms ease, transform 500ms ease;
+    -webkit-transform-origin: 50% 0%;
+    -moz-transform-origin: 50% 0%;
+    -ms-transform-origin: 50% 0%;
+    -o-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+   }
 
-  &.from-right {
+   &.from-right {
+    right: 0;
     &.out {
-      left: percentage(1);
-      right: percentage(-1 * @panel-size);
-      width: 0;
+      -webkit-transform: translate3d(100%, 0, 0) scale3d(1, 1, 0.5);
+      -moz-transform: translate3d(100%, 0, 0) scale3d(1, 1, 0.5);
+      -ms-transform: translate3d(100%, 0, 0) scale3d(1, 1, 0.5);
+      -o-transform: translate3d(100%, 0, 0) scale3d(1, 1, 0.5);
+      transform: translate3d(100%, 0, 0) scale3d(1, 1, 0.5);
     }
     &.in {
-      right: 0;
-      left: percentage(1 - @panel-size);
-      width: percentage(@panel-size);
+      -webkit-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+      -moz-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+      -ms-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+      -o-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+      transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
       box-shadow: -15px 0px 10px 0px rgba(50, 50, 50, 0.3); 
     }
   }
   &.from-left {
+    left: 0;
     &.out {
-      right: percentage(1);
-      left: percentage(@panel-size * -1);
-      width: 0;
+      -webkit-transform: translate3d(-100%, 0, 0) scale3d(1, 1, 0.5);
+      -moz-transform: translate3d(-100%, 0, 0) scale3d(1, 1, 0.5);
+      -ms-transform: translate3d(-100%, 0, 0) scale3d(1, 1, 0.5);
+      -o-transform: translate3d(-100%, 0, 0) scale3d(1, 1, 0.5);
+      transform: translate3d(-100%, 0, 0) scale3d(1, 1, 0.5);
     }
     &.in {
-      left: 0;
-      right: percentage(1 - @panel-size);
-      width: percentage(@panel-size);
+      -webkit-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+      -moz-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+      -ms-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+      -o-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+      transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
       box-shadow: 15px 0px 10px 0px rgba(50, 50, 50, 0.3); 
     }
   }
-
-  &.from-right,
-  &.from-left {
-    transition-property: right, left, width;
-    transition-duration: 0.5s, 0.5s, 0.5s;
-  }
-}
-
-.page-content {
-  position: absolute;
-  top: 60px;
-  bottom: 0px;
-  overflow-y: auto;
-  width: 100%;
 }
 
 .page {
-  width: 100%;
   display: -webkit-box;
   margin: 0 0 0 0;
   padding: 0;
   height: 100%;
-  -webkit-box-orient: vertical;
-  -webkit-box-align: stretch;
-  -webkit-box-sizing: border-box;
-  -webkit-transition: all 0.25s ease-in-out;
   overflow-y: auto;
   position: absolute;
   top: 0;
-  left: 0;
   bottom: 0;
-  right: 0;
-
-  &.from-right.out {
+  z-index: 10; //Panel always on top
+  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  -webkit-box-sizing: border-box;
+  -moz-transform: translate3d(0, 0, 0);
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  -moz-box-sizing: border-box;
+  width: 100%;
+  
+  .page-content {
     position: absolute;
-    left: 100%;
-    right: 100%;
-  }
-  &.from-left.out {
-    position: absolute;
-    right: -100%;
-    left: -100%;
-  }
-  &.from-bottom.out {
-    position: absolute;
-    top: 100%;
-    bottom: 100%;
-  }
-  &.from-top.out {
-    position: absolute;
-    top: -100%;
-    bottom: -100%;
-  }
-
-  &.out {
-    opacity: 0.5;
-  }
-  &.in {
-    opacity: 1;
-    left: 0px; 
-    top: 0px;
-    left: 0px; 
-    top: 0px;
-    z-index: 10;
-  }
-
-  &.from-right,
-  &.from-left,
-  &.from-top,
-  &.from-bottom {
-    transition-property: opacity, right, left;
-    transition-duration: 0.5s, 0.5s, 0.5s;
+    top: 60px;
+    bottom: 0px;
+    overflow-y: auto;
+    width: 100%;
   }
 
   &.panel-bg {
     opacity: 0.5;
+  }
+
+  &.from-left,
+  &.from-right {
+    -webkit-transition: opacity 300ms 100ms, -webkit-transform 500ms ease;
+    -webkit-transition-delay: ease, 0s;
+    -moz-transition: opacity 300ms 100ms ease, -moz-transform 500ms ease;
+    -o-transition: opacity 300ms 100ms ease, -o-transform 500ms ease;
+    transition: opacity 300ms 100ms ease, transform 500ms ease;
+    -webkit-transform-origin: 50% 0%;
+    -moz-transform-origin: 50% 0%;
+    -ms-transform-origin: 50% 0%;
+    -o-transform-origin: 50% 0%;
+    transform-origin: 50% 0%;
+  }
+
+  &.from-right {
+    right: 0;
+    &.out {
+      -webkit-transform: translate3d(100%, 0, 0) scale3d(1, 1, 0.5);
+      -moz-transform: translate3d(100%, 0, 0) scale3d(1, 1, 0.5);
+      -ms-transform: translate3d(100%, 0, 0) scale3d(1, 1, 0.5);
+      -o-transform: translate3d(100%, 0, 0) scale3d(1, 1, 0.5);
+      transform: translate3d(100%, 0, 0) scale3d(1, 1, 0.5);
+    }
+    &.in {
+      -webkit-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+      -moz-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+      -ms-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+      -o-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+      transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+      box-shadow: -15px 0px 10px 0px rgba(50, 50, 50, 0.3); 
+    }
+  }
+  &.from-left {
+    left: 0;
+    &.out {
+      -webkit-transform: translate3d(-100%, 0, 0) scale3d(1, 1, 0.5);
+      -moz-transform: translate3d(-100%, 0, 0) scale3d(1, 1, 0.5);
+      -ms-transform: translate3d(-100%, 0, 0) scale3d(1, 1, 0.5);
+      -o-transform: translate3d(-100%, 0, 0) scale3d(1, 1, 0.5);
+      transform: translate3d(-100%, 0, 0) scale3d(1, 1, 0.5);
+    }
+    &.in {
+      -webkit-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+      -moz-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+      -ms-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+      -o-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+      transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+      box-shadow: 15px 0px 10px 0px rgba(50, 50, 50, 0.3); 
+    }
   }
 }

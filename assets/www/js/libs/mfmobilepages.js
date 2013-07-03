@@ -45,6 +45,15 @@ $(function() {
     }
   });
 
+  $(document).click(function(event) {
+    //if any panel open 
+    if ($(".panel.in").size() > 0) {
+      //if outside a panel: close panel
+      if ($(event.target).parents(".panel").size() == 0 && !$(event.target).hasClass("panel") && $(event.target).parents(".page-btn").size() == 0) {
+       $(".close-panel-btn").trigger("click");
+      }
+    }
+  });
 
 
 });
