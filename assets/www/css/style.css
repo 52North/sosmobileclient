@@ -65,3 +65,8 @@ However, this blank file is available if you prefer
   margin-bottom: 0px !important;
   background: #222222;
 }
+
+/* subnav */ 
+.tab-nav li a {
+  font-size: 13px;
+}

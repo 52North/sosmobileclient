@@ -2,15 +2,16 @@ define([
   'jquery',
   'underscore',
   'backbone',
+  'mfmobilepages',
   'views/data',
-  'views/add'
+  'views/browser'
   //'views/legend'
   ],
-  function($, _, Backbone, DataView, AddView){ //, addView, legendView
+  function($, _, Backbone, MobilePages, DataView, BrowserView){ //, addView, legendView
     console.log("router loaded");
 
-    AddView.render(); //only render at startup!
     DataView.render();
+    BrowserView.render(); //only render at startup!
 
     //Do we even need Backbone Routing?
     var AppRouter = Backbone.Router.extend({
@@ -23,17 +24,15 @@ define([
       }, 
       view: function() {
         console.log("route:view");
+        navigateToPage("#view-page");
       },
       add: function() {
         console.log("route:add");
-      },
-      addBrowser: function() {
-        console.log("route:addBrowser");
-
+        navigateToPage("#add-page");
       },
       legend: function() {
         console.log("route:legend");
-        
+        openPanel("#legend-panel");
       }
     });
 
