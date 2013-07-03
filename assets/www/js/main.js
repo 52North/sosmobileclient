@@ -5,6 +5,7 @@ js/libs/jquery.mobile/jquery.mobile-1.3.1
 js/libs/phonegap/cordova-1.9.0
 js/libs/jquery.geo-1.0b1.min
 js/libs/underscore
+js/libs/less-1.3.3.min
 js/libs/backbone-1.0.0
 --phonegap api
 js/libs/phonegap/apis/accelerometer
@@ -20,12 +21,6 @@ js/libs/phonegap/apis/geolocation
 js/libs/phonegap/apis/media
 js/libs/phonegap/apis/notification
 js/libs/phonegap/apis/storage
-
-  <script src="js/libs/modernizr.js"></script>
-  <script src="js/libs/gumby.min.js"></script>
-  <script src="js/libs/gumby-plugins.js"></script>
-  <script src="js/libs/gumby-main.js"></script>
-
 */
 
 require.config({ 
@@ -39,7 +34,9 @@ require.config({
     'gumby': 'libs/gumby-main',
     'modernizr': 'libs/modernizr',
     'gumby-lib': 'libs/gumby.min',
-    'gumby-plugins': 'libs/gumby-plugins'
+    'gumby-plugins': 'libs/gumby-plugins',
+    'less': 'libs/less-1.3.3.min',
+    'mfmobilepages': 'libs/mfmobilepages'
   },
   shim: {
     underscore: {
@@ -55,6 +52,10 @@ require.config({
     gumby: {
       deps: ["jquery", "modernizr", "gumby-lib", "gumby-plugins"],
       exports: "Gumby"
+    },
+    mfmobilepages: {
+      deps: ["jquery"],
+      exports: "Mfmobile"
     }
   }
 });
@@ -64,9 +65,11 @@ require([
     'underscore',
     'backbone',
     'handlebars',
-    'gumby'
+    'gumby',
+    'less',
+    'mfmobilepages'
   ], 
-  function($, _, Backbone, Handlebars, Gumby, Offcanvas){
+  function($, _, Backbone, Handlebars, Gumby, Offcanvas, Less, Mfmobile){
     // Prevents all anchor click and hash change handling
     console.log("require js initialize");
 

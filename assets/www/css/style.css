@@ -26,7 +26,10 @@ However, this blank file is available if you prefer
   font-weight: 700;
   src: local('Open Sans Bold'), local('OpenSans-Bold'), url('fonts/opensans-bold.woff') format('woff');
 }
-
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('fonts/fontawesome-webfont.woff') format('woff');
+}
 .top {
   z-index: 100;
   position: relative;
@@ -43,6 +46,8 @@ However, this blank file is available if you prefer
 .top .nav-btn {
   position: absolute;
   top: 15px;
+  color: #fff;
+  font-size: 1.875em;
 }
 .top .nav-btn-right {
   right: 30px;

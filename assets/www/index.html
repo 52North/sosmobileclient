@@ -5,12 +5,10 @@
 	<title>Gumby - A Flexible, Responsive CSS Framework - Powered by SASS</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
-  <link rel="stylesheet" href="css/pagetransitions.css">
+  <link rel="stylesheet/less" href="css/mfmobilepages.less">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/font-awesome.css">
   <link rel="stylesheet" href="css/gumby.css">
-  <link rel="stylesheet" href="css/mobile.css">
-  <link rel="stylesheet" href="css/offcanvas.css">
 </head>
 
 
@@ -31,72 +29,56 @@
   </div>
 
 
-  <div class="page from-left in" id="view-page">
-    <div id="outer-wrap">
-      <div id="inner-wrap">
+  <div class="panel from-left out" id="legend-panel">
+    <header role="banner" class="top navbar">
+      <a class="nav-btn nav-btn-left close-panel-btn" data-page-target="#legend-panel" href="#view"><i class="icon-remove"></i></a>
+      <h1 class="block-title"><i class="icon-th-list"></i> Legend</h1>
+    </header>
+  </div>
 
-        <header role="banner" class="top navbar">
-          <a class="nav-btn nav-btn-left" id="nav-open-btn" href="#legend"><i class="icon-th-list"></i></a>
-          <h1 class="block-title"><i class="icon-bar-chart"></i> Data View</h1>
-          <a class="nav-btn nav-btn-right" href="#add"><i class="icon-plus"></i></a>
-        </header>
-        <!-- LEGEND (belongs to view-page) -->
-        <nav id="nav" role="navigation">
-          <ul class="nav-content">
-            <li class="is-active">
-                <a href="#">Chapter 1</a>
-            </li><!--
-         --><li>
-                <a href="#">Chapter 2</a>
-            </li><!--
-         --><li>
-                <a href="#">Chapter 3</a>
-            </li><!--
-         --><li>
-                <a href="#">Chapter 4</a>
-            </li>
-          </ul>
-          <a class="close-btn" id="nav-close-btn" href="#view">Return to Content</a>
-        </nav>
-          <div class="page-content" role="main">
-            <div class="row"  gumby-fixed="top">
-              <div class="twelve columns">
-                <section class="pill tabs">
-                  <ul class="tab-nav">
-                    <li class="active"><a href="#">Tab 1</a></li>
-                    <li><a href="#">Tab 2</a></li>
-                    <li><a href="#">Tab 3</a></li>
-                  </ul>
-                  <div class="tab-content active">
-                    <p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus...</p>
-                  </div>
-                  <div class="tab-content">
-                    <p>Morbi tincidunt, dui sit amet facilisis feugiat...</p>
-                  </div>
-                  <div class="tab-content">
-                    <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti...</p>
-                  </div>
-                </section>
-              </div>
+  <div class="page from-left in" id="view-page">
+    <header role="banner" class="top navbar">
+      <!-- <a class="nav-btn nav-btn-left" id="nav-open-btn" href="#legend"><i class="icon-th-list"></i></a> -->
+      <a class="nav-btn nav-btn-left page-btn" href="#legend" data-page-target="#legend-panel"><i class="icon-th-list"></i></a>
+      <h1 class="block-title"><i class="icon-bar-chart"></i> Data View</h1>
+      <a class="nav-btn nav-btn-right page-btn" data-page-target="#add-page" href="#add"><i class="icon-plus"></i></a>
+    </header>
+    <div class="page-content" role="main">
+      <div class="row"  gumby-fixed="top">
+        <div class="twelve columns">
+          <section class="pill tabs">
+            <ul class="tab-nav">
+              <li class="active"><a href="#">Tab 1</a></li>
+              <li><a href="#">Tab 2</a></li>
+              <li><a href="#">Tab 3</a></li>
+            </ul>
+            <div class="tab-content active">
+              <p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus...</p>
             </div>
-            <article class="block prose">
-              <h1>Content of Page</h1>
-              <p><a href="#" class="btn primary medium switch" gumby-trigger="#modal1">Open Modal</a></p>
-            </article>
-          </div>
+            <div class="tab-content">
+              <p>Morbi tincidunt, dui sit amet facilisis feugiat...</p>
+            </div>
+            <div class="tab-content">
+              <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti...</p>
+            </div>
+          </section>
+        </div>
+        <div class="twelve columns">
+          <h2>Hallo Gumby!</h2>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="page from-right out" id="add-page">
+  <div class="page from-right out" id="add-page">
+       <header role="banner" class="top navbar">
+        <a class="nav-btn nav-btn-left page-btn" href="#view" data-page-target="#view-page"><i class="icon-bar-chart"></i></a>
+        <h1 class="block-title"><i class="icon-plus"></i> Add</h1>
+      </header>
+  </div>
 
-    </div>
-
-    <!-- SIDE PANEL - fix -->
-    <script src="js/libs/modernizr.js"></script>
-    <script src="js/libs/offcanvas.js"></script>
-    <!-- JS APP -->
-    <script data-main="js/main" src="js/require.js"></script>
+  <!-- JS APP -->
+  <script data-main="js/main" src="js/require.js"></script>
 
   </body>
 </html>

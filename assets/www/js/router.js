@@ -16,7 +16,6 @@ define([
     var AppRouter = Backbone.Router.extend({
       routes: {
         //main routes
-        '':            'view',
         'view':        'view',
         'add':         'add',
         'legend':      'legend',
@@ -24,12 +23,9 @@ define([
       }, 
       view: function() {
         console.log("route:view");
-        
       },
       add: function() {
         console.log("route:add");
-        //AddView.render();
-        
       },
       addBrowser: function() {
         console.log("route:addBrowser");
