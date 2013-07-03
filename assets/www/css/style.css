@@ -39,29 +39,29 @@ However, this blank file is available if you prefer
 .top {
   z-index: 100;
   position: relative;
-  color: #fff;
-  background: #333333;
 }
 .top .nav-btn {
   position: absolute;
   top: 15px;
-  color: #fff;
-  font-size: 1.875em;
+  font-size: 30px;
+  color: rgba(255, 255, 255, 0.75);
 }
 .top .nav-btn-right {
-  right: 30px;
+  right: 20px;
 }
 .top .nav-btn-left {
-  left: 30px;
+  left: 20px;
 }
 .top h1 {
   margin: 0;
-  font-size: 1.875em;
-  line-height: 1.2em;
+  font-size: 20px;
+  line-height: 20px;
   text-align: center;
   white-space: nowrap;
   color: #fff !important;
+  padding-top: 19px;
 }
 .navbar {
   margin-bottom: 0px !important;
+  background: #222222;
 }
