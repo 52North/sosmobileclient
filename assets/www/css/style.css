@@ -27,9 +27,15 @@ However, this blank file is available if you prefer
   src: local('Open Sans Bold'), local('OpenSans-Bold'), url('fonts/opensans-bold.woff') format('woff');
 }
 @font-face {
-  font-family: 'FontAwesome';
-  src: url('fonts/fontawesome-webfont.woff') format('woff');
+  font-family: 'Roboto';
+  font-style: normal;
+  src: url('fonts/Roboto-Medium.ttf');
 }
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('fonts/fontawesome-webfont.tff');
+}
+
 .top {
   z-index: 100;
   position: relative;
