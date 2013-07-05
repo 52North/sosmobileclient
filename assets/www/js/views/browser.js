@@ -6,7 +6,6 @@ define([
 ],
 function($, _, Backbone, Handlebars){
   var BrowserView = Backbone.View.extend({
-    el: '#browser-content',
     initialize: function(){
       console.log("init data view");
       

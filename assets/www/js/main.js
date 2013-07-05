@@ -33,8 +33,6 @@ require.config({
     'handlebars': 'libs/handlebars-1.0.0',
     'gumby': 'libs/gumby-main',
     'modernizr': 'libs/modernizr',
-    'gumby-lib': 'libs/gumby.min',
-    'gumby-plugins': 'libs/gumby-plugins',
     'less': 'libs/less-1.3.3.min',
     'mfmobilepages': 'libs/mfmobilepages'
   },
@@ -50,7 +48,7 @@ require.config({
       exports: "Handlebars"
     },
     gumby: {
-      deps: ["jquery", "modernizr", "gumby-lib", "gumby-plugins"],
+      deps: ["jquery", "modernizr", "libs/gumby", "libs/ui/gumby.tabs", "libs/gumby-plugins", "libs/gumby.init"],
       exports: "Gumby"
     },
     mfmobilepages: {

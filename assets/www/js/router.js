@@ -4,14 +4,14 @@ define([
   'backbone',
   'mfmobilepages',
   'views/data',
-  'views/browser'
+  'views/add'
   //'views/legend'
   ],
-  function($, _, Backbone, MobilePages, DataView, BrowserView){ //, addView, legendView
+  function($, _, Backbone, MobilePages, DataView, AddView){ //, addView, legendView
     console.log("router loaded");
 
     DataView.render();
-    BrowserView.render(); //only render at startup!
+    AddView.render();
 
     //Do we even need Backbone Routing?
     var AppRouter = Backbone.Router.extend({

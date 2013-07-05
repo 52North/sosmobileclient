@@ -1,0 +1,10 @@
+<div class="pill tabs" id="add-tabs" gumby-fixed="top">
+  <ul class="tab-nav">
+    {{#each tabs}}
+      <li class="{{active}}"><a href="#browser">{{name}}</a></li> <!-- class= active -->
+    {{/each}}
+  </ul>
+    {{#each tabs}}
+      <div class="tab-content {{active}}" id="{{id}}"></div> <!-- class= active -->
+    {{/each}}
+</div>
