@@ -37,11 +37,11 @@ body {
    &.from-right {
     right: 0;
     &.out {
-      -webkit-transform: translate3d(100%, 0, 0) scale3d(0,1,1);
-      -moz-transform: translate3d(100%, 0, 0) scale3d(0,1,1);
-      -ms-transform: translate3d(100%, 0, 0) scale3d(0,1,1);
-      -o-transform: translate3d(100%, 0, 0) scale3d(0,1,1);
-      transform: translate3d(100%, 0, 0) scale3d(0,1,1);
+      -webkit-transform: translate3d(100%, 0, 0) scale3d(1,1,1);
+      -moz-transform: translate3d(100%, 0, 0) scale3d(1,1,1);
+      -ms-transform: translate3d(100%, 0, 0) scale3d(1,1,1);
+      -o-transform: translate3d(100%, 0, 0) scale3d(1,1,1);
+      transform: translate3d(100%, 0, 0) scale3d(1,1,1);
     }
     &.in {
       -webkit-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
@@ -55,11 +55,11 @@ body {
   &.from-left {
     left: 0;
     &.out {
-      -webkit-transform: translate3d(-100%, 0, 0) scale3d(1, 1, 0.5);
-      -moz-transform: translate3d(-100%, 0, 0) scale3d(1, 1, 0.5);
-      -ms-transform: translate3d(-100%, 0, 0) scale3d(1, 1, 0.5);
-      -o-transform: translate3d(-100%, 0, 0) scale3d(1, 1, 0.5);
-      transform: translate3d(-100%, 0, 0) scale3d(1, 1, 0.5);
+      -webkit-transform: translate3d(-100%, 0, 0) scale3d(1, 1, 1);
+      -moz-transform: translate3d(-100%, 0, 0) scale3d(1, 1, 1);
+      -ms-transform: translate3d(-100%, 0, 0) scale3d(1, 1, 1);
+      -o-transform: translate3d(-100%, 0, 0) scale3d(1, 1, 1);
+      transform: translate3d(-100%, 0, 0) scale3d(1, 1, 1);
     }
     &.in {
       -webkit-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
@@ -125,10 +125,7 @@ body {
       -ms-transform: translate3d(100%, 0, 0) scale3d(1, 1, 1);
       -o-transform: translate3d(100%, 0, 0) scale3d(1, 1, 1);
       transform: translate3d(100%, 0, 0) scale3d(1, 1, 1);
-      transition-property: width;
-      transition-duration: 0s;
-      transition-delay: @duration;
-      width: 0px;
+      //fix me with JS TODO
     }
     &.in {
       -webkit-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
@@ -141,11 +138,11 @@ body {
   &.from-left {
     left: 0;
     &.out {
-      -webkit-transform: translate3d(-100%, 0, 0) scale3d(1, 1, 0.5);
-      -moz-transform: translate3d(-100%, 0, 0) scale3d(1, 1, 0.5);
-      -ms-transform: translate3d(-100%, 0, 0) scale3d(1, 1, 0.5);
-      -o-transform: translate3d(-100%, 0, 0) scale3d(1, 1, 0.5);
-      transform: translate3d(-100%, 0, 0) scale3d(1, 1, 0.5);
+      -webkit-transform: translate3d(-100%, 0, 0) scale3d(1, 1, 1);
+      -moz-transform: translate3d(-100%, 0, 0) scale3d(1, 1, 1);
+      -ms-transform: translate3d(-100%, 0, 0) scale3d(1, 1, 1);
+      -o-transform: translate3d(-100%, 0, 0) scale3d(1, 1, 1);
+      transform: translate3d(-100%, 0, 0) scale3d(1, 1, 1);
     }
     &.in {
       -webkit-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
