@@ -3,9 +3,11 @@ define([
   'underscore',
   'backbone',
   'handlebars',
-  'views/browser'
+  'gumby',
+  'views/browser',
+  'views/map'
 ],
-function($, _, Backbone, Handlebars, BrowserView){
+function($, _, Backbone, Handlebars, Gumby, BrowserView, MapView){
   var AddView = Backbone.View.extend({
     el: '#add-content',
     initialize: function(){
@@ -14,21 +16,26 @@ function($, _, Backbone, Handlebars, BrowserView){
     render: function() {
       var tabs = { tabs: [
           { 'name': 'BROWSER', 'id': 'browser-content', "active": "active"},
-          { 'name': 'MAP', 'id': 'map-content'},
+          { 'name': 'MAP', 'id': 'map-content', 'content-class': 'full-content'},
           { 'name': 'SEARCH', 'id': 'search-content'},
           { 'name': 'HISTORY', 'id': 'history-content'}
         ]};
 
       var template = Handlebars.helpers.getTemplate('add-tabs');
       var html = template(tabs);
-      console.log(Gumby.initialize);
+
       this.$el.html(html);
       
       Gumby.initialize('tabs');
 
-      bv = BrowserView;
-      bv.setElement($('#browser-content'));
-      bv.render();
+      console.log(Backbone);
+      //bv = new BrowserView();
+      //bv.setElement($('#browser-content'));
+      //bv.render();
+
+      mv = new MapView();
+      mv.setElement($('#map-content'));
+      mv.render();
     }
   });
 

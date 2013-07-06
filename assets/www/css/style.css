@@ -70,3 +70,13 @@ However, this blank file is available if you prefer
 .tab-nav li a {
   font-size: 13px;
 }
+
+/* full screen tab content */
+.full-content {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 43px;
+  padding: 0px !important;
+}

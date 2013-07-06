@@ -5,9 +5,9 @@ define([
   'handlebars'
 ],
 function($, _, Backbone, Handlebars){
-  var BrowserView = Backbone.View.extend({
+  BrowserView = Backbone.View.extend({
     initialize: function(){
-      console.log("init data view");
+      
       
     },
     render: function() {
@@ -18,5 +18,5 @@ function($, _, Backbone, Handlebars){
     }
   });
 
-  return new BrowserView();
+  return BrowserView;
 });

@@ -1,14 +1,5 @@
+/*
 $(function() {
-  $(".close-panel-btn").click(function(event) {
-    selector = $(this).attr("data-page-target");
-    if ($(selector).hasClass("panel")) {
-      $(selector).toggleClass("out in");
-
-      //every page: opacity 1
-      $(".page.in").removeClass("panel-bg");
-    }
-  });
-
   $(document).click(function(event) {
     //if any panel open 
     if ($(".panel.in").size() > 0) {
@@ -16,22 +7,27 @@ $(function() {
       if ($(event.target).parents(".panel").size() == 0
           && !$(event.target).hasClass("panel")
           && $(event.target).parents(".page-btn").size() == 0) {
-       $(".close-panel-btn").trigger("click");
+       closeAllPanels();
       }
     }
   });
 });
+*/ 
+
+function closeAllPanels() {
+  //close all panels
+  $(".panel.in").each(function() {
+     $(this).addClass("out");
+     $(this).removeClass("in");
+  });
+  //every page: opacity 1
+  $(".page.in").removeClass("panel-bg");
+}
 
 function navigateToPage(selector) {
+  closeAllPanels();
   //if target page isn't already in
   if (!$(selector).hasClass("in")) {
-    //close all panels
-    $(".panel.in").each(function() {
-       $(this).addClass("out");
-       $(this).removeClass("in");
-    });
-    //every page: opacity 1
-    $(".page.in").removeClass("panel-bg");
     //every in-page: out
     $(".page.in").each(function() {
        $(this).addClass("out");
