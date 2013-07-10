@@ -13,7 +13,6 @@
 
 
 <body>
-
   <div class="modal" id="modal1">
     <div class="content">
       <a class="close switch" gumby-trigger="|#modal1"><i class="icon-cancel" /></i></a>
@@ -21,7 +20,6 @@
         <div class="ten columns centered center-text">
           <h2>This is a modal.</h2>
           <p>Gumby modals are easy to make using Toggles &amp; Switches. The <span class="label default">.modal</span> class already has the required styles which you can open and close using Toggles &amp; Switches.</p>
-
           <p class="btn primary medium"><a href="#" class="switch" gumby-trigger="|#modal1">Close Modal</a></p>
         </div>
       </div>
@@ -43,15 +41,7 @@
       <h1><i class="icon-bar-chart"></i> Data View</h1>
       <a class="nav-btn nav-btn-right page-btn" data-page-target="#add-page" href="#add"><i class="icon-plus"></i></a>
     </header>
-    <div class="page-content">
-      <div class="row"  gumby-fixed="top">
-        <div class="twelve columns">
-          
-        </div>
-        <div class="twelve columns">
-          <h2>Hallo Gumby!</h2>
-        </div>
-      </div>
+    <div class="page-content" id="view-content">
     </div>
   </div>
 
@@ -63,8 +53,74 @@
     <div id="add-content" class="page-content" ></div>
   </div>
 
-  <!-- JS APP -->
+  <!-- JS APP 
   <script data-main="js/main" src="js/require.js"></script>
+  -->
+  <!-- 3. Party -->
+  <script src="js/libs/jquery-1.7.2.min.js"></script>
+  <script src="js/libs/underscore.js"></script>
+  <script src="js/libs/backbone-1.0.0.js"></script>
+  <script src="js/libs/jquery.geo-1.0b1.min.js"></script>
+  <script src="js/libs/handlebars-1.0.0.js"></script>
+  <script src="js/libs/modernizr.js"></script>
+  <script src="js/libs/less-1.3.3.min.js"></script>
+  <script src="js/libs/mfmobilepages.js"></script>
+  
+  <!-- Phonegap -->
+  <script src="js/libs/phonegap/cordova-1.9.0.js"></script>
+  <script src="js/libs/phonegap/apis/geolocation.js"></script>
+
+  <!-- Gumby! -->
+  <script src="js/libs/gumby.js"></script>
+  <script src="js/libs/ui/gumby.tabs.js"></script>
+  <script src="js/libs/gumby-plugins.js"></script>
+  <script src="js/libs/gumby.init.js"></script>
+  <script src="js/libs/gumby-main.js"></script>
+
+
+  <!-- Router -->
+  <script src="js/router.js"></script>
+
+  <!-- Models -->
+  <script src="js/models/service.js"></script>
+  
+  <!-- Collections -->
+  <script src="js/collections/services.js"></script>
+  <!-- <script src="js/collections/current_timeseries.js"></script> -->
+
+  <!-- Views -->
+  <script src="js/views/add.js"></script>
+  <script src="js/views/browser.js"></script>
+  <script src="js/views/map.js"></script>
+  <script src="js/views/data.js"></script>
+
+  <script>
+    $(function() {
+      Handlebars.registerHelper('getTemplate', function(name) {
+        if (Handlebars.templates === undefined || Handlebars.templates[name] === undefined) {
+          $.ajax({
+            url : 'js/views/templates/' + name + '.hbs',
+            success : function(data) {
+              if (Handlebars.templates === undefined) {
+                Handlebars.templates = {};
+              }
+              Handlebars.templates[name] = Handlebars.compile(data);
+            },
+            dataType: "text",
+            async : false
+          });
+        }
+        return Handlebars.templates[name];
+      });
+
+
+      new AppRouter();
+      Backbone.history.start();
+
+      new DataView().render();
+      new AddView().render();
+    });
+  </script>
 
   </body>
 </html>

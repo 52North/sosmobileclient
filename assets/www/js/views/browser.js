@@ -1,22 +1,14 @@
-define([
-  'jquery',
-  'underscore',
-  'backbone',
-  'handlebars'
-],
-function($, _, Backbone, Handlebars){
-  BrowserView = Backbone.View.extend({
-    initialize: function(){
-      
-      
-    },
-    render: function() {
-      var compiledTemplate = Handlebars.helpers.getTemplate('hello');
-      var html = compiledTemplate({ name : 'World' });
+BrowserView = Backbone.View.extend({
+  initialize: function(){
 
-      this.$el.html(html);
-    }
-  });
+    svc = new Services();
+    //svc.areYouThere();
+    svc.fetch();
+  },
+  render: function() {
+    var compiledTemplate = Handlebars.helpers.getTemplate('hello');
+    var html = compiledTemplate({ name : 'World' });
 
-  return BrowserView;
+    this.$el.html(html);
+  }
 });
