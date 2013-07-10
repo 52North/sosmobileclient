@@ -1,10 +1,19 @@
-var MapView = Backbone.View.extend({  
+var MapView = Backbone.View.extend({ 
+
   initialize: function(){
-    navigator.geolocation.watchPosition(this.updateLocation, this.onError, { maximumAge: 3000, timeout: 5000, enableHighAccuracy: true });
+    console.log(this.options.services)
+    //navigator.geolocation.watchPosition(this.updateLocation, this.onError, { maximumAge: 3000, timeout: 5000, enableHighAccuracy: true });
   },
 
   render: function() {
-    this.$el.geomap({
+    this.renderSelect();
+
+    map = $("<div>");
+    map.height(400);
+    map.width(300);
+    this.$el.append(map);
+
+    map.geomap({
       center : [ 7.652469,51.934145 ],
       zoom : 10,
       click : function(e, geo) {
@@ -24,6 +33,12 @@ var MapView = Backbone.View.extend({
         }
       }]
     });
+
+  },
+  renderSelect: function() {
+    var compiledTemplate = Handlebars.helpers.getTemplate('service_select');
+    var html = compiledTemplate({services: this.options.services.toJSON()});
+    this.$el.append(html);
   },
   updateLocation: function(position) {
     coord = [position.coords.longitude, position.coords.latitude];
@@ -31,6 +46,7 @@ var MapView = Backbone.View.extend({
       var accuracyBuffer = position.coords.accuracy / this.$el.geomap("option", "pixelSize");
       this.$el.geomap("append", { type: "Point", coordinates: coord }, { color: "#cc0", width: accuracyBuffer, height: accuracyBuffer, borderRadius: accuracyBuffer }, false);
       this.$el.geomap("option", "center", coord);
+
     }
   },
   onError: function(error) {

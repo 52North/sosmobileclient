@@ -1,0 +1,51 @@
+[
+   {
+       "itemName": "Syke_Snow",
+       "title": "SYKE_SnowCoursesInSitu",
+       "url": "http://paikkatieto.ymparisto.fi/arcgis/rest/services/InSitu/SYKE_SnowCoursesInSitu/MapServer/exts/SOSExtension/",
+       "type": "SOS",
+       "version": "2.0.0"
+   },
+   {
+       "itemName": "PEGELONLINE",
+       "title": "52North SOS",
+       "url": "http://pegelonline.wsv.de/webservices/gis/gdi-sos",
+       "type": "SOS",
+       "version": "1.0.0"
+   },
+   {
+       "itemName": "CSIR",
+       "title": "Meraka AMD SOS",
+       "url": "http://ict4eo.meraka.csir.co.za/AMD_SOS/sos",
+       "type": "SOS",
+       "version": "1.0.0"
+   },
+   {
+       "itemName": "Air Quality Belgium",
+       "title": "SOS of IRCEL - CELINE",
+       "url": "http://sos.irceline.be/sos",
+       "type": "SOS",
+       "version": "1.0.0"
+   },
+   {
+       "itemName": "Wupperverband",
+       "title": "Wupperverband SOS",
+       "url": "http://fluggs.wupperverband.de/sos/sos",
+       "type": "SOS",
+       "version": "1.0.0"
+   },
+   {
+       "itemName": "GRDC-SOS_GEOWOW",
+       "title": "GRDC SOS",
+       "url": "http://geowow.dev.52north.org/52n-sos-grdc-webapp/sos/soap",
+       "type": "SOS",
+       "version": "2.0.0"
+   },
+   {
+       "itemName": "GRDC (Kisters SOS)",
+       "title": "KISTERS KiWIS SOS2",
+       "url": "http://kiwis.kisters.de/KiWIS/KiWIS?datasource=3",
+       "type": "SOS",
+       "version": "2.0.0"
+   }
+]

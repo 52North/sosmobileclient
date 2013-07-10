@@ -65,7 +65,6 @@ This closes all panels (note, that all panels will be automatically closed when 
         closeAllPanels(); //Close all open panels
 
 Configure the framework in `mfmobile.less`:
-
         @panel-size: 300px; //percentage or pixels
         @duration: 500ms; //duration of panel opening and closing as well as page navigation
 

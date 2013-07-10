@@ -18,11 +18,11 @@ var AddView = Backbone.View.extend({
     
     Gumby.initialize('tabs');
     
-    bv = new BrowserView();
+    bv = new BrowserView(this.options.services);
     bv.setElement($('#browser-content'));
     bv.render();
 
-    mv = new MapView();
+    mv = new MapView({'services': this.options.services});
     mv.setElement($('#map-content'));
     mv.render();
   }
