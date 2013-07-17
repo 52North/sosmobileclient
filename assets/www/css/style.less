@@ -93,18 +93,22 @@ However, this blank file is available if you prefer
 
 .list {
   list-style: none outside none;
-  li a {
+  li {
     border-bottom: 1px solid #d8d8d8;
-    margin: 0px 10px 0px 10px;
-    display:-moz-box; /* Firefox */
-    display:-webkit-box; /* Safari and Chrome */
-    display:-ms-flexbox; /* Internet Explorer 10 */
-    display:box;
-    width: 100%;
+    width: 95%;
+    margin: auto;
+    a {
+      margin: 0px 10px 0px 10px;
+      display:-moz-box; /* Firefox */
+      display:-webkit-box; /* Safari and Chrome */
+      display:-ms-flexbox; /* Internet Explorer 10 */
+      display:box;
+      width: 100%;
+    }
   }
   h1 {
     font-size: 18px;
-    margin: 8px 6px 2px 6px;
+    margin: 0px 6px 2px 6px;
     padding: 0px;
   }
   h2 {
@@ -122,6 +126,7 @@ However, this blank file is available if you prefer
     color: #7e7e7e;
   }
   .text {
+    padding-top: 10px;
     -moz-box-flex:1.0; /* Firefox */
     -webkit-box-flex:1.0; /* Safari and Chrome */
     -ms-flex:1.0; /* Internet Explorer 10 */
@@ -130,5 +135,4 @@ However, this blank file is available if you prefer
   .clear {
     clear: right;
   }
-
 }

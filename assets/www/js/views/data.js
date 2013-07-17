@@ -4,6 +4,6 @@ var DataView = Backbone.View.extend({
     console.log("init data view");
   },
   render: function() {
-    this.$el.html("<h2>SOS Mobile Client</h2><h3>Mobile SWC</h3>");
+    this.$el.append("<h2>SOS Mobile Client</h2><h3>Mobile SWC</h3>");
   }
 });

@@ -28,7 +28,7 @@ The UI will be Android-oriented but with JQuery Mobile styling. It consists of 3
 1. [Phonegap 1.9.0](http://phonegap.com/) (Apache License Version 2.0)
     is wrapper for HTML5 web apps, that bundles and desploys the code as native app for nearly every device. It also provides access to the native phone API to enable features like camera, geolocation and data storage.
 2. [JQuery 1.7.2](http://jquery.com/) (MIT Open Source License)
-    is the de-facto standard for client-side web apps. It is lightweight and provides an intuitive DOM manipulation API. It is an requirement for most of the libraries used in this project. **Version Info:** For now Phonegap need the deprectaed functions of the 1.7.2 JQuery. A migration to 2.0.2 with JQuery Migration is planned.
+    is the de-facto standard for client-side web apps. It is lightweight and provides an intuitive DOM manipulation API. It is an requirement for most of the libraries used in this project. **Version Info:** For now Phonegap needs the deprecated functions of the 1.7.2 JQuery. A migration to 2.0.2 with JQuery Migration is planned.
 3. ~~[JQuery Mobile 1.3.1](http://jquerymobile.com/)
    is mostly used as a complete mobile HTML5 framework. It provides lots of mobile elements such as popups, buttons, pages, navigation bars etc. Although it has its own navigation it is downgraded to a view-enhancing frontend framework. The "backend" of this javascript app will be Backbone.js.~~
 4. [Backbone.js 1.0.0](http://backbonejs.org/) (MIT Open Source License, with [underscore.js](http://underscorejs.org/))
@@ -43,7 +43,9 @@ The UI will be Android-oriented but with JQuery Mobile styling. It consists of 3
    is a beautiful flat designed responsive theme, that detects the type of device and loads the JQuery Mobile essentials, if needed.
 10. [Less](http://lesscss.org/) (Apache License Version 2.0)
     compiles .less stylesheets at the beginning of an application. Less code is way cleaner than CSS and provides variables and nested rules.
-
+11. [jQuery total storage](https://github.com/jarednova/jquery-total-storage) (free, no licence)
+    is a small plugin that guarantees local storage of data - if HTML5 is not supported it falls automatically back to cookies. With total storage its easy to save and retrieve strings, numbers and even complex json objects in one line.
+    
 ## MF-Mobile
 The MF mobile script is an ultra lightweight less and JQuery library that allows page oriented navigation with GPU enhancement through CSS3. It requires JQuery and LESS CSS.
 
