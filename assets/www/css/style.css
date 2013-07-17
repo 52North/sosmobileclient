@@ -70,3 +70,19 @@ However, this blank file is available if you prefer
 .tab-nav li a {
   font-size: 13px;
 }
+#map {
+  position: relative;
+  top:0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+#map-content {
+  position: absolute;
+  top: 44px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  padding: 0;
+  margin: 0;
+}

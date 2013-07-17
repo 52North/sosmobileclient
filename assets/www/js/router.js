@@ -3,6 +3,7 @@ var AppRouter = Backbone.Router.extend({
     'view':        'view',
     'add':         'add',
     'legend':      'legend',
+    'settings':      'settings',
     '*actions':    'defaultAction'
   }, 
 
@@ -21,5 +22,9 @@ var AppRouter = Backbone.Router.extend({
   legend: function() {
     console.log("route:legend");
     openPanel("#legend-panel");
+  },
+  settings: function() {
+    console.log("route:settings");
+    openPanel("#settings-panel");
   }
 });

@@ -6,12 +6,12 @@ var MapView = Backbone.View.extend({
   },
 
   render: function() {
-    this.renderSelect();
+    //this.renderSelect();
 
     map = $("<div>");
-    map.height(400);
-    map.width(300);
+    map.attr("id", "map");
     this.$el.append(map);
+    this.calcSize();
 
     map.geomap({
       center : [ 7.652469,51.934145 ],
@@ -51,5 +51,30 @@ var MapView = Backbone.View.extend({
   },
   onError: function(error) {
     console.log(error);
+  },
+
+  calcSize: function() {
+    winW = window.innerWidth;
+    winH = window.innerHeight;
+    console.log(winH, winW);
+    console.log($("#map").position());
+
+    setTimeout(function() {
+      console.log($("#map").offset());
+    }, 1000);
+
+/*
+    $("#map").css("min-height", winH + 'px');
+    $("#map").css("max-height", winH + 'px');
+    $("#map").css("height",     winH + 'px');
+
+    $("#map").css("width", winW + 'px');
+    $("#map").css("min-width", winW + 'px');
+    $("#map").css("max-width", winW + 'px');
+    
+    $("#map").css("z-index", '1');
+
+*/
+
   }
 });

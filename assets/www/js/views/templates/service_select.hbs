@@ -1,6 +1,9 @@
-<ul>
-<li>Services</li>
-  {{#each services}}
-    <li>{{itemName}}</li>
-  {{/each}}
-</ul>
+Provider:
+<div class="picker">
+  <select>
+    {{#each services}}
+      <option>{{itemName}}</option>
+    {{/each}}
+  </select>
+</div>
+

@@ -49,8 +49,16 @@
      <header role="banner" class="top navbar">
       <a class="nav-btn nav-btn-left page-btn" href="#view" data-page-target="#view-page"><i class="icon-bar-chart"></i></a>
       <h1><i class="icon-plus"></i> Add</h1>
+      <a class="nav-btn nav-btn-right page-btn" href="#settings" data-page-target="#settings-panel"><i class="icon-cogs"></i></a>
     </header>
     <div id="add-content" class="page-content" ></div>
+  </div>
+
+  <div class="panel from-right out" id="settings-panel">
+    <header role="banner" class="top navbar">
+      <a class="nav-btn nav-btn-left" href="#add"><i class="icon-remove"></i></a>
+      <h1></h1>
+    </header>
   </div>
 
   <!-- 3. Party -->
@@ -79,9 +87,11 @@
 
   <!-- Models -->
   <script src="js/models/service.js"></script>
+  <script src="js/models/station.js"></script>
   
   <!-- Collections -->
   <script src="js/collections/services.js"></script>
+  <script src="js/collections/stations.js"></script>
   <!-- <script src="js/collections/current_timeseries.js"></script> -->
 
   <!-- Views -->
@@ -116,6 +126,9 @@
       //Fetch Services once
       services = new Services();
       services.fetch();
+
+      sykeStations = new Stations({"currentService": "Syke_Snow"});
+      sykeStations.fetch();
 
       new DataView().render();
       new AddView({'services': services}).render();
