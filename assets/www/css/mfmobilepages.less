@@ -96,14 +96,6 @@ body {
   -ms-transform-origin: 0% 0%;
   -o-transform-origin: 0% 0%;
   transform-origin: 0% 0%;
-  
-  .page-content {
-    position: absolute;
-    top: 60px;
-    bottom: 0px;
-    overflow-y: auto;
-    width: 100%;
-  }
 
   &.panel-bg {
     opacity: 0.5;
@@ -151,5 +143,15 @@ body {
       -o-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
       transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
     }
+  }
+}
+
+.page, .panel {
+  .content {
+    position: absolute;
+    top: 60px;
+    bottom: 0px;
+    overflow-y: auto;
+    width: 100%;
   }
 }
