@@ -25,5 +25,11 @@ var AddView = Backbone.View.extend({
     mv = new MapView({'services': this.options.services});
     mv.setElement($('#map-content'));
     mv.render();
+
+    sv = new SettingsView();
+    sv.setElement($('#settings-content'));
+    sv.render();
+
+
   }
 });

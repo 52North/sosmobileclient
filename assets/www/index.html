@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
   <link rel="stylesheet/less" href="css/mfmobilepages.less">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet/less" href="css/style.less">
   <link rel="stylesheet" href="css/font-awesome.css">
   <link rel="stylesheet" href="css/gumby.css">
 </head>
@@ -41,7 +41,7 @@
       <h1><i class="icon-bar-chart"></i> Data View</h1>
       <a class="nav-btn nav-btn-right page-btn" data-page-target="#add-page" href="#add"><i class="icon-plus"></i></a>
     </header>
-    <div class="page-content" id="view-content">
+    <div class="content" id="view-content">
     </div>
   </div>
 
@@ -51,7 +51,7 @@
       <h1><i class="icon-plus"></i> Add</h1>
       <a class="nav-btn nav-btn-right page-btn" href="#settings" data-page-target="#settings-panel"><i class="icon-cogs"></i></a>
     </header>
-    <div id="add-content" class="page-content" ></div>
+    <div id="add-content" class="content" ></div>
   </div>
 
   <div class="panel from-right out" id="settings-panel">
@@ -59,6 +59,8 @@
       <a class="nav-btn nav-btn-left" href="#add"><i class="icon-remove"></i></a>
       <h1></h1>
     </header>
+    <div class="content" id="settings-content">
+    </div>
   </div>
 
   <!-- 3. Party -->
@@ -99,6 +101,7 @@
   <script src="js/views/browser.js"></script>
   <script src="js/views/map.js"></script>
   <script src="js/views/data.js"></script>
+  <script src="js/views/settings.js"></script>
 
   <script>
     $(function() {
