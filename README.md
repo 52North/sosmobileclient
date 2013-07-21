@@ -1,7 +1,7 @@
 Mobile Sensor Web Client
 ========================
 
-This project aims to build a mobile client for the Sensor Observation Network by [52north](https://wiki.52north.org/bin/view). You will be able to choose from a variety of sensors, add them to your current view and inspect the values.
+This project aims to build a mobile client for the Sensor Observation Network by [52north](http://52north.org/). You will be able to choose from a variety of sensors, add them to your current view and inspect the values.
 This project is attendet at the [University of Hamburg](http://www.uni-hamburg.de), Germany, dep. [VSIS](http://vsis-www.informatik.uni-hamburg.de/?lang=en).
 
 ## Status 
