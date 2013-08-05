@@ -22,14 +22,11 @@ var AddView = Backbone.View.extend({
     bv.setElement($('#browser-content'));
     bv.render();
 
-    mv = new MapView({'services': this.options.services});
+    mv = new MapView({'stations': this.options.stations});
     mv.setElement($('#map-content'));
-    mv.render();
 
     sv = new SettingsView();
     sv.setElement($('#settings-content'));
     sv.render();
-
-
   }
 });

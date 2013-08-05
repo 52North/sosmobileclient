@@ -128,11 +128,11 @@
       services = new Services();
       services.fetch();
 
-      sykeStations = new Stations({"currentService": "Syke_Snow"});
-      sykeStations.fetch();
+      stations = new Stations({"currentService": "PEGELONLINE"});
+      stations.fetch();
 
       new DataView().render();
-      new AddView({'services': services}).render();
+      new AddView({'services': services, 'stations': stations}).render();
     });
   </script>
 

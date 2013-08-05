@@ -1,13 +1,16 @@
 var MapView = Backbone.View.extend({ 
 
   initialize: function(){
-    console.log(this.options.services)
+    this.collection = this.options.stations;
+    me = this;
+    me.listenTo(me.collection, 'reset', me.render);
+    me.collection.fetch({reset: true});
+    
     //navigator.geolocation.watchPosition(this.updateLocation, this.onError, { maximumAge: 3000, timeout: 5000, enableHighAccuracy: true });
   },
 
-  render: function() {
-    //this.renderSelect();
 
+  render: function() {
     map = $("<div>");
     map.attr("id", "map");
     this.$el.append(map);
@@ -15,9 +18,9 @@ var MapView = Backbone.View.extend({
     map.geomap({
       center : [ 7.652469,51.934145 ],
       zoom : 10,
-      click : function(e, geo) {
-        //this.$el.geomap("append", geo);
-      },
+      mode: "find",
+      cursors: { find: "crosshair" },
+      click: me.findAndAdd,
       services: [{
         "class" : "osm",
         type : "tiled",
@@ -33,11 +36,11 @@ var MapView = Backbone.View.extend({
       }]
     });
 
-  },
-  renderSelect: function() {
-    var compiledTemplate = Handlebars.helpers.getTemplate('service_select');
-    var html = compiledTemplate({services: this.options.services.toJSON()});
-    this.$el.append(html);
+    stations = this.collection;
+    _.forEach(stations, function(index, model, list){
+      map.geomap("append", stations.at(model).get('geometry'), { color: "#bb0000", width: 10, height: 10, borderRadius: 10 }, false);
+    });
+
   },
   updateLocation: function(position) {
     coord = [position.coords.longitude, position.coords.latitude];
@@ -50,5 +53,33 @@ var MapView = Backbone.View.extend({
   },
   onError: function(error) {
     console.log(error);
+  },
+
+  findAndAdd: function (e, geo) {
+    var result = map.geomap("find", geo, 8), outputHtml = "";
+    switch(result.length) {
+    case 0:
+      //do nothing
+      break;
+    case 1:
+      //render add
+      console.log(result[0].coordinates);
+      var addModalsTemplate = Handlebars.helpers.getTemplate('map-adddialog');
+      var addModalsHtml = addModalsTemplate(); //obj
+      $('#global-modals').html(addModalsHtml);
+      Gumby.initialize('toggles');
+      Gumby.initialize('switches');
+      $('#addStationModalSwitch').click();
+      break;
+    default:
+      //render choose
+       $.each(result, function () {
+        outputHtml += ("Found a " + this.type + " at " + this.coordinates );
+      });
+      alert(outputHtml);
+    }
+
+
+   
   }
 });
