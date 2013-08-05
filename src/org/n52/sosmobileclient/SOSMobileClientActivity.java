@@ -1,4 +1,4 @@
-package org.north52.sosmobileclient;
+package org.n52.sosmobileclient;
 
 import org.apache.cordova.DroidGap;
 import android.os.Bundle;
