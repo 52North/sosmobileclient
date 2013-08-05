@@ -8,45 +8,40 @@
   <link rel="stylesheet/less" href="css/mfmobilepages.less">
   <link rel="stylesheet/less" href="css/style.less">
   <link rel="stylesheet" href="css/font-awesome.css">
-  <link rel="stylesheet" href="css/gumby.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
 </head>
-
-
 <body>
-
-  <!-- Container for global Modals-->
   <div id="global-modals">
   </div>
 
-  <div class="panel from-left out" id="legend-panel">
-    <header role="banner" class="top navbar">
+  <div class="app-panel from-left out" id="legend-panel">
+    <header role="banner" class="top app-navbar">
       <a class="nav-btn nav-btn-right" href="#view"><i class="icon-remove"></i></a>
       <h1></h1>
     </header>
   </div>
 
-  <div class="page from-left in" id="view-page">
-    <header role="banner" class="top navbar">
-      <!-- <a class="nav-btn nav-btn-left" id="nav-open-btn" href="#legend"><i class="icon-th-list"></i></a> -->
-      <a class="nav-btn nav-btn-left page-btn" href="#legend" data-page-target="#legend-panel"><i class="icon-th-list"></i></a>
+  <div class="app-page from-left in" id="view-page">
+    <header role="banner" class="top app-navbar">
+      <a class="nav-btn nav-btn-left page-btn" href="#legend" ><i class="icon-th-list"></i></a>
       <h1><i class="icon-bar-chart"></i> Data View</h1>
-      <a class="nav-btn nav-btn-right page-btn" data-page-target="#add-page" href="#add"><i class="icon-plus"></i></a>
+      <a class="nav-btn nav-btn-right page-btn" href="#add"><i class="icon-plus"></i></a>
     </header>
     <div class="content" id="view-content">
     </div>
   </div>
 
-  <div class="page from-right out" id="add-page">
-     <header role="banner" class="top navbar">
-      <a class="nav-btn nav-btn-left page-btn" href="#view" data-page-target="#view-page"><i class="icon-bar-chart"></i></a>
+  <div class="app-page from-right out" id="add-page">
+     <header role="banner" class="top app-navbar">
+      <a class="nav-btn nav-btn-left page-btn" href="#view"><i class="icon-bar-chart"></i></a>
       <h1><i class="icon-plus"></i> Add</h1>
-      <a class="nav-btn nav-btn-right page-btn" href="#settings" data-page-target="#settings-panel"><i class="icon-cogs"></i></a>
+      <a class="nav-btn nav-btn-right page-btn" href="#settings"><i class="icon-cogs"></i></a>
     </header>
     <div id="add-content" class="content" ></div>
   </div>
 
-  <div class="panel from-right out" id="settings-panel">
-    <header role="banner" class="top navbar">
+  <div class="app-panel from-right out" id="settings-panel">
+    <header role="banner" class="top app-navbar">
       <a class="nav-btn nav-btn-left" href="#add"><i class="icon-remove"></i></a>
       <h1></h1>
     </header>
@@ -69,13 +64,7 @@
   <script src="js/libs/phonegap/apis/geolocation.js"></script>
 
   <!-- Gumby! -->
-  <script src="js/libs/modernizr.js"></script>
-  <script src="js/libs/gumby.js"></script>
-  <script src="js/libs/ui/gumby.tabs.js"></script>
-  <script src="js/libs/ui/gumby.toggleswitch.js"></script>
-  <script src="js/libs/gumby-plugins.js"></script>
-  <script src="js/libs/gumby.init.js"></script>
-  <script src="js/libs/gumby-main.js"></script>
+  <script src="js/libs/bootstrap.js"></script>
 
   <!-- Router -->
   <script src="js/router.js"></script>

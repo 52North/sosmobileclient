@@ -6,8 +6,7 @@ BrowserView = Backbone.View.extend({
     svc.fetch();
   },
   render: function() {
-    var compiledTemplate = Handlebars.helpers.getTemplate('hello');
-    var html = compiledTemplate({ name : 'World' });
+    var html = "hello"
 
     this.$el.html(html);
   }

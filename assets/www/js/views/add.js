@@ -16,8 +16,6 @@ var AddView = Backbone.View.extend({
 
     this.$el.html(html);
     
-    Gumby.initialize('tabs');
-    
     bv = new BrowserView(this.options.services);
     bv.setElement($('#browser-content'));
     bv.render();

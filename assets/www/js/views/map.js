@@ -66,10 +66,7 @@ var MapView = Backbone.View.extend({
       console.log(result[0].coordinates);
       var addModalsTemplate = Handlebars.helpers.getTemplate('map-adddialog');
       var addModalsHtml = addModalsTemplate(); //obj
-      $('#global-modals').html(addModalsHtml);
-      Gumby.initialize('toggles');
-      Gumby.initialize('switches');
-      $('#addStationModalSwitch').click();
+      //$('#global-modals').html(addModalsHtml);
       break;
     default:
       //render choose

@@ -17,10 +17,7 @@ var SettingsView = Backbone.View.extend({
 
     var settingsModalsTemplate = Handlebars.helpers.getTemplate('settingsModals');
     var settingsModalsHtml = settingsModalsTemplate();
-    $('#global-modals').append(settingsModalsHtml);
-
-    Gumby.initialize('toggles');
-    Gumby.initialize('switches');
+    //$('#global-modals').append(settingsModalsHtml);
   },
 
   refreshStations: function() {
