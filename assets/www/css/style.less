@@ -84,7 +84,7 @@ However, this blank file is available if you prefer
   left: 0px;
   right: 0px;
 }
-#map-content {
+#tab-map-content {
   position: absolute;
   top: 44px;
   bottom: 0px;
@@ -94,15 +94,12 @@ However, this blank file is available if you prefer
   margin: 0;
 }
 
-#settings-content {
-  background: #f0f0f0;
-}
-
 .list {
   list-style: none outside none;
+  padding: 0px;
   li {
     border-bottom: 1px solid #d8d8d8;
-    width: 95%;
+    width: 100%;
     margin: auto;
     a {
       margin: 0px 10px 0px 10px;
@@ -110,7 +107,10 @@ However, this blank file is available if you prefer
       display:-webkit-box; /* Safari and Chrome */
       display:-ms-flexbox; /* Internet Explorer 10 */
       display:box;
-      width: 100%;
+      text-decoration: none;
+      &:active, &:focus, &:hover {
+        text-decoration:none;
+      }
     }
   }
   h1 {
@@ -121,7 +121,7 @@ However, this blank file is available if you prefer
   h2 {
     font-size: 14px;
     margin: 2px 6px 4px 6px;
-    padding: 0px;
+    padding: 0px 0px 10px 0px;
     color: #8a8a8a;
   }
   .element {
@@ -142,4 +142,12 @@ However, this blank file is available if you prefer
   .clear {
     clear: right;
   }
+}
+
+/* modals */
+.modal-header {
+  border-bottom: none;
+}
+.modal-footer {
+  border-top: none;
 }

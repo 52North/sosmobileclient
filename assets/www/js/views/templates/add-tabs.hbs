@@ -1,10 +1,10 @@
-<div class="pill tabs" id="add-tabs" gumby-fixed="top" style="z-index: 9;">
-  <ul class="tab-nav">
+  <ul class="nav nav-tabs app-tabs" id="addTabs">
     {{#each tabs}}
-      <li class="{{active}}"><a href="#browser">{{name}}</a></li> <!-- class= active -->
+      <li class="{{active}}"><a href="#" data-target="tab-{{id}}">{{name}}</a></li> <!-- class= active -->
     {{/each}}
   </ul>
+  <div class="tab-content" id="addTabContent">
     {{#each tabs}}
-      <div class="tab-content {{active}} {{content-class}}" id="{{id}}"></div> <!-- class= active -->
+      <div class="tab-pane fade in {{active}} {{content-class}}" id="tab-{{id}}"></div> <!-- class= active -->
     {{/each}}
-</div>
+  </div>

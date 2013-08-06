@@ -13,11 +13,12 @@ var SettingsView = Backbone.View.extend({
   render: function() {
     var template = Handlebars.helpers.getTemplate('settings');
     var listHtml = template();
-    this.$el.html(listHtml);
 
     var settingsModalsTemplate = Handlebars.helpers.getTemplate('settingsModals');
     var settingsModalsHtml = settingsModalsTemplate();
-    //$('#global-modals').append(settingsModalsHtml);
+    
+    this.$el.empty().html(listHtml);
+    $("#global-modals").append(settingsModalsHtml);
   },
 
   refreshStations: function() {

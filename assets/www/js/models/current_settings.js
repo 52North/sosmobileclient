@@ -11,7 +11,7 @@ var CurrentSettings = Backbone.Model.extend({
     if (this.isSet()) {
       console.log("current settings bereits gesetzt, hole aus storage")
     } else {
-      console.log("current settings noch nicht gesetzt, erstelle neu")
+      console.log("keine current settings")
     }
   }
 });

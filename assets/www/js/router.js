@@ -26,5 +26,8 @@ var AppRouter = Backbone.Router.extend({
   settings: function() {
     console.log("route:settings");
     openPanel("#settings-panel");
+  },
+  defaultAction: function() {
+    console.log("routing not found");
   }
 });
