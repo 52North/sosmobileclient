@@ -2151,7 +2151,7 @@ input[type="button"].btn-block {
 }
 
 .dropdown-backdrop {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
@@ -3337,7 +3337,7 @@ button.close {
 }
 
 .modal {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
@@ -3387,7 +3387,7 @@ button.close {
 }
 
 .modal-backdrop {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
@@ -4418,7 +4418,7 @@ a.list-group-item.active > .badge,
 }
 
 .affix {
-  position: fixed;
+  position: absolute;
 }
 
 @-ms-viewport {
