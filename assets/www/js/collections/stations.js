@@ -1,16 +1,10 @@
 var Stations = Backbone.Collection.extend({
 
   model: Station,
+  url: 'http://sensorweb.demo.52north.org/sensorwebclient-webapp-stable/api/v0/services/PEGELONLINE/stations.json',
 
-  prefix: "http://sensorweb.demo.52north.org/sensorwebclient-webapp-stable/api/v0/services/",
-  suffix: "/stations.json",
-
-  url: function(){
-    return this.prefix + this.currentService + this.suffix;
-  },
-  
-  initialize: function(props){
-    this.currentService = props.currentService;
+  initialize: function(){
+    
   },
 
   getByCoordinates: function(coord) {

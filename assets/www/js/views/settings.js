@@ -46,9 +46,7 @@ var SettingsView = Backbone.View.extend({
       svMe.$('.refresh-stations-icon').addClass('icon-refresh');
     }, 750);
 
-    d = new Date(); 
-
-    svMe.model.set('lastStationUpdate', d.toLocaleString())
+    svMe.model.set('lastStationUpdate', new Date().toLocaleString())
   },
 
   changeService: function(e) {
@@ -56,7 +54,9 @@ var SettingsView = Backbone.View.extend({
     $('#providerModal').modal('hide');
     $('body').removeClass('modal-open');
     $('.modal-backdrop').remove();
-    newStation = $(e.currentTarget).data('station');
-    svMe.model.set('currentProvider', newStation);
+    newService = $(e.currentTarget).data('station');
+    svMe.model.set('currentProvider', newService);
+    svMe.options.currentStations.url = generateStationsUrl(newService);
+    svMe.refreshStations(e);
   }
 });

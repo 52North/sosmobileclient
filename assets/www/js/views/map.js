@@ -5,25 +5,23 @@ var MapView = Backbone.View.extend({
   },
 
   initialize: function(){
-    this.collection = this.options.stations;
     me = this;
     tracking = false;
 
     me.render();
     // render with tab opening once => $('#addTabs').on('shown.bs.tab'
-    me.listenTo(me.collection, 'reset', me.render);
-    me.collection.fetch({reset: true});
+    me.listenTo(this.collection, 'sync', me.render);
+    //this.options.stations.fetch({reset: true});
   },
 
   render: function() {
-    console.log("render map");
     map = $("<div>");
     map.attr("id", "map");
     this.$el.append(map);
 
     this.map = map.geomap({
-      center : [ 7.652469,51.934145 ],
-      zoom : 10,
+      center : [ 7.5, 52 ],
+      zoom : 5,
       mode: "find",
       cursors: { find: "crosshair" },
       click: me.findAndAdd,
@@ -42,9 +40,8 @@ var MapView = Backbone.View.extend({
       }]
     });
 
-    stations = this.collection;
-    _.forEach(stations, function(index, model, list){
-      this.map.geomap("append", stations.at(model).get('geometry'), { color: "#bb0000", width: 10, height: 10, borderRadius: 10 }, false);
+    _.each(this.collection.models, function (elem) {
+      this.map.geomap("append", elem.get('geometry'), { color: "#bb0000", width: 10, height: 10, borderRadius: 10 }, false);
     });
 
     //my position switch
