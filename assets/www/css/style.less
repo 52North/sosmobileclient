@@ -97,6 +97,7 @@ However, this blank file is available if you prefer
 .list {
   list-style: none outside none;
   padding: 0px;
+
   li {
     border-bottom: 1px solid #d8d8d8;
     width: 100%;
@@ -112,6 +113,12 @@ However, this blank file is available if you prefer
         text-decoration:none;
       }
     }
+  }
+  &.sublist li {
+    border-bottom: none;
+    width: 100%;
+    padding-left: 20px;
+    border-left: 1px solid #d8d8d8;
   }
   h1 {
     font-size: 18px;
@@ -131,6 +138,7 @@ However, this blank file is available if you prefer
     border-left: 1px solid #d8d8d8;
     font-size: 26px;
     color: #7e7e7e;
+    text-align: center;
   }
   .text {
     padding-top: 10px;

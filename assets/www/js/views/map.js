@@ -74,7 +74,9 @@ var MapView = Backbone.View.extend({
   updateLocation: function(position) {
     coord = [position.coords.longitude, position.coords.latitude];
     if (this.map) {
-      this.map.geomap("append", { type: "Point", coordinates: coord }, { color: "#2176B7", width: 20, height: 20, borderRadius: 20 }, false);
+      this.map.geomap("remove", me.point);
+      me.point = { type: "Point", coordinates: coord };
+      this.map.geomap("append", me.point, { color: "#2176B7", width: 20, height: 20, borderRadius: 20 }, false);
       this.map.geomap("option", "center", coord);
       this.map.geomap("option", "zoom", 12)
     }
@@ -90,13 +92,6 @@ var MapView = Backbone.View.extend({
       //do nothing
       break;
     case 1:
-      //render add
-      var addModalsTemplate = Handlebars.helpers.getTemplate('map-add-dialog');
-      match = me.collection.getByCoordinate(result[0].coordinates);
-      var addModalsHtml = addModalsTemplate({'station': match.toJSON()});
-      $('#temp-modals').html(addModalsHtml);
-      $('#map-add-dialog').modal();
-      break;
     default:
       coords = [];
       $.each(result, function () {

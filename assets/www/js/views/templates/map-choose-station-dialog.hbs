@@ -3,21 +3,46 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h1 class="modal-title"><i class="icon-question-sign"></i> Choose Station</h1>
+        <h1 class="modal-title">
+          {{#ifGt stations.length 2}}
+            <i class="icon-building"></i><i class="icon-building"></i> Stations
+          {{else}}
+            <i class="icon-building"></i> Station
+          {{/ifGt}}
+        </h1>
       </div>
       <div class="modal-body">
         <p>
-          We found multiple stations at your tap:
           <ul class="list">
             {{#each stations}}
               <li>
-                <a href="http://www.google.de" class="refresh-stations">
+                <a href="#" data-toggle="collapse" data-target="#station-{{@index}}-timeseries" class="refresh-stations">
                   <div class="text">
                     <h1>{{properties.station}}</h1>
-                    <h2>Germany, Sassenberg</h2>
+                    <h2>{{properties.timeseries.length}} timeseries</h2>
+                  </div>
+                  <div class="element">
+                    <i class="icon-building text-info"></i>
                   </div>
                 </a>
-              <li>
+                <div id="station-{{@index}}-timeseries" class="collapse">
+                  <ul class="list sublist">
+                    {{#each properties.timeseries}}
+                      <li>
+                        <a href="#">
+                          <div class="text">
+                            <h1>{{category}}</h1>
+                            <h2>{{offering}}</h2>
+                          </div>
+                          <div class="element">
+                            <i class="icon-plus"></i>
+                          </div>
+                        </a>
+                      </li>
+                    {{/each}}
+                  </ul>
+                </div>
+              </li>
             {{/each}}
           </ul>
         </p>
