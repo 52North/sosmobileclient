@@ -16,6 +16,17 @@ var Stations = Backbone.Collection.extend({
   },
 
   getByCoordinates: function(coord) {
-    alert("niy - ", coord);
+    coordArray = [].concat( coord );
+    results = [];
+    _.each(this.models, function (elem) {
+      if ($.inArray(elem.get('geometry').coordinates, coordArray) != -1) {
+        results.push(elem.toJSON());
+      }
+    });
+    return results;
+  },
+  getByCoordinate: function(coord) {
+    return this.find(function(model) { return model.get('geometry').coordinates == coord; });
   }
+
 });

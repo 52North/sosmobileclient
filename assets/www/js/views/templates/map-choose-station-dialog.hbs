@@ -1,0 +1,30 @@
+<div class="modal fade" id="map-choose-station-dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h1 class="modal-title"><i class="icon-question"></i> Choose Station</h1>
+      </div>
+      <div class="modal-body">
+        <p>
+          We found multiple stations at your tap:
+          <ul class="list">
+            {{#each stations}}
+              <li>
+                <a href="http://www.google.de" class="refresh-stations">
+                  <div class="text">
+                    <h1>{{properties.station}}</h1>
+                    <h2>Germany, Sassenberg</h2>
+                  </div>
+                </a>
+              <li>
+            {{/each}}
+          </ul>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

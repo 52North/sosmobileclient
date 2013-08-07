@@ -91,17 +91,24 @@ var MapView = Backbone.View.extend({
       break;
     case 1:
       //render add
-      console.log(result[0].coordinates);
-      var addModalsTemplate = Handlebars.helpers.getTemplate('map-adddialog');
-      var addModalsHtml = addModalsTemplate(); //obj
-      //$('#global-modals').html(addModalsHtml);
+      var addModalsTemplate = Handlebars.helpers.getTemplate('map-add-dialog');
+      match = me.collection.getByCoordinate(result[0].coordinates);
+      var addModalsHtml = addModalsTemplate({'station': match.toJSON()});
+      $('#temp-modals').html(addModalsHtml);
+      $('#map-add-dialog').modal();
       break;
     default:
-      //render choose
-       $.each(result, function () {
-        outputHtml += ("Found a " + this.type + " at " + this.coordinates );
+      coords = [];
+      $.each(result, function () {
+        coords.push( this.coordinates );
       });
-      alert(outputHtml);
+
+      matches = me.collection.getByCoordinates(coords);
+
+      var modalsTemplate = Handlebars.helpers.getTemplate('map-choose-station-dialog');
+      var modalsHtml = modalsTemplate({'stations': matches}); //obj
+      $('#temp-modals').html(modalsHtml);
+      $('#map-choose-station-dialog').modal();
     }   
   }
 });
