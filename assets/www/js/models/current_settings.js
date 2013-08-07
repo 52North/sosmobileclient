@@ -1,4 +1,16 @@
 var CurrentSettings = Backbone.Model.extend({
+
+  defaultValues: {
+    'currentProvider': 'PEGELONLINE',
+    'lastStationUpdate': 'never',
+    'appVersion': 'v0.3 alpha',
+    'currentTimeseries': ''
+  },
+
+  initialize: function() {
+    
+  },
+
   isSet: function() {
     if ($.totalStorage('current_settings')) {
       return true;
@@ -8,10 +20,17 @@ var CurrentSettings = Backbone.Model.extend({
   },
   
   fetch: function() {
+    /* DEVELOPMENT MODE
     if (this.isSet()) {
-      console.log("current settings bereits gesetzt, hole aus storage")
+      this.set($.totalStorage('current_settings'));
     } else {
-      console.log("keine current settings")
-    }
+      */
+      this.set(this.defaultValues);
+      this.save();
+    //}
+  },
+
+  save: function() {
+    $.totalStorage('current_settings', this.toJSON());
   }
 });

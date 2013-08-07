@@ -5,7 +5,7 @@ var AddView = Backbone.View.extend({
   },
 
   initialize: function(){
-    console.log("init data view");
+    //console.log("init add view");
   },
   render: function() {
     var tabs = { tabs: [
@@ -26,10 +26,6 @@ var AddView = Backbone.View.extend({
 
     mv = new MapView({'stations': this.options.stations});
     mv.setElement($('#tab-map-content'));
-
-    sv = new SettingsView();
-    sv.setElement($('#settings-content'));
-    sv.render();
   },
 
   navigateTab: function(e) {

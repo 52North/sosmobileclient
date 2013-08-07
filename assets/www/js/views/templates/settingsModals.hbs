@@ -9,18 +9,21 @@
       <div class="modal-body">
         <p>
           <ul class="list">
-            <a>
-              <div class="text">
-                <h1>Syke_Snow</h1>
-                <h2>blubbsalat</h2>
-              </div>
-            </a>
+            {{#each availableServices}}
+              <li>
+                <a href="#" class="availableServiceLink"  data-dismiss="modal" data-station="{{itemName}}">
+                  <div class="text">
+                    <h1>{{itemName}}</h1>
+                    <h2>{{type}}, {{version}}</h2>
+                  </div>
+                </a>
+              </li>
+            {{/each}}
           </ul>
         </p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
       </div>
     </div>
   </div>
@@ -37,9 +40,9 @@
         <p>
            This project aims to build a mobile client for the Sensor Observation Network by 52north. You will be able to choose from a variety of sensors, add them to your current view and inspect the values. This project is attendet at the University of Hamburg, Germany, dep. VSIS.
           <ul>
-            <li>Version [from storage]</li>
-            <li>Creator: Marius Fink, <a href="http://52north.org" target="_system">52° North</a></li>
-            <li>Github: <a href="https://github.com/marfnk/sosmobileclient">https://github.com/marfnk/sosmobileclient</a>
+            <li>Version: <code>{{appVersion}}</code></li>
+            <li>Creator: Marius Fink, <a href="http://www.uni-hamburg.de/" target="_system">Uni Hamburg, Germany</a>, <a href="http://52north.org" target="_system">52° North</a></li>
+            <li><i class="icon-github"></i> <a href="https://github.com/marfnk/sosmobileclient">https://github.com/marfnk/sosmobileclient</a>
           </ul>
         </p>
       </div>

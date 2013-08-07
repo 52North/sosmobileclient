@@ -8,23 +8,23 @@ var AppRouter = Backbone.Router.extend({
   }, 
 
   initialize: function() {    
-    console.log("router loaded");    
+    //console.log("router loaded");    
   },
 
   view: function() {
-    console.log("route:view");
+    //console.log("route:view");
     navigateToPage("#view-page");
   },
   add: function() {
-    console.log("route:add");
+    //console.log("route:add");
     navigateToPage("#add-page");
   },
   legend: function() {
-    console.log("route:legend");
+    //console.log("route:legend");
     openPanel("#legend-panel");
   },
   settings: function() {
-    console.log("route:settings");
+    //console.log("route:settings");
     openPanel("#settings-panel");
   },
   defaultAction: function() {

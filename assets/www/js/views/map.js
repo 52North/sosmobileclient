@@ -7,13 +7,16 @@ var MapView = Backbone.View.extend({
   initialize: function(){
     this.collection = this.options.stations;
     me = this;
+    tracking = false;
+
+    me.render();
+    // render with tab opening once => $('#addTabs').on('shown.bs.tab'
     me.listenTo(me.collection, 'reset', me.render);
     me.collection.fetch({reset: true});
-    
-    tracking = false;
   },
 
   render: function() {
+    console.log("render map");
     map = $("<div>");
     map.attr("id", "map");
     this.$el.append(map);
@@ -77,6 +80,7 @@ var MapView = Backbone.View.extend({
       var accuracyBuffer = position.coords.accuracy / this.map.geomap("option", "pixelSize");
       this.map.geomap("append", { type: "Point", coordinates: coord }, { color: "#2176B7", width: accuracyBuffer, height: accuracyBuffer, borderRadius: accuracyBuffer }, false);
       this.map.geomap("option", "center", coord);
+      this.map.geomap("option", "zoom", 12)
     }
   },
   onError: function(error) {

@@ -3,7 +3,7 @@
     <a href="#" data-toggle="modal" data-target="#providerModal">
       <div class="text">
         <h1>Choose Provider</h1>
-        <h2>Current: currentProvider</h2>
+        <h2>Current: {{currentProvider}}</h2>
       </div>
       <div class="element">
         <i class="icon-cloud-download"></i>
@@ -14,7 +14,7 @@
     <a href="#" class="refresh-stations">
       <div class="text">
         <h1>Refresh stations</h1>
-        <h2>Last refresh: xx.xx.xxxx, xx:xx:xx</h2>
+        <h2>Last refresh: {{lastStationUpdate}}</h2>
       </div>
       <div class="element">
         <i class="icon-refresh refresh-stations-icon"></i>
@@ -25,7 +25,7 @@
     <a href="#" data-toggle="modal" data-target="#aboutModal">
       <div class="text">
         <h1>About this app</h1>
-        <h2>v0.1 beta</h2>
+        <h2>{{appVersion}}</h2>
       </div>
       <div class="element">
         <i class="icon-info-sign"></i>
