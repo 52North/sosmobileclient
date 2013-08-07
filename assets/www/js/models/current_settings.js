@@ -3,8 +3,7 @@ var CurrentSettings = Backbone.Model.extend({
   defaultValues: {
     'currentProvider': 'PEGELONLINE',
     'lastStationUpdate': 'never',
-    'appVersion': 'v0.3 alpha',
-    'currentTimeseries': ''
+    'appVersion': 'v0.3 alpha'
   },
 
   initialize: function() {

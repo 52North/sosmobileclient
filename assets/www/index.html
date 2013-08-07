@@ -63,6 +63,7 @@
         <a class="nav-btn nav-btn-right" href="#view"><i class="icon-remove"></i></a>
         <h1></h1>
       </header>
+      <div class="content" id="legend-content"></div>
     </div>
 
     <div class="app-page from-left in" id="view-page">
@@ -123,11 +124,12 @@
     <script src="js/models/service.js"></script>
     <script src="js/models/station.js"></script>
     <script src="js/models/current_settings.js"></script>
+    <script src="js/models/timeseries.js"></script>
     
     <!-- Collections -->
     <script src="js/collections/services.js"></script>
     <script src="js/collections/stations.js"></script>
-    <!-- <script src="js/collections/current_timeseries.js"></script> -->
+    <script src="js/collections/current_timeseries.js"></script>
 
     <!-- Views -->
     <script src="js/views/add.js"></script>
@@ -135,6 +137,7 @@
     <script src="js/views/map.js"></script>
     <script src="js/views/data.js"></script>
     <script src="js/views/settings.js"></script>
+    <script src="js/views/legend.js"></script>
 
     <script>
       $(function() {
@@ -142,13 +145,16 @@
         stations = new Stations();
         currentSettings = new CurrentSettings();
         services = new Services();
+        currentTimeseries = new CurrentTimeseries();
 
         //views
         new SettingsView({'model': currentSettings, 'currentStations': stations, 'availableServices': services}).render();
         new DataView().render();
         new AddView({'stations': stations, 'currentSettings': currentSettings}).render();
+        new LegendView({'collection': currentTimeseries}).render();
 
         //fetching data
+        currentTimeseries.fetch();
         currentSettings.fetch();
         stations.url = generateStationsUrl(currentSettings.get('currentProvider'));
         stations.fetch();

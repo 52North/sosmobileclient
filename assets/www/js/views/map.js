@@ -8,10 +8,8 @@ var MapView = Backbone.View.extend({
     me = this;
     tracking = false;
 
-    me.render();
-    // render with tab opening once => $('#addTabs').on('shown.bs.tab'
+    //me.render();
     me.listenTo(this.collection, 'sync', me.render);
-    //this.options.stations.fetch({reset: true});
   },
 
   render: function() {
@@ -40,8 +38,10 @@ var MapView = Backbone.View.extend({
       }]
     });
 
-    _.each(this.collection.models, function (elem) {
-      this.map.geomap("append", elem.get('geometry'), { color: "#bb0000", width: 10, height: 10, borderRadius: 10 }, false);
+    lastStationIndex = this.collection.models.length - 1;
+    _.each(this.collection.models, function (elem, index) {
+      refreshMap = (index == lastStationIndex);
+      this.map.geomap("append", elem.get('geometry'), { color: "#bb0000", width: 10, height: 10, borderRadius: 10 }, refreshMap);
     });
 
     //my position switch
@@ -76,7 +76,7 @@ var MapView = Backbone.View.extend({
     if (this.map) {
       this.map.geomap("remove", me.point);
       me.point = { type: "Point", coordinates: coord };
-      this.map.geomap("append", me.point, { color: "#2176B7", width: 20, height: 20, borderRadius: 20 }, false);
+      this.map.geomap("append", me.point, { color: "#2176B7", width: 20, height: 20, borderRadius: 20 }, true);
       this.map.geomap("option", "center", coord);
       this.map.geomap("option", "zoom", 12)
     }
