@@ -4,6 +4,12 @@ var DataView = Backbone.View.extend({
     //console.log("init data view");
   },
   render: function() {
-    this.$el.append("<h2>SOS Mobile Client</h2><h3>Mobile SWC</h3>");
+    chart = $("<div>");
+    chart.attr('id','chart_div');
+
+    this.$el.append(chart);
+
+    //this.renderChart();
   }
+
 });
