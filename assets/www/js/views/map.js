@@ -17,7 +17,7 @@ var MapView = Backbone.View.extend({
   render: function() {
     map = $("<div>");
     map.attr("id", "map");
-    this.$el.append(map);
+    this.$el.empty().append(map);
 
     this.map = map.geomap({
       center : [ 7.5, 52 ],
@@ -48,7 +48,7 @@ var MapView = Backbone.View.extend({
     posBtnWrapper = $("<div>").addClass('map-buttons');
     this.posBtn = $("<a>").addClass('btn posBtn');
     this.updatePosBtn();
-    this.posBtn.html("<i class='icon-map-marker'></i>");
+    this.posBtn.html("<i class='icon-screenshot'></i>");
     posBtnWrapper.append(this.posBtn);
 
     this.$el.append(posBtnWrapper);

@@ -9,8 +9,8 @@ var AddView = Backbone.View.extend({
   },
   render: function() {
     var tabs = { tabs: [
-        { 'name': 'BROWSER', 'id': 'browser-content', "active": "active"},
-        { 'name': 'MAP', 'id': 'map-content', 'content-class': 'full-content'},
+        { 'name': 'MAP', 'id': 'map-content', "active": "active", 'content-class': 'full-content'},
+        { 'name': 'BROWSER', 'id': 'browser-content'},
         { 'name': 'SEARCH', 'id': 'search-content'},
         { 'name': 'HISTORY', 'id': 'history-content'}
       ]};
