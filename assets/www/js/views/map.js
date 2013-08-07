@@ -74,8 +74,7 @@ var MapView = Backbone.View.extend({
   updateLocation: function(position) {
     coord = [position.coords.longitude, position.coords.latitude];
     if (this.map) {
-      var accuracyBuffer = position.coords.accuracy / this.map.geomap("option", "pixelSize");
-      this.map.geomap("append", { type: "Point", coordinates: coord }, { color: "#2176B7", width: accuracyBuffer, height: accuracyBuffer, borderRadius: accuracyBuffer }, false);
+      this.map.geomap("append", { type: "Point", coordinates: coord }, { color: "#2176B7", width: 20, height: 20, borderRadius: 20 }, false);
       this.map.geomap("option", "center", coord);
       this.map.geomap("option", "zoom", 12)
     }
