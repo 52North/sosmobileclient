@@ -1,5 +1,7 @@
 var MapView = Backbone.View.extend({ 
 
+  currentSettings: null,
+
   events: {
     'click .posBtn': 'toggleTracking'
   },
@@ -8,11 +10,11 @@ var MapView = Backbone.View.extend({
     me = this;
     tracking = false;
 
-    //me.render();
-    me.listenTo(this.collection, 'sync', me.render);
+    me.listenTo(this.collection, 'reset', me.drawStations); //only redraw points TODO
   },
 
   render: function() {
+    console.log("render map");
     map = $("<div>");
     map.attr("id", "map");
     this.$el.empty().append(map);
@@ -27,8 +29,7 @@ var MapView = Backbone.View.extend({
         "class" : "osm",
         type : "tiled",
         src : function(view) {
-          return "http://tile.openstreetmap.org/" + view.zoom + "/"
-              + view.tile.column + "/" + view.tile.row + ".png";
+          return "http://tile.openstreetmap.org/" + view.zoom + "/" + view.tile.column + "/" + view.tile.row + ".png";
         },
         attr : "&copy; OpenStreetMap (CC-BY-SA)",
         style : {
@@ -36,12 +37,6 @@ var MapView = Backbone.View.extend({
           opacity : 1.0
         }
       }]
-    });
-
-    lastStationIndex = this.collection.models.length - 1;
-    _.each(this.collection.models, function (elem, index) {
-      refreshMap = (index == lastStationIndex);
-      this.map.geomap("append", elem.get('geometry'), { color: "#bb0000", width: 10, height: 10, borderRadius: 10 }, refreshMap);
     });
 
     //my position switch
@@ -52,6 +47,16 @@ var MapView = Backbone.View.extend({
     posBtnWrapper.append(this.posBtn);
 
     this.$el.append(posBtnWrapper);
+
+  },
+  drawStations: function() {
+    this.map.geomap( "empty", false );
+    color = stringToColor(this.options.currentSettings.get('currentProvider'));
+    _.each(this.collection.models, function (elem, index) {
+      this.map.geomap("append", elem.get('geometry'), { color: "#" + color, width: 10, height: 10, borderRadius: 10 }, false);
+    });
+
+    $("#map").geomap( "refresh" );
   },
   updatePosBtn: function() {
     if (tracking) {

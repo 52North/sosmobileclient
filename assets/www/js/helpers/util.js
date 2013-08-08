@@ -12,3 +12,23 @@ function collectionModelsToJSONArray(collection) {
   });
   return json_array;
 }
+
+function stringToColor(string) {
+	//luminance is: (0.2126*R) + (0.7152*G) + (0.0722*B)  has to be > 50 ??
+	return intToRGB(hashCode(string));
+}
+
+//M. Jessup, http://stackoverflow.com/questions/2464745/compute-hex-color-code-for-an-arbitrary-string
+function hashCode(str) {
+    var hash = 0;
+    for (var i = 0; i < str.length; i++) {
+       hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return hash;
+} 
+
+function intToRGB(i){
+    return ((i>>16)&0xFF).toString(16) + 
+           ((i>>8)&0xFF).toString(16) + 
+           (i&0xFF).toString(16);
+}

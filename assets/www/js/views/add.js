@@ -26,6 +26,7 @@ var AddView = Backbone.View.extend({
 
     mv = new MapView({'collection': this.options.stations, 'currentSettings': this.options.currentSettings});
     mv.setElement($('#tab-map-content'));
+    mv.render();
   },
 
   navigateTab: function(e) {
