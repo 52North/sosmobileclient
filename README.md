@@ -5,6 +5,13 @@ This project is under development. The target is a mobile client for the Sensor 
 This project is attended at the [University of Hamburg](http://www.uni-hamburg.de), Germany, dep. [VSIS](http://vsis-www.informatik.uni-hamburg.de/?lang=en).
 
 ## Status 
+### 8/10/2013
+- Frameworks
+  - small Backbone-Mediator - some kind of architecture becomes necessary
+  - The Google Charting API is great but not enough. I want to kepp the data transfer as small as possible so I decided to include highcharts - which operates completely on the client side.
+- Map
+  - The first usable version of the map is finished. With coloring of the stations, GPS positioning and choosing stations and timeseries.
+
 ### 8/7/2013
 - Frameworks:
   - I replaced gumby with bootstrap 3. I chose Gumby because of its flat design - but since bootstrap is flat, too I returned to the more powerful, mature and javascript accessible framework.
@@ -35,24 +42,30 @@ The UI will be Android-oriented. It consists of 3 main pages/panels:
   You can add new time series in four different ways: via a map, a browser, a search or your personal time series history. Additionally you have a settings panel to choose from the list of sensor data providers or update the stations.
 ![target l+f](https://raw.github.com/marfnk/sosmobileclient/master/target_app.PNG "Target look and feel")
 
-## Currently used frameworks
+## Frameworks
 1. [Phonegap 1.9.0](http://phonegap.com/) (Apache License Version 2.0)
     is wrapper for HTML5 web apps, that bundles and desploys the code as native app for nearly every device. It also provides access to the native phone API to enable features like camera, geolocation and data storage.
 2. [JQuery 1.7.2](http://jquery.com/) (MIT Open Source License)
     is the de-facto standard for client-side web apps. It is lightweight and provides an intuitive DOM manipulation API. It is an requirement for most of the libraries used in this project. **Version Info:** For now Phonegap needs the deprecated functions of the 1.7.2 JQuery. A migration to 2.0.2 with JQuery Migration is planned.
-4. [Backbone.js 1.0.0](http://backbonejs.org/) (MIT Open Source License, with [underscore.js](http://underscorejs.org/))
+3. [Backbone.js 1.0.0](http://backbonejs.org/) (MIT Open Source License, with [underscore.js](http://underscorejs.org/))
     is a thin client-MVC framework which also handles the routing of the app. Since the Mobile SWC comes with no own server and only the [REST API](https://wiki.52north.org/bin/view/SensorWeb/SensorWebClientRESTInterface) there was a need for a flexible MVC-architecture style.
-5. [Bootstrap 3](http://getbootstrap.com/) (Apache Licence v2.0)
+4. [Bootstrap 3](http://getbootstrap.com/) (Apache Licence v2.0)
     
-6. [JQuery Geo 1.0b1](http://jquerygeo.com/) (MIT Open Source License)
+5. [JQuery Geo 1.0b1](http://jquerygeo.com/) (MIT Open Source License)
    is a JQuery plug-in and basically provides a map with with access to a tile server API. This project uses [OpenStreetMap](http://www.openstreetmap.org/) to display its location data. It has a very easy-to-use API with many functions. You can easily add a map to any JQuery enhanced page with only about 28 characters. Ryan Westphal discusses the different [map plug-ins](http://trippingthebits.com/geopres/).
-8. [Handlebars](http://handlebarsjs.com/) (MIT Open Source License)
+6. [Handlebars](http://handlebarsjs.com/) (MIT Open Source License)
    is a templating engine that works well with backbone.js.
-10. [Less](http://lesscss.org/) (Apache License Version 2.0)
-    compiles .less stylesheets at the beginning of an application. Less code is way cleaner than CSS and provides variables and nested rules.
-11. [jQuery total storage](https://github.com/jarednova/jquery-total-storage) (MIT Open Source Licence)
+7. [Less](http://lesscss.org/) (Apache License Version 2.0)
+   compiles .less stylesheets at the beginning of an application. Less code is way cleaner than CSS and provides variables and nested rules.
+8. [jQuery total storage](https://github.com/jarednova/jquery-total-storage) (MIT Open Source Licence)
     is a small plugin that guarantees local storage of data - if HTML5 is not supported it falls automatically back to cookies. With total storage its easy to save and retrieve strings, numbers and even complex json objects in one line.
+9. [Highcharts 3.0.4](http://www.highcharts.com/) (Creative Commons BY-NC 3.0)
+   one of the best charting APIs and compatible with legacy systems and browsers. Includes the full code which means that no data transfer  is required.
+10. [chalbert/Backbone-Mediator](https://github.com/chalbert/Backbone-Mediator) (MIT Licence)
+   an ultra small mediator-pattern plugin for backbone.js.
+
 ### Removed frameworks
+Those frameworks were removed due to changes in requirements.
 5. ~~[Require.js 2.1.6](http://requirejs.org/)~~
    This project comes to a size where the different javascript files become difficult to handle. Require.js priovides some functions to manage the structured loading of those files.
 9. ~~[Gumby](http://gumbyframework.com/) (MIT Open Source License)~~
