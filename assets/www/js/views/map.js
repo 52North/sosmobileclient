@@ -2,8 +2,16 @@ var MapView = Backbone.View.extend({
 
   currentSettings: null,
 
+  subscriptions: {
+    'timeseries:add': 'enable'
+  },
+
   events: {
     'click .posBtn': 'locate'
+  },
+
+  enable: function() {
+    alert("bingobongo");
   },
 
   initialize: function(){
