@@ -105,12 +105,12 @@ var MapView = Backbone.View.extend({
         coords.push( this.coordinates );
       });
 
+      //new collection
       matches = me.collection.getByCoordinates(coords);
+      stationsView = new StationsView({'collection': matches});
 
-      var modalsTemplate = Handlebars.helpers.getTemplate('map-choose-station-dialog');
-      var modalsHtml = modalsTemplate({'stations': matches}); //obj
-      $('#temp-modals').html(modalsHtml);
-      $('#map-choose-station-dialog').modal();
+      $('#temp-modals').html(stationsView.render().el);
+      $(stationsView.el).modal();
     }   
   }
 });

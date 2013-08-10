@@ -1,0 +1,26 @@
+<a href="#" class="station-header">
+  <div class="text">
+    <h1>{{properties.station}}</h1>
+    <h2>{{properties.timeseries.length}} timeseries</h2>
+  </div>
+  <div class="element">
+    <i class="icon-building text-info"></i>
+  </div>
+</a>
+<div class="collapse">
+  <ul class="list sublist">
+    {{#each properties.timeseries}}
+      <li>
+        <a href="#">
+          <div class="text">
+            <h1>{{category}}</h1>
+            <h2>{{offering}}</h2>
+          </div>
+          <div class="element">
+            <i class="icon-plus"></i>
+          </div>
+        </a>
+      </li>
+    {{/each}}
+  </ul>
+</div>

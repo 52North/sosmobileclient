@@ -9,16 +9,15 @@ var Stations = Backbone.Collection.extend({
 
   getByCoordinates: function(coord) {
     coordArray = [].concat( coord );
-    results = [];
-    _.each(this.models, function (elem) {
+
+    newCollection = new Stations();
+    this.each(function(elem) {
       if ($.inArray(elem.get('geometry').coordinates, coordArray) != -1) {
-        results.push(elem.toJSON());
+        newCollection.add(elem);
       }
     });
-    return results;
-  },
-  getByCoordinate: function(coord) {
-    return this.find(function(model) { return model.get('geometry').coordinates == coord; });
+
+    return newCollection;
   }
 
 });
