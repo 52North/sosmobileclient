@@ -20,9 +20,10 @@ var MapView = Backbone.View.extend({
     this.$el.empty().append(map);
 
     this.map = map.geomap({
-      center: [-71, 42],
-      zoom: 14,
+      center: [10,50],
+      zoom: 4,
       mode: "find",
+      cursors: {'find': 'crosshair'},
       click: me.findAndAdd,
       services: [{
         "class" : "osm",
