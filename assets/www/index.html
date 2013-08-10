@@ -99,10 +99,14 @@
     <script src="js/views/data.js"></script>
     <script src="js/views/settings.js"></script>
     <script src="js/views/legend.js"></script>
-    <script src="js/views/stationsView.js"></script>
+    <script src="js/views/stations.js"></script>
+    <script src="js/views/timeserie.js"></script>
 
     <script>
       $(function() {
+        //Migrate logging off
+        jQuery.migrateMute = true;
+
         //models and collections
         stations = new Stations();
         currentSettings = new CurrentSettings();
@@ -113,7 +117,8 @@
         new SettingsView({'model': currentSettings, 'currentStations': stations, 'availableServices': services}).render();
         new DataView().render();
         new AddView({'stations': stations, 'currentSettings': currentSettings}).render();
-        new LegendView({'collection': currentTimeseries}).render();
+        legend = new LegendView({'collection': currentTimeseries});
+        $('#legend-content').empty().html(legend.render().el)
 
         //fetching data
         currentTimeseries.fetch();
@@ -121,10 +126,15 @@
         stations.url = generateStationsUrl(currentSettings.get('currentProvider'));
         stations.fetch({reset: true});
         services.fetch();
-        
+
         //router
         router = new AppRouter();
         Backbone.history.start();
+
+        //Events
+        Backbone.Mediator.subscribe('timeseries:add', function(timeseries) {
+          currentTimeseries.add(timeseries);
+        }, this);
       });
     </script>
 

@@ -1,19 +1,7 @@
 var MapView = Backbone.View.extend({ 
-
-  currentSettings: null,
-
-  subscriptions: {
-    'timeseries:add': 'enable'
-  },
-
   events: {
     'click .posBtn': 'locate'
   },
-
-  enable: function() {
-    alert("bingobongo");
-  },
-
   initialize: function(){
     me = this;
 
@@ -22,7 +10,6 @@ var MapView = Backbone.View.extend({
   },
 
   render: function() {
-    console.log("render map");
     map = $("<div>");
     map.attr("id", "map");
     this.$el.empty().append(map);

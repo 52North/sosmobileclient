@@ -1,14 +1,22 @@
 var LegendView = Backbone.View.extend({
-  el: '#legend-content',
+  tagName: 'ul',
+  className: 'list timeseries',
 
   initialize: function(){
-    this.listenTo(this.collection, 'all', this.render);
+    this.listenTo(this.collection, 'add', this.render);
   },
 
   render: function() {
-    var template = Handlebars.helpers.getTemplate('legend');
-    var listHtml = template({'currentTimeseries': collectionModelsToJSONArray(this.collection)});
-    this.$el.empty().append(listHtml);
+    this.$el.empty();
+
+    list = this.$el;
+    this.collection.each(function(timeserie){
+      console.log(timeserie);
+      stationView = new TimeserieView({'model': timeserie});
+      list.append(stationView.render().el);
+    });
+
+    return this;
   }
 
 });
