@@ -14,6 +14,8 @@ function collectionModelsToJSONArray(collection) {
 }
 
 function stringToColor(string) {
+	if (string == undefined)
+		return "000000";
 	//luminance is: (0.2126*R) + (0.7152*G) + (0.0722*B)  has to be > 50 ??
 	return intToRGB(hashCode(string));
 }

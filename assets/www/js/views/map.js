@@ -3,14 +3,14 @@ var MapView = Backbone.View.extend({
   currentSettings: null,
 
   events: {
-    'click .posBtn': 'toggleTracking'
+    'click .posBtn': 'locate'
   },
 
   initialize: function(){
     me = this;
-    tracking = false;
 
-    me.listenTo(this.collection, 'reset', me.drawStations); //only redraw points TODO
+    me.listenTo(this.collection, 'reset', me.drawStations);
+    //mediator listen to loading -> draw stations
   },
 
   render: function() {
@@ -20,10 +20,9 @@ var MapView = Backbone.View.extend({
     this.$el.empty().append(map);
 
     this.map = map.geomap({
-      center : [ 7.5, 52 ],
-      zoom : 5,
+      center: [-71, 42],
+      zoom: 14,
       mode: "find",
-      cursors: { find: "crosshair" },
       click: me.findAndAdd,
       services: [{
         "class" : "osm",
@@ -36,57 +35,59 @@ var MapView = Backbone.View.extend({
           visibility : "visible",
           opacity : 1.0
         }
+      },
+      {
+        id: "marker-layer",
+        type: "shingled",
+        src: ""
       }]
     });
 
+    this.markerLayer = $("#marker-layer").geomap( "option", "shapeStyle", { width: 0, height: 0 } );
+
     //my position switch
     posBtnWrapper = $("<div>").addClass('map-buttons');
-    this.posBtn = $("<a>").addClass('btn posBtn');
-    this.updatePosBtn();
-    this.posBtn.html("<i class='icon-screenshot'></i>");
+    this.posBtn = $("<a>").addClass('btn posBtn btn-primary');
+    this.posBtn.html("<i class='icon-screenshot' id='posBtnIcon'></i>");
     posBtnWrapper.append(this.posBtn);
 
     this.$el.append(posBtnWrapper);
-
   },
   drawStations: function() {
     this.map.geomap( "empty", false );
+
     color = stringToColor(this.options.currentSettings.get('currentProvider'));
     _.each(this.collection.models, function (elem, index) {
       this.map.geomap("append", elem.get('geometry'), { color: "#" + color, width: 10, height: 10, borderRadius: 10 }, false);
     });
 
-    $("#map").geomap( "refresh" );
+    this.map.geomap( "refresh" );
   },
-  updatePosBtn: function() {
-    if (tracking) {
-      this.posBtn.removeClass('btn-default');
-      this.posBtn.addClass('btn-primary');
-    } else {
-      this.posBtn.removeClass('btn-primary');
-      this.posBtn.addClass('btn-default');
-    }
-  },
-  toggleTracking: function(event) {
-    tracking = !tracking;
-    if (tracking) {
-      this.watchId = navigator.geolocation.watchPosition(this.updateLocation, this.onError, { maximumAge: 3000, timeout: 5000, enableHighAccuracy: true });
-    } else {
-      navigator.geolocation.clearWatch(this.watchId);
-    }
-    this.updatePosBtn();
+  locate: function(event) {
+    this.posBtn.find('#posBtnIcon').removeClass("icon-screenshot");
+    this.posBtn.find('#posBtnIcon').addClass("icon-spinner icon-spin");
+
+    navigator.geolocation.getCurrentPosition(this.updateLocation, this.onError, { timeout: 5000, enableHighAccuracy: true });
   },
   updateLocation: function(position) {
+    me.posBtn.find('#posBtnIcon').removeClass("icon-spinner icon-spin");
+    me.posBtn.find('#posBtnIcon').addClass("icon-screenshot");
+
     coord = [position.coords.longitude, position.coords.latitude];
     if (this.map) {
-      this.map.geomap("remove", me.point);
+      me.markerLayer.geomap("remove", me.point);
       me.point = { type: "Point", coordinates: coord };
-      this.map.geomap("append", me.point, { color: "#2176B7", width: 20, height: 20, borderRadius: 20 }, true);
+
+      me.markerLayer.geomap( "append", me.point, "" );
+
       this.map.geomap("option", "center", coord);
       this.map.geomap("option", "zoom", 12)
     }
   },
   onError: function(error) {
+    me.posBtn.find('#posBtnIcon').removeClass("icon-spinner icon-spin");
+    me.posBtn.find('#posBtnIcon').addClass("icon-screenshot");
+
     console.log(error);
   },
 
