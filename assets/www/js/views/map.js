@@ -88,7 +88,7 @@ var MapView = Backbone.View.extend({
     me.posBtn.find('#posBtnIcon').removeClass("icon-spinner icon-spin");
     me.posBtn.find('#posBtnIcon').addClass("icon-screenshot");
 
-    console.log(error);
+    showErrorMessage("Can't locate you", error.message);
   },
 
   findAndAdd: function (e, geo) {

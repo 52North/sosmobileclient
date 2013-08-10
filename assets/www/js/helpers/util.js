@@ -1,3 +1,5 @@
+var errorId = 0;
+
 function generateStationsUrl(provider) {
   if (!provider) {
     provider = "PEGELONLINE";
@@ -33,4 +35,22 @@ function intToRGB(i){
     return ((i>>16)&0xFF).toString(16) + 
            ((i>>8)&0xFF).toString(16) + 
            (i&0xFF).toString(16);
+}
+
+function showErrorMessage(title, message) {
+  id = 'error' + errorId++;
+  template = Handlebars.helpers.getTemplate('errorMessage');
+  html = template({
+    id: id,
+    icon: 'icon-warning-sign',
+    title: title,
+    message: message
+  });
+  $('#temp-modals').append(html);
+  modal = $('#' + id);
+  modal.modal('show');
+
+  modal.on('hidden.bs.modal', function () {
+    modal.remove();
+  });
 }
