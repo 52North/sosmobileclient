@@ -54,3 +54,34 @@ function showErrorMessage(title, message) {
     modal.remove();
   });
 }
+
+/*
+ *  Finds the topmost/leftmost and the bottommost/rightmost station
+ */
+function boundingBoxFromStations(stationCollection) {
+  if (stationCollection.length != 0) {
+    firstElemCoord = stationCollection.at(0).get('geometry').coordinates;
+    topmost = firstElemCoord[1];
+    bottommost = firstElemCoord[1];
+    leftmost = firstElemCoord[0];
+    rightmost = firstElemCoord[0];
+
+    stationCollection.each(function(element) {
+      geom = element.get('geometry').coordinates; //[longitue, latitude] = [x,y]
+
+      if (geom[0] > rightmost) {
+        rightmost = geom[0];
+      }
+      if (geom[0] < leftmost) {
+        leftmost = geom[0];
+      }
+      if (geom[1] > topmost) {
+        topmost = geom[1];
+      }
+      if (geom[1] < bottommost) {
+        bottommost = geom[1];
+      }
+    });
+    return [parseFloat(leftmost), parseFloat(bottommost), parseFloat(rightmost), parseFloat(topmost)];
+  }
+}

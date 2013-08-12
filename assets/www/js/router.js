@@ -5,14 +5,14 @@ var AppRouter = Backbone.Router.extend({
     'add/:tab':    'addTab',
     'legend':      'legend',
     'settings':    'settings',
+    '[closePanels]': 'closePanels',
     '*actions':    'defaultAction'
   },
 
-
-
-  initialize: function() {    
-    
-
+  initialize: function() {
+    rtMe = this;
+    document.addEventListener("menubutton", rtMe.toggleSettings, false);
+    rtMe.settingsOpened = false;
   },
 
   view: function() {
@@ -30,8 +30,21 @@ var AppRouter = Backbone.Router.extend({
     openPanel("#legend-panel");
   },
   settings: function() {
-    //open everywhere by tapping menu btn
     openPanel("#settings-panel");
+    rtMe.settingsOpened = true;
+  },
+  toggleSettings: function() {
+    //open everywhere by tapping menu btn
+    alert("toggle open:" + rtMe.settingsOpened);
+    if (rtMe.settingsOpened) {
+      rtMe.closePanels();
+    } else {
+      rtMe.settings();
+    }
+  },
+  closePanels: function() {
+    rtMe.settingsOpened = false;
+    closeAllPanels();
   },
   defaultAction: function() {
     console.log("routing not found");

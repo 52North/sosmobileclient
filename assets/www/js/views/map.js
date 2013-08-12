@@ -62,6 +62,9 @@ var MapView = Backbone.View.extend({
       this.map.geomap("append", elem.get('geometry'), { color: "#" + color, width: 10, height: 10, borderRadius: 10 }, false);
     });
 
+    //zoom to extend
+    this.map.geomap("option", "bbox", boundingBoxFromStations(this.collection));
+
     this.map.geomap( "refresh" );
   },
   locate: function(event) {
@@ -84,6 +87,7 @@ var MapView = Backbone.View.extend({
       this.map.geomap("option", "center", coord);
       this.map.geomap("option", "zoom", 12)
     }
+
   },
   onError: function(error) {
     me.posBtn.find('#posBtnIcon').removeClass("icon-spinner icon-spin");
