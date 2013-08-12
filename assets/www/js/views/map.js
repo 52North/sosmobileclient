@@ -11,6 +11,7 @@ var MapView = Backbone.View.extend({
     Backbone.Mediator.subscribe('station:locate', function(timeseries) {
       me.map.geomap("option", "center", timeseries.get('location').coordinates);
       me.map.geomap("option", "zoom", 12)
+      me.map.geomap( "refresh" );
     }, this);
   },
 

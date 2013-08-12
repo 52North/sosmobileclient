@@ -23,7 +23,7 @@ var AppRouter = Backbone.Router.extend({
   },
   addTab: function(tab) {
     navigateToPage("#add-page");
-    $('#add-content a[href="#tab-' + tab + '-content"]').tab('show');
+    $('#addTabs a[data-target="#tab-' + tab + '-content"]').tab('show');
   },
   legend: function() {
     navigateToPage("#view-page");
@@ -35,7 +35,6 @@ var AppRouter = Backbone.Router.extend({
   },
   toggleSettings: function() {
     //open everywhere by tapping menu btn
-    alert("toggle open:" + rtMe.settingsOpened);
     if (rtMe.settingsOpened) {
       rtMe.closePanels();
     } else {
@@ -43,6 +42,7 @@ var AppRouter = Backbone.Router.extend({
     }
   },
   closePanels: function() {
+    //Important: set url without trigger => history js
     rtMe.settingsOpened = false;
     closeAllPanels();
   },

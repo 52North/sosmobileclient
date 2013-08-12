@@ -14,7 +14,7 @@ AddController = (function() {
         { 'name': 'SEARCH', 'id': 'search-content', 'content-class': 'full-content'},
         { 'name': 'HISTORY', 'id': 'history-content', 'content-class': 'full-content'}
       ]};
-    $(document).on('click', '#addTabs a', this.navigateTab);
+    //(document).on('click', '#addTabs a', this.navigateTab);
 
     Backbone.Mediator.subscribe('timeseries:add', this.addTimeseries, this);
     Backbone.Mediator.subscribe('legend:timeseries:delete', this.removeTimeseries, this);
@@ -50,14 +50,7 @@ AddController = (function() {
   AddController.prototype.removeTimeseries = function(timeseries) {
     currentTimeseries.remove(timeseries);
   }
-
-  AddController.prototype.navigateTab = function(e) {
-    e.preventDefault();
-    $(e.currentTarget).tab('show');
-    $('#addTabContent').find('.tab-pane').removeClass('active');
-    $("#" + $(e.currentTarget).data('target')).addClass('active');
-  }
-
+  
   return AddController;
 
 })();

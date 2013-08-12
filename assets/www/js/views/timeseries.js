@@ -9,7 +9,7 @@ var TimeseriesListView = Backbone.View.extend({
     list = $("<ul>");
     list.addClass('list sublist');
 
-    actions = this.options.actions
+    actions = this.options.actions;
     this.collection.each(function(ts) {
       tsView = new TimeserieView({'model': ts, 'actions': actions});
       list.append(tsView.render().el);
