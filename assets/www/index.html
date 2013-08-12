@@ -113,23 +113,23 @@
         jQuery.migrateMute = true;
 
         //models and collections
+        window.settings = new CurrentSettings(); //globally
         stations = new Stations();
-        currentSettings = new CurrentSettings();
         services = new Services();
         currentTimeseries = new CurrentTimeseries();
 
         //views
-        new SettingsView({'model': currentSettings, 'currentStations': stations, 'availableServices': services}).render();
+        new SettingsView({'model': window.settings, 'currentStations': stations, 'availableServices': services}).render();
         new DataView().render();
-        new AddController(services, stations, currentSettings);
+        new AddController(services, stations);
 
         legend = new LegendView({'collection': currentTimeseries});
         $('#legend-content').empty().html(legend.render().el)
 
         //fetching data
         currentTimeseries.fetch();
-        currentSettings.fetch();
-        stations.url = generateStationsUrl(currentSettings.get('currentProvider'));
+        window.settings.fetch();
+        stations.url = generateStationsUrl(window.settings.get('currentProvider'));
         stations.fetch({reset: true});
         services.fetch();
 

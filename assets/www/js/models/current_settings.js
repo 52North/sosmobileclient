@@ -8,7 +8,10 @@ var CurrentSettings = Backbone.Model.extend({
   },
 
   initialize: function() {
-    
+    Backbone.Mediator.subscribe('app:booted', function(timeseries) {
+      this.listenTo(this, 'change', this.save);
+      this.listenTo(this, 'change', this.sort);
+    }, this);
   },
 
   isSet: function() {
@@ -20,14 +23,12 @@ var CurrentSettings = Backbone.Model.extend({
   },
   
   fetch: function() {
-    /* DEVELOPMENT MODE
     if (this.isSet()) {
       this.set($.totalStorage('current_settings'));
     } else {
-      */
       this.set(this.defaultValues);
       this.save();
-    //}
+    }
   },
 
   save: function() {

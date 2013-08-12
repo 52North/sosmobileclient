@@ -2,10 +2,9 @@ var AddController;
 
 AddController = (function() {
 
-  function AddController(services, stations, settings) {
+  function AddController(services, stations) {
     this.services = services;
     this.stations = stations;
-    this.settings = settings;
     this.historyTimeseries = new HistoryTimeseries();
     this.historyTimeseries.fetch();
 
@@ -34,7 +33,7 @@ AddController = (function() {
     bv.setElement($('#tab-browser-content'));
     bv.render();
 
-    mv = new MapView({'collection': this.stations, 'currentSettings': this.settings});
+    mv = new MapView({'collection': this.stations});
     mv.setElement($('#tab-map-content'));
     mv.render();
     mv.drawStations();

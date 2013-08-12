@@ -3,6 +3,10 @@ var HistoryView = Backbone.View.extend({
   className: 'list timeseries',
   actions: [
     {
+        'icon': 'icon-plus',
+        'callback': 'timeseries:add'
+    },
+    {
         'icon': 'icon-trash',
         'callback': 'history:timeseries:delete'
     },
@@ -22,6 +26,7 @@ var HistoryView = Backbone.View.extend({
     Backbone.Mediator.subscribe('history:timeseries:delete', function(timeseries) {
      collection.remove(timeseries);
     }, this);
+
   },
 
   render: function() {

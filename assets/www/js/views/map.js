@@ -4,6 +4,7 @@ var MapView = Backbone.View.extend({
   },
   initialize: function(){
     me = this;
+    this.settings = window.settings;
 
     me.listenTo(this.collection, 'reset', me.drawStations);
 
@@ -56,7 +57,7 @@ var MapView = Backbone.View.extend({
   drawStations: function() {
     this.map.geomap( "empty", false );
 
-    color = stringToColor(this.options.currentSettings.get('currentProvider'));
+    color = stringToColor(this.settings.get('currentProvider'));
     _.each(this.collection.models, function (elem, index) {
       this.map.geomap("append", elem.get('geometry'), { color: "#" + color, width: 10, height: 10, borderRadius: 10 }, false);
     });

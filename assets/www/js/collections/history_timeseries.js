@@ -9,7 +9,6 @@ var HistoryTimeseries = Backbone.Collection.extend({
     this.listenTo(this, 'change', this.sort);
     this.listenTo(this, 'remove', this.save);
 
-    htMe = this;
     Backbone.Mediator.subscribe('timeseries:add', function(timeseries) {
       this.add(timeseries);
     }, this);
