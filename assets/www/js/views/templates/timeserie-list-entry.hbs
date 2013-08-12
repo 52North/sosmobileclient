@@ -1,9 +1,15 @@
 <div class="wrapper timeseries">
   <div class="text">
-    {{#if category}}
-      <h1>{{category}}</h1>
+    {{#if procedure}}
+      <h1>{{procedure}}</h1>
     {{else}}
       <h1>[unknown]</h1>
+    {{/if}}
+    {{#if timeseriesId}}
+      <h2 style="font-size: 9px; color: black;">{{timeseriesId}}</h2>
+    {{/if}}
+    {{#if category}}
+      <h2>{{category}}</h2>
     {{/if}}
     {{#if feature}}
       <h2>{{feature}}</h2>
@@ -14,9 +20,7 @@
     {{#if phenomenon}}
       <h2>{{phenomenon}}</h2>
     {{/if}}
-    {{#if procedure}}
-      <h2>{{procedure}}</h2>
-    {{/if}}
+    
   </div>
   <div class="element">
     {{#each actions}}

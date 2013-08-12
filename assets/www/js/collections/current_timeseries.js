@@ -3,6 +3,11 @@ var CurrentTimeseries = Backbone.Collection.extend({
   model: Timeseries,
   url: '',
  
+  initialize: function() {
+    this.listenTo(this, 'change', this.save);
+    this.listenTo(this, 'remove', this.save);
+  },
+
   isSet: function() {
     if ($.totalStorage('currentTimeseries')) {
       return true;

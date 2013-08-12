@@ -7,12 +7,13 @@ AddController = (function() {
     this.stations = stations;
     this.settings = settings;
     this.historyTimeseries = new HistoryTimeseries();
+    this.historyTimeseries.fetch();
 
     this.tabs = { tabs: [
-        { 'name': 'MAP', 'id': 'map-content', "active": "active", 'content-class': 'full-content'},
-        { 'name': 'BROWSER', 'id': 'browser-content'},
-        { 'name': 'SEARCH', 'id': 'search-content'},
-        { 'name': 'HISTORY', 'id': 'history-content'}
+        { 'name': 'MAP', 'id': 'map-content', "active": "active"},
+        { 'name': 'BROWSER', 'id': 'browser-content', 'content-class': 'full-content'},
+        { 'name': 'SEARCH', 'id': 'search-content', 'content-class': 'full-content'},
+        { 'name': 'HISTORY', 'id': 'history-content', 'content-class': 'full-content'}
       ]};
     $(document).on('click', '#addTabs a', this.navigateTab);
 
@@ -43,6 +44,7 @@ AddController = (function() {
   };
 
   AddController.prototype.addTimeseries = function(timeseries) {
+    timeseries.set('addedAt', new Date().getTime());
     currentTimeseries.add(timeseries);
   }
 
