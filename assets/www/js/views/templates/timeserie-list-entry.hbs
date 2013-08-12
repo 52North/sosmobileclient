@@ -1,4 +1,4 @@
-<a href="#" class="timeseries">
+<div class="wrapper timeseries">
   <div class="text">
     {{#if category}}
       <h1>{{category}}</h1>
@@ -20,13 +20,13 @@
   </div>
   <div class="element">
     {{#each actions}}
-      <span class="action" data-action="{{callback}}" 
+      <a class="action" data-action="{{callback}}" 
       {{#if navigate}}
         data-navigate="{{navigate}}"
       {{/if}}
       >
         <i class="{{icon}}"></i>
-      </span>
+      </a>
     {{/each}}
   </div>
-</a>
+</div>

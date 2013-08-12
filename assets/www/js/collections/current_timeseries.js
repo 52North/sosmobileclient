@@ -1,7 +1,7 @@
 var CurrentTimeseries = Backbone.Collection.extend({
 
   model: Timeseries,
-  url: 'http://sensorweb.demo.52north.org/sensorwebclient-webapp-stable/api/v0/services/PEGELONLINE/stations.json',
+  url: '',
  
   isSet: function() {
     if ($.totalStorage('currentTimeseries')) {

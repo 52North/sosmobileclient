@@ -36,6 +36,12 @@ However, this blank file is available if you prefer
   src: url('fonts/fontawesome-webfont.ttf');
 }
 
+/** bootstrap fixes **/
+a, a:focus, a:active, a:hover, a:visited {
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .top {
   z-index: 100;
   position: relative;
@@ -87,7 +93,7 @@ However, this blank file is available if you prefer
     border-bottom: 1px solid #d8d8d8;
     width: 100%;
     margin: auto;
-    a {
+    .wrapper, a {
       margin: 0px 10px 0px 10px;
       display:-moz-box; /* Firefox */
       display:-webkit-box; /* Safari and Chrome */
@@ -146,6 +152,10 @@ However, this blank file is available if you prefer
   }
   .clear {
     clear: right;
+  }
+  .placeholder {
+    text-align: center;
+    padding-top: 40px;
   }
 }
 

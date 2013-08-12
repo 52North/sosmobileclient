@@ -73,6 +73,7 @@
     <!-- Phonegap -->
     <script src="js/libs/phonegap/cordova-1.9.0.js"></script>
     <script src="js/libs/phonegap/apis/geolocation.js"></script>
+    <script src="js/libs/phonegap/apis/device.js"></script>
 
     <!-- Bootstrap -->
     <script src="js/libs/bootstrap.js"></script>
@@ -91,9 +92,12 @@
     <script src="js/collections/stations.js"></script>
     <script src="js/collections/current_timeseries.js"></script>
     <script src="js/collections/timeseries_collection.js"></script>
+    <script src="js/collections/history_timeseries.js"></script>
+
+    <!-- Controllers -->
+    <script src="js/controllers/add.js"></script>
 
     <!-- Views -->
-    <script src="js/views/add.js"></script>
     <script src="js/views/browser.js"></script>
     <script src="js/views/map.js"></script>
     <script src="js/views/data.js"></script>
@@ -101,6 +105,7 @@
     <script src="js/views/legend.js"></script>
     <script src="js/views/stations.js"></script>
     <script src="js/views/timeseries.js"></script>
+    <script src="js/views/history.js"></script>
 
     <script>
       $(function() {
@@ -116,7 +121,8 @@
         //views
         new SettingsView({'model': currentSettings, 'currentStations': stations, 'availableServices': services}).render();
         new DataView().render();
-        new AddView({'stations': stations, 'currentSettings': currentSettings}).render();
+        new AddController(services, stations, currentSettings);
+
         legend = new LegendView({'collection': currentTimeseries});
         $('#legend-content').empty().html(legend.render().el)
 
@@ -131,16 +137,17 @@
         router = new AppRouter();
         Backbone.history.start();
 
-        //Events
-        Backbone.Mediator.subscribe('timeseries:add', function(timeseries) {
-          currentTimeseries.add(timeseries);
-          currentTimeseries.save();
-        }, this);
-        Backbone.Mediator.subscribe('timeseries:delete', function(timeseries) {
-          currentTimeseries.remove(timeseries);
-          currentTimeseries.save();
-        }, this);
+        //No calls after boot
+        Backbone.Mediator.publish('app:booted', false);
       });
+
+      function onDeviceReady() {
+          document.addEventListener("menubutton", onMenuKeyDown, false);
+      }
+
+      function onMenuKeyDown() {
+        alert("menukey");
+      }
     </script>
 
     </body>

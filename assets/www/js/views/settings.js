@@ -64,6 +64,8 @@ var SettingsView = Backbone.View.extend({
   changeExpertMode: function(e) {
     e.preventDefault();
     box = $(e.currentTarget).find('.expert-checkbox');
-    box.attr("checked", !box.prop("checked"));
+    expert = !box.prop("checked");
+    box.attr("checked", expert);
+    this.model.set('expert', expert);
   }
 });

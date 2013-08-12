@@ -1,10 +1,10 @@
-var LegendView = Backbone.View.extend({
+var HistoryView = Backbone.View.extend({
   tagName: 'ul',
   className: 'list timeseries',
   actions: [
     {
         'icon': 'icon-trash',
-        'callback': 'legend:timeseries:delete'
+        'callback': 'history:timeseries:delete'
     },
     {
       'icon': 'icon-screenshot',
@@ -16,13 +16,18 @@ var LegendView = Backbone.View.extend({
   initialize: function(){
     this.listenTo(this.collection, 'add', this.render);
     this.listenTo(this.collection, 'remove', this.render);
+
+    collection = this.collection;
+    Backbone.Mediator.subscribe('history:timeseries:delete', function(timeseries) {
+     collection.remove(timeseries);
+    }, this);
   },
 
   render: function() {
     this.$el.empty();
 
     if (this.collection.length == 0) {
-      this.$el.html("<div class='placeholder'>No current timeseries.<br/>Go on, <a href='#add'>add</a> one.</div>");
+      this.$el.html("<div class='placeholder'>No history entries found.<br/>Go on, <a href='#add'>add</a> one.</div>");
     }
 
     list = this.$el;
