@@ -135,6 +135,7 @@
         //Events
         Backbone.Mediator.subscribe('timeseries:add', function(timeseries) {
           currentTimeseries.add(timeseries);
+          currentTimeseries.save();
         }, this);
       });
     </script>

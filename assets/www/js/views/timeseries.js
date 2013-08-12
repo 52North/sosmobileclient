@@ -9,13 +9,13 @@ var TimeseriesListView = Backbone.View.extend({
     list = $("<ul>");
     list.addClass('list sublist');
 
+    actions = this.options.actions
     this.collection.each(function(ts) {
-      tsView = new TimeserieView({'model': ts});
+      tsView = new TimeserieView({'model': ts, 'actions': actions});
       list.append(tsView.render().el);
     });
 
     this.$el.html(list);
-    console.log(this.$el);
     return this;
   }
 });
@@ -25,11 +25,21 @@ var TimeserieView = Backbone.View.extend({
   template: Handlebars.helpers.getTemplate('timeserie-list-entry'),
   
   events: {
-    
+    'click .action': 'perform' 
   },
 
   render: function() {
-    this.$el.html(this.template(this.model.toJSON()));
+    model = this.model.toJSON();
+    model['actions'] = this.options.actions;
+    this.$el.html(this.template(model));
     return this;
+  },
+
+  perform: function(e) {
+    e.preventDefault();
+    callback = $(e.currentTarget).data('action');
+
+    Backbone.Mediator.publish(callback, this.model);
   }
+
 });

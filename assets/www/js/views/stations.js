@@ -23,13 +23,22 @@ var StationView = Backbone.View.extend({
   tagName: 'li',
   template: Handlebars.helpers.getTemplate('station-list-entry'),
   events: {
-    'click .station-header': 'togglePhenomenons',
-    'click .timeseries': 'addTimeseries'
+    'click .station-header': 'togglePhenomenons'
   },
+  timeSeriesActions: [
+    {
+      'icon': 'icon-plus',
+      'callback': 'timeseries:add'
+    },
+    {
+      'icon': 'icon-trash',
+      'callback': 'timeseries:delete'
+    },
+  ],
   render: function() {
     this.$el.html(this.template(this.model.toJSON()));
 
-    tsLv = new TimeseriesListView({'collection': this.model.timeseries});
+    tsLv = new TimeseriesListView({'collection': this.model.timeseries, 'actions': this.timeSeriesActions});
     this.$el.append(tsLv.render().el);
     
     this.collapse = this.$('.collapse');
@@ -38,10 +47,5 @@ var StationView = Backbone.View.extend({
   togglePhenomenons: function(e) {
     e.preventDefault();
     this.collapse.collapse('toggle');
-  },
-  addTimeseries: function(e) {
-    e.preventDefault();
-    Backbone.Mediator.publish('timeseries:add', this.model);
   }
-
 });

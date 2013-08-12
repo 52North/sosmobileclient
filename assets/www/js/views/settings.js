@@ -3,7 +3,8 @@ var SettingsView = Backbone.View.extend({
 
   events: {
     'click .refresh-stations': 'refreshStations',
-    'click .availableServiceLink': 'changeService'
+    'click .availableServiceLink': 'changeService',
+    'click .expert': 'changeExpertMode'
   },
 
   initialize: function(){
@@ -58,5 +59,11 @@ var SettingsView = Backbone.View.extend({
     svMe.model.set('currentProvider', newService);
     svMe.options.currentStations.url = generateStationsUrl(newService);
     svMe.refreshStations(e);
+  },
+
+  changeExpertMode: function(e) {
+    e.preventDefault();
+    box = $(e.currentTarget).find('.expert-checkbox');
+    box.attr("checked", !box.prop("checked"));
   }
 });

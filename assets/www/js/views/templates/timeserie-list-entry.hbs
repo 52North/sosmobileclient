@@ -19,6 +19,10 @@
     {{/if}}
   </div>
   <div class="element">
-    <i class="icon-plus"></i>
+    {{#each actions}}
+      <span class="action" data-action="{{callback}}">
+        <i class="{{icon}}"></i>
+      </span>
+    {{/each}}
   </div>
 </a>
