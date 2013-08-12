@@ -1,9 +1,24 @@
-<a href="#" class="availableServiceLink"  data-dismiss="modal" data-station="{{itemName}}">
+<a href="#" class="timeseries">
   <div class="text">
+    {{#if category}}
       <h1>{{category}}</h1>
+    {{else}}
+      <h1>[unknown]</h1>
+    {{/if}}
+    {{#if feature}}
+      <h2>{{feature}}</h2>
+    {{/if}}
+    {{#if offering}}
       <h2>{{offering}}</h2>
+    {{/if}}
+    {{#if phenomenon}}
+      <h2>{{phenomenon}}</h2>
+    {{/if}}
+    {{#if procedure}}
+      <h2>{{procedure}}</h2>
+    {{/if}}
   </div>
   <div class="element">
-    <i class="icon-trash"></i>
+    <i class="icon-plus"></i>
   </div>
 </a>

@@ -9,10 +9,10 @@ var StationsView = Backbone.View.extend({
   render: function() {
     $(this.el).html(this.template({'stationsCount': this.collection.size()}));
 
-    list = $(this.el).find('.list');
+    sationsList = this.$el.find('.list');
     this.collection.each(function(station){
       stationView = new StationView({'model': station});
-      list.append(stationView.render().el);
+      sationsList.append(stationView.render().el);
     });
     
     return this;
@@ -27,9 +27,11 @@ var StationView = Backbone.View.extend({
     'click .timeseries': 'addTimeseries'
   },
   render: function() {
-    //TODO: HIER UNTERVIEW: TIMESERIE - 
+    this.$el.html(this.template(this.model.toJSON()));
 
-    $(this.el).html(this.template(this.model.toJSON()));
+    tsLv = new TimeseriesListView({'collection': this.model.timeseries});
+    this.$el.append(tsLv.render().el);
+    
     this.collapse = this.$('.collapse');
     return this;
   },

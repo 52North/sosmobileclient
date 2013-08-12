@@ -11,7 +11,6 @@ var LegendView = Backbone.View.extend({
 
     list = this.$el;
     this.collection.each(function(timeserie){
-      console.log(timeserie);
       stationView = new TimeserieView({'model': timeserie});
       list.append(stationView.render().el);
     });
