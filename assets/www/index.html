@@ -18,7 +18,7 @@
     <div class="app-panel from-left out" id="legend-panel">
       <header role="banner" class="top app-navbar">
         <a class="nav-btn nav-btn-right" href="#view"><i class="icon-remove"></i></a>
-        <h1></h1>
+        <h1>Legend</h1>
       </header>
       <div class="content" id="legend-content"></div>
     </div>
@@ -135,6 +135,10 @@
         //Events
         Backbone.Mediator.subscribe('timeseries:add', function(timeseries) {
           currentTimeseries.add(timeseries);
+          currentTimeseries.save();
+        }, this);
+        Backbone.Mediator.subscribe('timeseries:delete', function(timeseries) {
+          currentTimeseries.remove(timeseries);
           currentTimeseries.save();
         }, this);
       });

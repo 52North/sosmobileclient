@@ -6,7 +6,11 @@ var MapView = Backbone.View.extend({
     me = this;
 
     me.listenTo(this.collection, 'reset', me.drawStations);
-    //mediator listen to loading -> draw stations
+
+    Backbone.Mediator.subscribe('station:locate', function(timeseries) {
+      me.map.geomap("option", "center", timeseries.get('location').coordinates);
+      me.map.geomap("option", "zoom", 16)
+    }, this);
   },
 
   render: function() {

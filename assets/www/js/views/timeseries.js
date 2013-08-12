@@ -25,7 +25,7 @@ var TimeserieView = Backbone.View.extend({
   template: Handlebars.helpers.getTemplate('timeserie-list-entry'),
   
   events: {
-    'click .action': 'perform' 
+    'click .action': 'perform'
   },
 
   render: function() {
@@ -40,6 +40,11 @@ var TimeserieView = Backbone.View.extend({
     callback = $(e.currentTarget).data('action');
 
     Backbone.Mediator.publish(callback, this.model);
+
+    navigate = $(e.currentTarget).data('navigate');
+    if (navigate) {
+      window.location.href = navigate;
+    }
   }
 
 });

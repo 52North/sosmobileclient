@@ -20,7 +20,11 @@
   </div>
   <div class="element">
     {{#each actions}}
-      <span class="action" data-action="{{callback}}">
+      <span class="action" data-action="{{callback}}" 
+      {{#if navigate}}
+        data-navigate="{{navigate}}"
+      {{/if}}
+      >
         <i class="{{icon}}"></i>
       </span>
     {{/each}}

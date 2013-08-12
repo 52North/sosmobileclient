@@ -29,11 +29,7 @@ var StationView = Backbone.View.extend({
     {
       'icon': 'icon-plus',
       'callback': 'timeseries:add'
-    },
-    {
-      'icon': 'icon-trash',
-      'callback': 'timeseries:delete'
-    },
+    }    
   ],
   render: function() {
     this.$el.html(this.template(this.model.toJSON()));
