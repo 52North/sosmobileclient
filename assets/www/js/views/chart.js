@@ -1,16 +1,18 @@
 var ChartView = Backbone.View.extend({
 
   initialize: function(){
+
+    Backbone.Mediator.subscribe('screen:change:ratio', this.render, this);
   },
 
   render: function() {
+    this.$el.empty();
     this.renderChart();
-    cvMe = this;
+
     return this;
   },
 
   renderChart: function() {
-
     graph = new Rickshaw.Graph( {
       element: this.el, 
       width: this.$el.width(), 

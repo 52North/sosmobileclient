@@ -12,6 +12,7 @@ var ChartController = (function() {
 
     this.build();
     //Backbone.Mediator.subscribe('timeseries:add', this.addTimeseries, this);
+
   };
 
   ChartController.prototype.build = function(param) {

@@ -85,3 +85,15 @@ function boundingBoxFromStations(stationCollection) {
     return [parseFloat(leftmost), parseFloat(bottommost), parseFloat(rightmost), parseFloat(topmost)];
   }
 }
+
+window.ratio = $(document).width() / $(document).height(); 
+    
+$(window).resize(function() {
+  newRatio = $(document).width() / $(document).height();
+  
+  if (newRatio != window.ratio) {
+    window.ratio = newRatio;
+    Backbone.Mediator.publish("screen:change:ratio", ratio);
+    //console.log(window.ratio);
+  }
+});
