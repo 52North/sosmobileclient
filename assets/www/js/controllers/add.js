@@ -8,13 +8,14 @@ AddController = (function() {
     this.historyTimeseries = new HistoryTimeseries();
     this.historyTimeseries.fetch();
 
-    this.tabs = { tabs: [
+    this.tabs = { 
+      id: "add-tabs",
+      tabs: [
         { 'name': 'MAP', 'id': 'map-content', "active": "active"},
         { 'name': 'BROWSER', 'id': 'browser-content', 'content-class': 'full-content'},
         { 'name': 'SEARCH', 'id': 'search-content', 'content-class': 'full-content'},
         { 'name': 'HISTORY', 'id': 'history-content', 'content-class': 'full-content'}
       ]};
-    //(document).on('click', '#addTabs a', this.navigateTab);
 
     Backbone.Mediator.subscribe('timeseries:add', this.addTimeseries, this);
     Backbone.Mediator.subscribe('legend:timeseries:delete', this.removeTimeseries, this);
@@ -23,7 +24,7 @@ AddController = (function() {
 
   AddController.prototype.build = function(param) {
     
-    template = Handlebars.helpers.getTemplate('add-tabs');
+    template = Handlebars.helpers.getTemplate('tabs');
     html = template(this.tabs);
 
     this.el = $("#add-content");

@@ -24,19 +24,19 @@
       <div class="content" id="legend-content"></div>
     </div>
 
-    <div class="app-page from-left in" id="view-page">
+    <div class="app-page from-left in" id="chart-page">
       <header role="banner" class="top app-navbar">
         <a class="nav-btn nav-btn-left page-btn" href="#legend" ><i class="icon-th-list"></i></a>
-        <h1><i class="icon-bar-chart"></i> Data View</h1>
+        <h1>Chart View</h1>
         <a class="nav-btn nav-btn-right page-btn" href="#add"><i class="icon-plus"></i></a>
       </header>
-      <div class="content" id="view-content">
+      <div class="content" id="chart-content">
       </div>
     </div>
 
     <div class="app-page from-right out" id="add-page">
        <header role="banner" class="top app-navbar">
-        <a class="nav-btn nav-btn-left page-btn" href="#view"><i class="icon-bar-chart"></i></a>
+        <a class="nav-btn nav-btn-left page-btn" href="#chart"><i class="icon-bar-chart"></i></a>
         <h1><i class="icon-plus"></i> Add</h1>
         <a class="nav-btn nav-btn-right page-btn" href="#settings"><i class="icon-cogs"></i></a>
       </header>
@@ -96,11 +96,12 @@
 
     <!-- Controllers -->
     <script src="js/controllers/add.js"></script>
+    <script src="js/controllers/chart.js"></script>
 
     <!-- Views -->
     <script src="js/views/browser.js"></script>
     <script src="js/views/map.js"></script>
-    <script src="js/views/data.js"></script>
+    <script src="js/views/chart.js"></script>
     <script src="js/views/settings.js"></script>
     <script src="js/views/legend.js"></script>
     <script src="js/views/stations.js"></script>
@@ -122,8 +123,8 @@
 
           //views
           new SettingsView({'model': window.settings, 'currentStations': stations, 'availableServices': services}).render();
-          new DataView().render();
           new AddController(services, stations);
+          new ChartController(currentTimeseries);
 
           legend = new LegendView({'collection': currentTimeseries});
           $('#legend-content').empty().html(legend.render().el)

@@ -1,6 +1,6 @@
 var AppRouter = Backbone.Router.extend({
   routes: {
-    'view':        'view',
+    'chart':        'chart',
     'add':         'add',
     'add/:tab':    'addTab',
     'legend':      'legend',
@@ -11,14 +11,13 @@ var AppRouter = Backbone.Router.extend({
   initialize: function() {
     rtMe = this;
     rtMe.settingsOpened = false;
-    rtMe.navigate("#view", {trigger: true, replace: true});
 
     document.addEventListener("menubutton", rtMe.toggleSettings, false);
-    document.addEventListener("backbutton", rtMe.closeOnView, false);
+    document.addEventListener("backbutton", rtMe.closeOnChart, false);
   },
 
-  view: function() {
-    navigateToPage("#view-page");
+  chart: function() {
+    navigateToPage("#chart-page");
   },
   add: function() {
     navigateToPage("#add-page");
@@ -28,7 +27,7 @@ var AppRouter = Backbone.Router.extend({
     $('#addTabs a[data-target="#tab-' + tab + '-content"]').tab('show');
   },
   legend: function() {
-    navigateToPage("#view-page");
+    navigateToPage("#chart-page");
     openPanel("#legend-panel");
   },
   settings: function() {
@@ -36,24 +35,24 @@ var AppRouter = Backbone.Router.extend({
     rtMe.settingsOpened = true;
   },
   toggleSettings: function() {
-    alert("menu");
     //open everywhere by tapping menu btn
     if (rtMe.settingsOpened) {
       rtMe.settingsOpened = false;
-      window.history.back()
+      window.history.back();
     } else {
       rtMe.settings();
     }
   },
-  closeOnView: function() {
-    alert("back");
-    if (Backbone.history.fragment == "view") {
+  closeOnChart: function() {
+    if (Backbone.history.fragment == "chart") {
       alert("exit");
       navigator.app.exitApp()
+    } else {
+      window.history.back();
     }
   },
   defaultAction: function() {
     console.log("routing not found");
-    rtMe.navigate("#view", {trigger: false, replace: true});
+    rtMe.navigate("#chart", {trigger: false, replace: true});
   }
 });
