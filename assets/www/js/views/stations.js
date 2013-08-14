@@ -28,7 +28,8 @@ var StationView = Backbone.View.extend({
   timeSeriesActions: [
     {
       'icon': 'icon-plus',
-      'callback': 'timeseries:add'
+      'callback': 'timeseries:add',
+      'navigate': '#chart'
     }    
   ],
   render: function() {

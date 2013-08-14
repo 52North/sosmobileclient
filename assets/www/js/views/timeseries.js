@@ -40,10 +40,12 @@ var TimeserieView = Backbone.View.extend({
     e.preventDefault();
     callback = $(e.currentTarget).data('action');
 
+    //TODO already added?
     Backbone.Mediator.publish(callback, this.model);
 
     navigate = $(e.currentTarget).data('navigate');
     if (navigate) {
+      $('.modal').modal('hide');
       window.location.href = navigate;
     }
   }
