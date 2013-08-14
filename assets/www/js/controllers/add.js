@@ -2,11 +2,12 @@ var AddController;
 
 AddController = (function() {
 
-  function AddController(services, stations) {
+  function AddController(services, stations, currentTimeseries, historyTimeseries) {
     this.services = services;
     this.stations = stations;
-    this.historyTimeseries = new HistoryTimeseries();
-    this.historyTimeseries.fetch();
+    this.stations = stations;
+    this.historyTimeseries = historyTimeseries;
+    this.currentTimeseries = currentTimeseries;
 
     this.tabs = { 
       id: "add-tabs",
@@ -45,11 +46,13 @@ AddController = (function() {
 
   AddController.prototype.addTimeseries = function(timeseries) {
     timeseries.set('addedAt', new Date().getTime());
-    currentTimeseries.add(timeseries);
+    timeseries.set('service', window.settings.get("currentProvider"));
+    timeseries.updateUrl();
+    this.currentTimeseries.add(timeseries);
   }
 
   AddController.prototype.removeTimeseries = function(timeseries) {
-    currentTimeseries.remove(timeseries);
+    this.currentTimeseries.remove(timeseries);
   }
   
   return AddController;

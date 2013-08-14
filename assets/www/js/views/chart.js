@@ -2,12 +2,19 @@ var ChartView = Backbone.View.extend({
 
   initialize: function(){
 
+    this.listenTo(this.model.get('chartSettings'), 'all', this.render);
+    this.listenTo(this.model.get('currentTimeseries'), 'add' ,this.render);
+    this.listenTo(this.model.get('currentTimeseries'), 'remove' ,this.render);
     Backbone.Mediator.subscribe('screen:change:ratio', this.render, this);
   },
 
-  render: function() {
+  render: function() {   
     this.$el.empty();
     this.renderChart();
+
+    this.model.get('currentTimeseries').each(function(ts) {
+      //console.log(ts.url());
+    });
 
     return this;
   },

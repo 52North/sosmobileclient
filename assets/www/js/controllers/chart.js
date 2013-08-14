@@ -1,7 +1,7 @@
 var ChartController = (function() {
 
-  function ChartController(currentTimeseries) {
-    this.currentTimeseries = currentTimeseries;
+  function ChartController(currentTimeseriesData) {
+    this.currentTimeseriesData = currentTimeseriesData;
 
     this.tabs = {
       id: 'chart-tabs',
@@ -23,7 +23,7 @@ var ChartController = (function() {
     this.el = $("#chart-content");
     this.el.empty().html(html);
     
-    cv = new ChartView({'model': currentTimeseries});
+    cv = new ChartView({'model': this.currentTimeseriesData});
     cv.setElement($('#tab-chart1-content'));
     cv.render();
   };
