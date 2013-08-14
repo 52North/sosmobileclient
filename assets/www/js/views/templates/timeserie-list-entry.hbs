@@ -5,17 +5,19 @@
     {{else}}
       <h1>[unknown]</h1>
     {{/if}}
-    {{#if timeseriesId}}
-      <h2 style="font-size: 9px; color: black;">{{timeseriesId}}</h2>
-    {{/if}}
-    {{#if category}}
-      <h2>{{category}}</h2>
-    {{/if}}
-    {{#if feature}}
-      <h2>{{feature}}</h2>
-    {{/if}}
-    {{#if offering}}
-      <h2>{{offering}}</h2>
+    {{#if expert}}
+      {{#if timeseriesId}}
+        <h2 style="font-size: 9px; color: black;">{{timeseriesId}}</h2>
+      {{/if}}
+      {{#if category}}
+        <h2>{{category}}</h2>
+      {{/if}}
+      {{#if feature}}
+        <h2>{{feature}}</h2>
+      {{/if}}
+      {{#if offering}}
+        <h2>{{offering}}</h2>
+      {{/if}}
     {{/if}}
     {{#if phenomenon}}
       <h2>{{phenomenon}}</h2>

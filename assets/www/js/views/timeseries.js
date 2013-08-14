@@ -31,6 +31,7 @@ var TimeserieView = Backbone.View.extend({
   render: function() {
     model = this.model.toJSON();
     model['actions'] = this.options.actions;
+    model['expert'] = window.settings.get('expert');
     this.$el.html(this.template(model));
     return this;
   },

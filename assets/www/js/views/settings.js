@@ -15,14 +15,16 @@ var SettingsView = Backbone.View.extend({
   },
 
   render: function() {
-    var template = Handlebars.helpers.getTemplate('settings');
-    var listHtml = template(this.model.toJSON());
-
-    var settingsModalsTemplate = Handlebars.helpers.getTemplate('settingsModals');
-    var settingsModalsHtml = settingsModalsTemplate($.extend(this.model.toJSON(), {'availableServices': this.options.availableServices.toJSON()}));
+    template = Handlebars.helpers.getTemplate('settings');
+    listHtml = template(this.model.toJSON());
+    
+    settingsModalsTemplate = Handlebars.helpers.getTemplate('settingsModals');
+    settingsModalsHtml = settingsModalsTemplate($.extend(this.model.toJSON(), {'availableServices': this.options.availableServices.toJSON()}));
     
     $('#settings-content').empty().html(listHtml);
-    
+    this.updateExpertIcon();
+
+
     //modals
     if ($("#global-modals #settings-modals").length != 1) {
       $("#global-modals").append($("<div>").attr("id","settings-modals"));
@@ -30,6 +32,16 @@ var SettingsView = Backbone.View.extend({
       $("#global-modals #settings-modals").empty();
     }
     $("#global-modals #settings-modals").append(settingsModalsHtml);
+  },
+
+  updateExpertIcon: function() {
+    icon = this.$('#expert-icon');
+    icon.removeClass();
+    if (this.model.get('expert')) {
+      icon.addClass('icon-ok ');
+    } else {
+      icon.addClass('icon-remove');
+    }
   },
 
   refreshStations: function(e) {
@@ -63,9 +75,6 @@ var SettingsView = Backbone.View.extend({
 
   changeExpertMode: function(e) {
     e.preventDefault();
-    box = $(e.currentTarget).find('.expert-checkbox');
-    expert = !box.prop("checked");
-    box.attr("checked", expert);
-    this.model.set('expert', expert);
+    this.model.set('expert', !this.model.get('expert'));
   }
 });

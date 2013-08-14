@@ -5,14 +5,16 @@ var AppRouter = Backbone.Router.extend({
     'add/:tab':    'addTab',
     'legend':      'legend',
     'settings':    'settings',
-    '[closePanels]': 'closePanels',
     '*actions':    'defaultAction'
   },
 
   initialize: function() {
     rtMe = this;
-    document.addEventListener("menubutton", rtMe.toggleSettings, false);
     rtMe.settingsOpened = false;
+    rtMe.navigate("#view", {trigger: true, replace: true});
+
+    document.addEventListener("menubutton", rtMe.toggleSettings, false);
+    document.addEventListener("backbutton", rtMe.closeOnView, false);
   },
 
   view: function() {
@@ -34,19 +36,24 @@ var AppRouter = Backbone.Router.extend({
     rtMe.settingsOpened = true;
   },
   toggleSettings: function() {
+    alert("menu");
     //open everywhere by tapping menu btn
     if (rtMe.settingsOpened) {
-      rtMe.closePanels();
+      rtMe.settingsOpened = false;
+      window.history.back()
     } else {
       rtMe.settings();
     }
   },
-  closePanels: function() {
-    //Important: set url without trigger => history js
-    rtMe.settingsOpened = false;
-    closeAllPanels();
+  closeOnView: function() {
+    alert("back");
+    if (Backbone.history.fragment == "view") {
+      alert("exit");
+      navigator.app.exitApp()
+    }
   },
   defaultAction: function() {
     console.log("routing not found");
+    rtMe.navigate("#view", {trigger: false, replace: true});
   }
 });
