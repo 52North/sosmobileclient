@@ -46,6 +46,12 @@ var CurrentTimeseries = Backbone.Collection.extend({
       current_timeseries_json.push(elem.toJSON());
     });
     $.totalStorage('currentTimeseries', current_timeseries_json);
+  },
+
+  contains: function(timeseries) {
+    return this.some(function(elem) {
+      return elem.get('timeseriesId') === timeseries.get('timeseriesId');
+    });
   }
 
 });

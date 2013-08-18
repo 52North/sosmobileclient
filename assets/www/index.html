@@ -9,49 +9,72 @@
     <link rel="stylesheet" href="css/font-awesome.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/rickshaw.min.css">
-    <link rel="stylesheet/less" href="css/mfmobilepages.less">
+    <link rel="stylesheet" href="css/mfmobilepages.css">
     <link rel="stylesheet/less" href="css/style.less">
+    <style type="text/css">
+      *, *:after, *:before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+      body, html {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+      }
+
+      /* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+      .clearfix:before, .clearfix:after { content: " "; display: table; }
+      .clearfix:after { clear: both; }
+
+      body {
+        background: #fff;
+        overflow: hidden;
+      }
+    </style>
+    <!-- Modernizer -->
+    <script src="js/libs/modernizr.custom.js"></script>
   </head>
   <body>
     <div id="global-modals"></div>
     <div id="temp-modals"></div>
 
-    <div class="app-panel from-left out" id="legend-panel">
-      <header role="banner" class="top app-navbar">
-        <a class="nav-btn nav-btn-right" href="javascript:history.back()"><i class="icon-remove"></i></a>
-        <h1>Legend</h1>
-      </header>
-      <div class="content" id="legend-content"></div>
-    </div>
+    <div id="pt-main" class="pt-perspective">
+      <div class="mf-panel"  data-alignment="left" id="legend-panel">
+        <header role="banner" class="top app-navbar">
+          <a class="nav-btn nav-btn-right" href="javascript:history.back()"><i class="icon-remove"></i></a>
+          <h1>Legend</h1>
+        </header>
+        <div class="full-content" id="legend-content"></div>
+      </div>
 
-    <div class="app-page from-left in" id="chart-page">
-      <header role="banner" class="top app-navbar">
-        <a class="nav-btn nav-btn-left page-btn" href="#legend" ><i class="icon-th-list"></i></a>
-        <h1>Chart View</h1>
-        <a class="nav-btn nav-btn-right page-btn" href="#add"><i class="icon-plus"></i></a>
-      </header>
-      <div class="content" id="chart-content">
+      <div class="pt-page" data-alignment="left" id="chart-page">
+        <header role="banner" class="top app-navbar">
+          <a class="nav-btn nav-btn-left page-btn" href="#legend" ><i class="icon-th-list"></i></a>
+          <h1>Chart View</h1>
+          <a class="nav-btn nav-btn-right page-btn" href="#add"><i class="icon-plus"></i></a>
+        </header>
+        <div class="content" id="chart-content">
+        </div>
+      </div>
+
+      <div class="pt-page" data-alignment="right" id="add-page">
+         <header role="banner" class="top app-navbar">
+          <a class="nav-btn nav-btn-left page-btn" href="#chart"><i class="icon-bar-chart"></i></a>
+          <h1><i class="icon-plus"></i> Add</h1>
+          <a class="nav-btn nav-btn-right page-btn" href="#settings"><i class="icon-cogs"></i></a>
+        </header>
+        <div id="add-content" class="content" ></div>
+      </div>
+
+      <div class="mf-panel" data-alignment="right" id="settings-panel">
+        <header role="banner" class="top app-navbar">
+          <a class="nav-btn nav-btn-left" href="javascript:history.back()"><i class="icon-remove"></i></a>
+          <h1></h1>
+        </header>
+        <div class="full-content" id="settings-content">
+        </div>
       </div>
     </div>
 
-    <div class="app-page from-right out" id="add-page">
-       <header role="banner" class="top app-navbar">
-        <a class="nav-btn nav-btn-left page-btn" href="#chart"><i class="icon-bar-chart"></i></a>
-        <h1><i class="icon-plus"></i> Add</h1>
-        <a class="nav-btn nav-btn-right page-btn" href="#settings"><i class="icon-cogs"></i></a>
-      </header>
-      <div id="add-content" class="content" ></div>
-    </div>
 
-    <div class="app-panel from-right out" id="settings-panel">
-      <header role="banner" class="top app-navbar">
-        <a class="nav-btn nav-btn-left" href="javascript:history.back()"><i class="icon-remove"></i></a>
-        <h1></h1>
-      </header>
-      <div class="content" id="settings-content">
-      </div>
-    </div>
-
+    <!-- JavaScript -->
     <!-- 3. Party -->
     <script src="js/libs/jquery-1.7.2.min.js"></script>
     <script src="js/libs/jquery-migrate-1.2.1.js"></script>
@@ -121,6 +144,7 @@
           timeseriesData = new CurrentTimeseriesData();
           timeseriesData.set('currentTimeseries', new CurrentTimeseries());
           timeseriesData.set('chartSettings', new CurrentSettings());
+          window.currentTimeseries = timeseriesData.get('currentTimeseries'); //globally
           historyTimeseries = new HistoryTimeseries();
           historyTimeseries.fetch();
 
@@ -145,6 +169,27 @@
 
           //No calls after boot
           Backbone.Mediator.publish('app:booted', false);
+
+
+            data = JSON.stringify({"timeseries": ["ts_46d3a18491aee6ae456bc80733b66903","ts_f8ce3a93a6d7b7634b512cd164345991","ts_60d531379494324f27589573b27acd1c"]});
+            console.log(data);
+          request = $.ajax( {
+            url: 'http://sensorweb.demo.52north.org/sensorwebclient-webapp-stable/api/v0/timeseries',
+            type: 'POST',
+            data: data,
+            headers: {
+              "Data-type": 'application/json',
+              "Accept": 'application/json'
+            }
+          });
+
+          request.success(function(data) {
+              console.info(data);
+          });
+          request.fail(function(jqXHR, textStatus) {
+            console.log( "Request failed: " + textStatus + "   " + jqXHR.responseText);
+            });
+
         //}, false);
       });
 

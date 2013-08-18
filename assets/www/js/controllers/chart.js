@@ -3,22 +3,21 @@ var ChartController = (function() {
   function ChartController(currentTimeseriesData) {
     this.currentTimeseriesData = currentTimeseriesData;
 
-    this.tabs = {
-      id: 'chart-tabs',
-      tabs: [
-        { 'name': 'CHART', 'id': 'chart1-content', "active": "active", 'content-class': 'full-content'},
-        { 'name': 'CHART PREFERENCES', 'id': 'chart-settings-content'}
-      ]};
-
     this.build();
     //Backbone.Mediator.subscribe('timeseries:add', this.addTimeseries, this);
 
   };
 
   ChartController.prototype.build = function(param) {
-    
+    tabs = {
+      id: 'chart-tabs',
+      tabs: [
+        { 'name': 'CHART', 'id': 'chart1-content', "active": "active", 'content-class': 'full-content'},
+        { 'name': 'CHART PREFERENCES', 'id': 'chart-settings-content'}
+      ]};
+
     template = Handlebars.helpers.getTemplate('tabs');
-    html = template(this.tabs);
+    html = template(tabs);
 
     this.el = $("#chart-content");
     this.el.empty().html(html);

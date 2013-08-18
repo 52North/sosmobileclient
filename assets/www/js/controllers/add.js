@@ -2,14 +2,20 @@ var AddController;
 
 AddController = (function() {
 
-  function AddController(services, stations, currentTimeseries, historyTimeseries) {
+  function AddController(services, stations, historyTimeseries) {
     this.services = services;
     this.stations = stations;
     this.stations = stations;
     this.historyTimeseries = historyTimeseries;
-    this.currentTimeseries = currentTimeseries;
+    this.currentTimeseries = window.currentTimeseries;
 
-    this.tabs = { 
+    Backbone.Mediator.subscribe('timeseries:add', this.addTimeseries, this);
+    Backbone.Mediator.subscribe('legend:timeseries:delete', this.removeTimeseries, this);
+    Backbone.Mediator.subscribe('app:booted', this.build, this);
+  };
+
+  AddController.prototype.build = function(param) {
+    tabs = { 
       id: "add-tabs",
       tabs: [
         { 'name': 'MAP', 'id': 'map-content', "active": "active"},
@@ -18,15 +24,8 @@ AddController = (function() {
         { 'name': 'HISTORY', 'id': 'history-content', 'content-class': 'full-content'}
       ]};
 
-    Backbone.Mediator.subscribe('timeseries:add', this.addTimeseries, this);
-    Backbone.Mediator.subscribe('legend:timeseries:delete', this.removeTimeseries, this);
-    Backbone.Mediator.subscribe('app:booted', this.build, this);
-  };
-
-  AddController.prototype.build = function(param) {
-    
     template = Handlebars.helpers.getTemplate('tabs');
-    html = template(this.tabs);
+    html = template(tabs);
 
     this.el = $("#add-content");
     this.el.empty().html(html);
@@ -35,7 +34,7 @@ AddController = (function() {
     bv.setElement($('#tab-browser-content'));
     bv.render();
 
-    mv = new MapView({'collection': this.stations});
+    mv = new MapView({'collection': this.stations, 'currentTimeseries': currentTimeseries});
     mv.setElement($('#tab-map-content'));
     mv.render();
     mv.drawStations();
@@ -45,10 +44,14 @@ AddController = (function() {
   };
 
   AddController.prototype.addTimeseries = function(timeseries) {
-    timeseries.set('addedAt', new Date().getTime());
-    timeseries.set('service', window.settings.get("currentProvider"));
-    timeseries.updateUrl();
-    this.currentTimeseries.add(timeseries);
+    if (this.currentTimeseries.contains(timeseries)) {
+      console.log("already");
+    } else {
+      timeseries.set('addedAt', new Date().getTime());
+      timeseries.set('service', window.settings.get("currentProvider")); //TODO this is awful
+      timeseries.updateUrl();
+      this.currentTimeseries.add(timeseries);
+    }
   }
 
   AddController.prototype.removeTimeseries = function(timeseries) {

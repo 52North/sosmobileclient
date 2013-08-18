@@ -32,7 +32,9 @@ var StationView = Backbone.View.extend({
       'navigate': '#chart'
     }    
   ],
+
   render: function() {
+
     this.$el.html(this.template(this.model.toJSON()));
 
     tsLv = new TimeseriesListView({'collection': this.model.timeseries, 'actions': this.timeSeriesActions});
