@@ -36,6 +36,25 @@ However, this blank file is available if you prefer
   src: url('fonts/fontawesome-webfont.ttf');
 }
 
+/* width/heigh fixes */
+*, *:after, *:before {
+  -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;
+}
+body, html {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfix:before, .clearfix:after { content: " "; display: table; }
+.clearfix:after { clear: both; }
+
+body {
+  background: #fff;
+  overflow: hidden;
+}
+
 /** bootstrap fixes **/
 a, a:focus, a:active, a:hover, a:visited {
   text-decoration: none;

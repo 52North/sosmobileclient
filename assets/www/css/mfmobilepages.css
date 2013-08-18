@@ -64,6 +64,7 @@
 }
 .mf-backdrop-current {
   visibility: visible;
+  opacity: 0;
 }
 .mf-backdrop {
   opacity: 0.8;
