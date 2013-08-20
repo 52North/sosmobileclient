@@ -8,16 +8,16 @@ This project is attended at the [University of Hamburg](http://www.uni-hamburg.d
 ### 8/20/2013
 - Frameworks
   - JQuery Geo replaced by Leaflet JS, much easier, better API, better docs, lots of extensions
-  - Highcharts remplaced by Rickshaw due to Highcharts licensing model and Rickshaw's size and simple API
+  - Highcharts replaced by Rickshaw due to Highcharts licensing model and Rickshaw's size and simple API
 - Map
   - Rebuilt with Leaflet JS
   - Station clustering included
   - nicer markers
 - Usability
   - Buttons and markers are bigger and therefore better to reach by finger
-  - The front end finally is done right. No offscreen content, better transitions and positioning.
+  - The front end is finally done right: no offscreen content, better transitions and positioning.
 - Feature
-  - History and Legend work as intended.
+  - History and legend work as intended.
 - Architecture
   - Controllers added. I feel like I have to think about my JS again.
 
@@ -75,8 +75,11 @@ The UI will be Android-oriented. It consists of 3 main pages/panels:
 8. [chalbert/Backbone-Mediator](https://github.com/chalbert/Backbone-Mediator) (MIT Open Source License)
    an ultra small mediator-pattern plugin for backbone.js.
 9. [Leaflet js](http://leafletjs.com/) (Self-made Open Source License)
-10. [Leaflet.markercluster](https://github.com/Leaflet/Leaflet.markercluster)
-11. [shutterstock/rickshaw](https://github.com/shutterstock/rickshaw)
+   This is a great mobile-first map plugin with lots of extensions, like...
+10. [Leaflet.markercluster](https://github.com/Leaflet/Leaflet.markercluster) (MIT Open Source License)
+    which clusteres markers on a map layer, zooming to fit the bounds on click. Provides usability for my map with lots of stations.
+11. [shutterstock/rickshaw](https://github.com/shutterstock/rickshaw) (MIT Open Source License)
+    This charting library only comes with bar and line charts but is incredible easy to use and lightweight. I works completely on the client.
 
 ### Removed frameworks
 Those frameworks were removed due to changes in requirements.
@@ -114,8 +117,8 @@ To create a panel that comes from (and goes to) the left side just add this `<di
 
 To open panels or navigate to pages use Javascript (JQuery):
 
-    navigateToPage("#page-id"); //Navigates to a page with the given ID
-    openPanel("#panel-id"); //Opens the panel with the given ID
+    navigateToPage("#myPage"); //Navigates to a page with the given ID
+    openPanel("#myPanel"); //Opens the panel with the given ID
 
 This closes all panels (note, that all panels will be automatically closed when navigating to any page):
 
