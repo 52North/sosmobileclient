@@ -24,7 +24,7 @@ var MapView = Backbone.View.extend({
       cloudmadeAttribution = '&copy; OpenStreetMap &amp; Contributors',
       cloudmade = L.tileLayer(cloudmadeUrl, {maxZoom: 17, attribution: cloudmadeAttribution}),
       latlng = L.latLng(50, 10);
-    L.Icon.Default.imagePath = '/img';
+    L.Icon.Default.imagePath = 'img';
 
     this.map = L.map('map', {center: latlng, zoom: 5, layers: [cloudmade]});
     this.markers = L.markerClusterGroup();
@@ -72,8 +72,8 @@ var MapView = Backbone.View.extend({
     }
 
     var myIcon = L.icon({
-      iconUrl: '/img/marker.png',
-      shadowUrl: '/img/marker-shadow.png',
+      iconUrl: 'img/marker.png',
+      shadowUrl: 'img/marker-shadow.png',
 
       iconSize:     [40, 46], // size of the icon
       shadowSize:   [41, 41], // size of the shadow
