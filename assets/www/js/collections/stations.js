@@ -12,7 +12,8 @@ var Stations = Backbone.Collection.extend({
 
     newCollection = new Stations();
     this.each(function(elem) {
-      if ($.inArray(elem.get('geometry').coordinates, coordArray) != -1) {
+      var c = elem.get('geometry').coordinates;
+      if (c[0] == coord[0] && c[1] == coord[1]) {
         newCollection.add(elem);
       }
     });

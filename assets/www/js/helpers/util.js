@@ -82,7 +82,7 @@ function boundingBoxFromStations(stationCollection) {
         bottommost = geom[1];
       }
     });
-    return [parseFloat(leftmost), parseFloat(bottommost), parseFloat(rightmost), parseFloat(topmost)];
+    return [[parseFloat(bottommost), parseFloat(leftmost)], [parseFloat(topmost), parseFloat(rightmost)]];
   }
 }
 

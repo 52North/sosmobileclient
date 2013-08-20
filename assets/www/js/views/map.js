@@ -60,7 +60,7 @@ var MapView = Backbone.View.extend({
 
     color = stringToColor(this.settings.get('currentProvider'));
     _.each(this.collection.models, function (elem, index) {
-      this.map.geomap("append", elem.get('geometry'), { color: "#" + color, width: 10, height: 10, borderRadius: 10 }, false);
+      this.map.geomap("append", elem.get('geometry'), { color: "#" + color, width: 25, height: 25, borderRadius: 25 }, false);
     });
 
     //zoom to extend
