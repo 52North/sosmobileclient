@@ -31,7 +31,11 @@
           data-navigate="{{navigate}}"
         {{/if}}
       >
-        <i class="{{icon}}"></i>
+        <i class="{{icon}}"
+          {{#if color}}
+            style="color: {{color}};"
+          {{/if}}
+        ></i>
       </a>
     {{/each}}
   </div>

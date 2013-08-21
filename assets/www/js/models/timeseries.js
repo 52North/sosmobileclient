@@ -11,6 +11,10 @@ var Timeseries = Backbone.Model.extend({
 
   data: function(form, till) {
   	//ajax request on initialize
+  },
+
+  color: function() {
+    return "#" + stringToColor(this.get('id'));
   }
 
 });

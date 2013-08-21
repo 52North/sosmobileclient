@@ -156,16 +156,20 @@
 
           //No calls after boot
           Backbone.Mediator.publish('app:booted', false);
-            /*
+            
 
-            data = JSON.stringify({"timeseries": ["ts_46d3a18491aee6ae456bc80733b66903","ts_f8ce3a93a6d7b7634b512cd164345991","ts_60d531379494324f27589573b27acd1c"]});
-            console.log(data);
+          data = {
+            "timespan": "PT6h/2013-05-28TZ",
+            "timeseries": ["ts_35559ca6b2248629e6dcdc65ceead0ed"]
+          };
+          console.log(data);
+          
           request = $.ajax( {
             url: 'http://sensorweb.demo.52north.org/sensorwebclient-webapp-stable/api/v0/timeseries',
             type: 'POST',
             data: data,
             headers: {
-              "Data-type": 'application/json',
+              "Content-Type": 'application/json',
               "Accept": 'application/json'
             }
           });
@@ -173,10 +177,11 @@
           request.success(function(data) {
               console.info(data);
           });
+          
           request.fail(function(jqXHR, textStatus) {
             console.log( "Request failed: " + textStatus + "   " + jqXHR.responseText);
-            });
-*/
+          });
+
         //}, false);
       });
 

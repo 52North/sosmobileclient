@@ -9,9 +9,9 @@ var MapView = Backbone.View.extend({
     me.listenTo(this.collection, 'reset', me.drawStations);
 
     Backbone.Mediator.subscribe('station:locate', function(timeseries) {
-      me.map.geomap("option", "center", timeseries.get('location').coordinates);
-      me.map.geomap("option", "zoom", 12)
-      me.map.geomap( "refresh" );
+      var pos = new L.LatLng(timeseries.get('location').coordinates[1], timeseries.get('location').coordinates[0]);
+      me.map.panTo(pos);
+      me.map.setZoom(17);
     }, this);
   },
 
@@ -85,7 +85,8 @@ var MapView = Backbone.View.extend({
     me.yourPos = L.marker(new L.LatLng(position.coords.latitude, position.coords.longitude), { title: "You are here.", icon: myIcon });
     me.map.addLayer(me.yourPos);
 
-    me.map.fitBounds([[position.coords.latitude, position.coords.longitude],[position.coords.latitude, position.coords.longitude]]);
+    me.map.panTo(me.yourPos);
+    me.map.setZoom(12);
   },
   onError: function(error) {
     me.posBtn.find('#posBtnIcon').removeClass("icon-spinner icon-spin");

@@ -10,6 +10,11 @@ var LegendView = Backbone.View.extend({
       'icon': 'icon-screenshot',
       'callback': 'station:locate',
       'navigate': '#add/map'
+    },
+    {
+      'icon': 'icon-edit-sign',
+      'callback': 'station:locate',
+      'color': '#162534'
     }
   ],
 
