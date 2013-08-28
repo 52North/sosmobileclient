@@ -13,14 +13,19 @@ var LegendView = Backbone.View.extend({
     },
     {
       'icon': 'icon-edit-sign',
-      'callback': 'station:locate',
-      'color': '#162534'
+      'callback': 'legend:timeseries:change_color',
+      'color': true
     }
   ],
 
   initialize: function(){
     this.listenTo(this.collection, 'add', this.render);
     this.listenTo(this.collection, 'remove', this.render);
+    this.listenTo(window.settings, 'change:expert', this.render);
+
+    Backbone.Mediator.subscribe('legend:timeseries:change_color', function(timeseries) {
+      this.showColorDialog(timeseries);
+    }, this);
   },
 
   render: function() {
@@ -39,4 +44,9 @@ var LegendView = Backbone.View.extend({
 
     return this;
   },
+
+  showColorDialog: function(timeseries) {
+    new ColorView({'model': timeseries}).render();
+  }
+
 });

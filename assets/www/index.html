@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/leaflet/MarkerCluster.css">
     <link rel="stylesheet" href="css/mfmobilepages.css">
     <link rel="stylesheet/less" href="css/style.less">
+    <link rel="stylesheet/less" href="css/map.less">
     <!-- Modernizer -->
     <script src="js/libs/modernizr.custom.js"></script>
   </head>
@@ -110,7 +111,7 @@
 
     <!-- Views -->
     <script src="js/views/browser.js"></script>
-    <!--<script src="js/views/map.js"></script>-->
+    <script src="js/views/color.js"></script>
     <script src="js/views/leaflet_map.js"></script>
     <script src="js/views/chart.js"></script>
     <script src="js/views/settings.js"></script>
@@ -124,8 +125,10 @@
         //document.addEventListener("deviceready", function() { //wait for phonegap //TURN OFF ON COMPUTER IN DEV MODE!
           jQuery.migrateMute = true;
 
-          //models and collections
           window.settings = new CurrentSettings(); //globally
+          window.settings.fetch();
+          
+          //models and collections
           stations = new Stations();
           services = new Services();
           timeseriesData = new CurrentTimeseriesData();
@@ -145,7 +148,6 @@
 
           //fetching data
           timeseriesData.get('currentTimeseries').fetch();
-          window.settings.fetch();
           stations.url = generateStationsUrl(window.settings.get('currentProvider'));
           stations.fetch({reset: true});
           services.fetch();
@@ -156,31 +158,6 @@
 
           //No calls after boot
           Backbone.Mediator.publish('app:booted', false);
-            
-
-          data = {
-            "timespan": "PT6h/2013-05-28TZ",
-            "timeseries": ["ts_35559ca6b2248629e6dcdc65ceead0ed"]
-          };
-          console.log(data);
-          
-          request = $.ajax( {
-            url: 'http://sensorweb.demo.52north.org/sensorwebclient-webapp-stable/api/v0/timeseries',
-            type: 'POST',
-            data: data,
-            headers: {
-              "Content-Type": 'application/json',
-              "Accept": 'application/json'
-            }
-          });
-
-          request.success(function(data) {
-              console.info(data);
-          });
-          
-          request.fail(function(jqXHR, textStatus) {
-            console.log( "Request failed: " + textStatus + "   " + jqXHR.responseText);
-          });
 
         //}, false);
       });
