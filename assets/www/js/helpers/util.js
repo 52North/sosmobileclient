@@ -4,7 +4,7 @@ function generateStationsUrl(provider) {
   if (!provider) {
     provider = "PEGELONLINE";
   }
-  return "http://sensorweb.demo.52north.org/sensorwebclient-webapp-stable/api/v0/services/" + provider.toString() + "/stations.json";
+  return "http://sensorweb.demo.52north.org/sensorwebclient-webapp-stable/api/v0/services/" + provider.toString() + "/stations.json?show=expanded";
 }
 
 function collectionModelsToJSONArray(collection) {
@@ -32,9 +32,14 @@ function hashCode(str) {
 } 
 
 function intToRGB(i){
-    return ((i>>16)&0xFF).toString(16) + 
+    var rgb = ((i>>16)&0xFF).toString(16) + 
            ((i>>8)&0xFF).toString(16) + 
            (i&0xFF).toString(16);
+    rgb = rgb.toString();
+    while (rgb.length < 6) {
+      rgb = "0" + rgb;
+    }
+    return rgb;
 }
 
 function showErrorMessage(title, message) {
@@ -54,6 +59,16 @@ function showErrorMessage(title, message) {
     modal.remove();
   });
 }
+
+ function calcLuminance(hex) { 
+  c = hex.substring(1);      // strip #
+  var rgb = parseInt(c, 16);   // convert rrggbb to decimal
+  var r = (rgb >> 16) & 0xff;  // extract red
+  var g = (rgb >>  8) & 0xff;  // extract green
+  var b = (rgb >>  0) & 0xff;  // extract blue
+
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+ }
 
 /*
  *  Finds the topmost/leftmost and the bottommost/rightmost station

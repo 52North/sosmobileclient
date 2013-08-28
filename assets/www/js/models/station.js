@@ -7,9 +7,7 @@ var Station = Backbone.Model.extend({
 
   parseTimeseries: function() {
     timeseries = new TimeseriesCollection();
-    station = this;
     $.each(this.get('properties').timeseries, function(index, element) {
-      element['location'] = station.get('geometry');
       timeseries.add(new Timeseries(element));
     });
     this.timeseries = timeseries;

@@ -1,12 +1,12 @@
 BrowserView = Backbone.View.extend({
   initialize: function(){
 
-    svc = new Services();
+    //svc = new Services();
     //svc.areYouThere();
-    svc.fetch();
+    //svc.fetch();
   },
   render: function() {
-    var html = "hello"
+    var html = "not implemented yet"
 
     this.$el.html(html);
   }

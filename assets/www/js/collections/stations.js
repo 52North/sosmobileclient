@@ -1,7 +1,7 @@
 var Stations = Backbone.Collection.extend({
 
   model: Station,
-  url: 'http://sensorweb.demo.52north.org/sensorwebclient-webapp-stable/api/v0/services/PEGELONLINE/stations.json',
+  url: 'http://sensorweb.demo.52north.org/sensorwebclient-webapp-stable/api/v1/services/PEGELONLINE/stations.json?show=expanded',
 
   initialize: function(){
     

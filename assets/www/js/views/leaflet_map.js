@@ -9,9 +9,9 @@ var MapView = Backbone.View.extend({
     me.listenTo(this.collection, 'reset', me.drawStations);
 
     Backbone.Mediator.subscribe('station:locate', function(timeseries) {
-      var pos = new L.LatLng(timeseries.get('location').coordinates[1], timeseries.get('location').coordinates[0]);
-      me.map.panTo(pos);
+      var pos = new L.LatLng(timeseries.get('station').geometry.coordinates[1], timeseries.get('station').geometry.coordinates[0]);
       me.map.setZoom(17);
+      me.map.panTo(pos);
     }, this);
   },
 
@@ -99,9 +99,12 @@ var MapView = Backbone.View.extend({
     var lat = e.latlng.lat;
     var lng = e.latlng.lng;
     matches = me.collection.getByCoordinates([lng, lat]);
+
     stationsView = new StationsView({'collection': matches});
 
     $('#temp-modals').html(stationsView.render().el);
     $(stationsView.el).modal();
+
+
   }
 });

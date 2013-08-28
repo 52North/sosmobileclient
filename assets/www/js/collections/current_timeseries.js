@@ -43,7 +43,7 @@ var CurrentTimeseries = Backbone.Collection.extend({
   save: function() {
     current_timeseries_json = [];
     _.each(this.models, function (elem) {
-      current_timeseries_json.push(elem.toJSON());
+      current_timeseries_json.push(elem.get('id'));
     });
     $.totalStorage('currentTimeseries', current_timeseries_json);
   },

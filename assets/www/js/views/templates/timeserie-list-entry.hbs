@@ -1,42 +1,40 @@
 <div class="wrapper timeseries">
   <div class="text">
-    {{#if procedure}}
-      <h1>{{procedure}}</h1>
-    {{else}}
-      <h1>[unknown]</h1>
-    {{/if}}
-    {{#if expert}}
-      {{#if timeseriesId}}
-        <h2 style="font-size: 9px; color: black;">{{timeseriesId}}</h2>
+    {{#if synced}}
+      {{#if parameters.phenomenon.label}}
+        <h1 style='color: #{{color}}'>
+          {{parameters.phenomenon.label}}
+        </h1>
+      {{else}}
+        <h1>[unknown phenomenon]</h1>
       {{/if}}
-      {{#if category}}
-        <h2>{{category}}</h2>
+      <h2><i class="icon-building"></i> {{station.properties.label}}</h2>
+      <h2>Unit: {{uom}}</h2>
+      {{#if expert}}
+          <h2 style="font-size: 9px;">ID: {{id}}</h2>
+          <h2>{{parameters.procedure.label}}</h2>
+          <h2>{{parameters.category.label}}</h2>
+          <h2>{{parameters.feature.label}}</h2>
+          <h2>{{parameters.offering.label}}</h2>
       {{/if}}
-      {{#if feature}}
-        <h2>{{feature}}</h2>
-      {{/if}}
-      {{#if offering}}
-        <h2>{{offering}}</h2>
-      {{/if}}
-    {{/if}}
-    {{#if phenomenon}}
-      <h2>{{phenomenon}}</h2>
-    {{/if}}
-    
-  </div>
-  <div class="element">
-    {{#each actions}}
-      <a class="action" data-action="{{callback}}" 
-        {{#if navigate}}
-          data-navigate="{{navigate}}"
-        {{/if}}
-      >
-        <i class="{{icon}}"
-          {{#if color}}
-            style="color: {{color}};"
+      
+    </div>
+    <div class="element">
+      {{#each actions}}
+        <a class="action" data-action="{{callback}}" 
+          {{#if navigate}}
+            data-navigate="{{navigate}}"
           {{/if}}
-        ></i>
-      </a>
-    {{/each}}
-  </div>
+        >
+          <i class="{{icon}}"
+            {{#if color}}
+              style="color: #{{../../color}};"
+            {{/if}}
+          ></i>
+        </a>
+      {{/each}}
+    </div>
+  {{else}}
+    loading
+  {{/if}}
 </div>

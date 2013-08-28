@@ -28,10 +28,21 @@ var TimeserieView = Backbone.View.extend({
     'click .action': 'perform'
   },
 
+  initialize: function() {
+    var _this = this;
+    this.listenTo(this.model, 'sync', this.render);
+    if (!this.model.isSynced()) {
+      this.model.fetch();
+    }
+  },
+
   render: function() {
-    model = this.model.toJSON();
+    var model = this.model.toJSON();
+    console.log(model.id);
     model['actions'] = this.options.actions;
     model['expert'] = window.settings.get('expert');
+    model['synced'] = this.model.isSynced();
+    this.listenTo(this.model, 'change:color', this.render);
     this.$el.html(this.template(model));
     return this;
   },

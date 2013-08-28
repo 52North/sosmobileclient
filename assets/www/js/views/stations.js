@@ -15,6 +15,12 @@ var StationsView = Backbone.View.extend({
       sationsList.append(stationView.render().el);
     });
     
+    //Close and remove
+    var _this = this
+    this.$el.on('hidden.bs.modal', function() {
+      _this.remove();
+    });
+
     return this;
   }
 });
