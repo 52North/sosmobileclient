@@ -18,12 +18,13 @@ var HistoryView = Backbone.View.extend({
   ],
 
   initialize: function(){
+    var collection = this.collection;
+    
+    this.listenTo(this.collection, 'sort', this.render);
     this.listenTo(this.collection, 'add', this.render);
     this.listenTo(this.collection, 'remove', this.render);
-    this.listenTo(this.collection, 'sort', this.render);
     this.listenTo(window.settings, 'change:expert', this.render);
 
-    collection = this.collection;
     Backbone.Mediator.subscribe('history:timeseries:delete', function(timeseries) {
      collection.remove(timeseries);
     }, this);

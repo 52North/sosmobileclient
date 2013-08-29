@@ -44,19 +44,13 @@ AddController = (function() {
   };
 
   AddController.prototype.addTimeseries = function(timeseries) {
-    if (this.currentTimeseries.contains(timeseries)) {
-      console.log("already");
-    } else {
-      timeseries.set('addedAt', new Date().getTime());
-      timeseries.set('service', window.settings.get("currentProvider")); //TODO this is awful
-      timeseries.updateUrl();
-      this.currentTimeseries.add(timeseries);
-    }
-  }
+    timeseries.set('addedAt', new Date().getTime());
+    this.currentTimeseries.add(timeseries);
+  };
 
   AddController.prototype.removeTimeseries = function(timeseries) {
     this.currentTimeseries.remove(timeseries);
-  }
+  };
   
   return AddController;
 

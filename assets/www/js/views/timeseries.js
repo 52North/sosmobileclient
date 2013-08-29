@@ -5,6 +5,10 @@ var TimeseriesListView = Backbone.View.extend({
     
   },
 
+  initialize: function() {
+    
+  },
+
   render: function() {
     list = $("<ul>");
     list.addClass('list sublist');
@@ -31,6 +35,7 @@ var TimeserieView = Backbone.View.extend({
   initialize: function() {
     var _this = this;
     this.listenTo(this.model, 'sync', this.render);
+
     if (!this.model.isSynced()) {
       this.model.fetch();
     }
@@ -38,7 +43,6 @@ var TimeserieView = Backbone.View.extend({
 
   render: function() {
     var model = this.model.toJSON();
-    console.log(model.id);
     model['actions'] = this.options.actions;
     model['expert'] = window.settings.get('expert');
     model['synced'] = this.model.isSynced();

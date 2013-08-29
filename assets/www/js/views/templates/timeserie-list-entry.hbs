@@ -1,12 +1,14 @@
 <div class="wrapper timeseries">
-  <div class="text">
-    {{#if synced}}
+  {{#if synced}}
+    <div class="text">
       {{#if parameters.phenomenon.label}}
         <h1 style='color: #{{color}}'>
           {{parameters.phenomenon.label}}
         </h1>
       {{else}}
-        <h1>[unknown phenomenon]</h1>
+        <h1>
+          <i>[unknown phenomenon]</i>
+        </h1>
       {{/if}}
       <h2><i class="icon-building"></i> {{station.properties.label}}</h2>
       <h2>Unit: {{uom}}</h2>
@@ -35,6 +37,15 @@
       {{/each}}
     </div>
   {{else}}
-    loading
+    <div class="text">
+      <h1>
+        <i>
+          [fetching data]
+        </i>
+      </h1>
+    </div>
+    <div class="element">
+      <i class="icon-spinner icon-spin"></i>
+    </div>
   {{/if}}
 </div>

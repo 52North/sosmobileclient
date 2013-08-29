@@ -8,6 +8,7 @@ var CurrentTimeseries = Backbone.Collection.extend({
     this.listenTo(this, 'change', this.save);
     this.listenTo(this, 'change', this.sort);
     this.listenTo(this, 'remove', this.save);
+    this.listenTo(this, 'add', this.save);
 
     Backbone.Mediator.subscribe('timeseries:add', function(timeseries) {
       this.add(timeseries);
@@ -29,10 +30,12 @@ var CurrentTimeseries = Backbone.Collection.extend({
   
   fetch: function() {
     if (this.isSet()) {
-      current_timeseries_json = $.totalStorage('currentTimeseries');
+      var current_timeseries_json = $.totalStorage('currentTimeseries');
       current = this;
       $.each(current_timeseries_json, function(index, ts) {
-        current.add(new Timeseries(ts));
+        var ts = new Timeseries(ts);
+        ts.fetch();
+        current.add(ts);
       });
     } else {
       //empty or default timeseries?
@@ -42,7 +45,7 @@ var CurrentTimeseries = Backbone.Collection.extend({
 
   save: function() {
     current_timeseries_json = [];
-    _.each(this.models, function (elem) {
+    this.each(function (elem) {
       current_timeseries_json.push(elem.get('id'));
     });
     $.totalStorage('currentTimeseries', current_timeseries_json);
