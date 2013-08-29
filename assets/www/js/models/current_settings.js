@@ -18,7 +18,7 @@ var CurrentSettings = Backbone.Model.extend({
   },
 
   isSet: function() {
-    return false; //reset
+    //return false; //reset
 
     if (this.devMode) {
       if ($.totalStorage('current_settings')) {
@@ -52,6 +52,7 @@ var CurrentSettings = Backbone.Model.extend({
   },
 
   save: function() {
+    console.log('changed!', this.toJSON());
     if (this.devMode) {
       $.totalStorage(this.key, this.toJSON());
     } else {

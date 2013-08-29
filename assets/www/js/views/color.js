@@ -33,11 +33,13 @@ var ColorView = Backbone.View.extend({
   },
 
   changeColor: function(event) {
-    color = $(event.currentTarget).data('color');
+    var color = $(event.currentTarget).data('color');
     
     if (color != this.model.get('color')) {
       this.model.set('color', color);
-      //store color for this id
+      var colorMap = window.settings.get('timeseries_colors');
+      colorMap[this.model.get('id')] = color;
+      window.settings.set('timeseries_colors', colorMap);
     }
     
     //Close and remove
