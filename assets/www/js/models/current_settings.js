@@ -12,8 +12,13 @@ var CurrentSettings = Backbone.Model.extend({
   },
 
   initialize: function() {
+    csMe = this;
     Backbone.Mediator.subscribe('app:booted', function(timeseries) {
       this.listenTo(this, 'change', this.save);
+    }, this);
+    Backbone.Mediator.subscribe('app:reset', function() {
+      this.set(this.defaultValues);
+      this.save();
     }, this);
   },
 

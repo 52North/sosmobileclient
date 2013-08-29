@@ -2,11 +2,11 @@ var AddController;
 
 AddController = (function() {
 
-  function AddController(services, stations, historyTimeseries) {
+  function AddController(services, stations, currentTimeseries, historyTimeseries) {
     this.services = services;
     this.stations = stations;
     this.historyTimeseries = historyTimeseries;
-    this.currentTimeseries = window.currentTimeseries;
+    this.currentTimeseries = currentTimeseries;
 
     Backbone.Mediator.subscribe('timeseries:add', this.addTimeseries, this);
     Backbone.Mediator.subscribe('legend:timeseries:delete', this.removeTimeseries, this);

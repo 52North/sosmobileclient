@@ -2,8 +2,8 @@ var SettingsView = Backbone.View.extend({
   el: $(document),
 
   events: {
-    'click .refresh-stations': 'refreshStations',
-    'click .expert': 'changeExpertMode'
+    'click .expert': 'changeExpertMode',
+    'click .reset': 'reset'
   },
 
   initialize: function(){
@@ -43,5 +43,10 @@ var SettingsView = Backbone.View.extend({
   changeExpertMode: function(e) {
     e.preventDefault();
     this.model.set('expert', !this.model.get('expert'));
+  },
+
+  reset: function(e) {
+    e.preventDefault();
+    Backbone.Mediator.publish('app:reset');
   }
 });

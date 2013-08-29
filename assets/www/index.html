@@ -98,7 +98,6 @@
     <script src="js/models/station.js"></script>
     <script src="js/models/current_settings.js"></script>
     <script src="js/models/timeseries.js"></script>
-    <script src="js/models/current_timeseries_data.js"></script>
     
     <!-- Collections -->
     <script src="js/collections/services.js"></script>
@@ -133,23 +132,20 @@
           //models and collections
           stations = new Stations();
           services = new Services();
-          timeseriesData = new CurrentTimeseriesData();
-          timeseriesData.set('currentTimeseries', new CurrentTimeseries());
-          timeseriesData.set('chartSettings', new CurrentSettings());
-          window.currentTimeseries = timeseriesData.get('currentTimeseries'); //globally
+          currentTimeseries = new CurrentTimeseries();
           historyTimeseries = new HistoryTimeseries();
           historyTimeseries.fetch();
 
           //views
           new SettingsView({'model': window.settings}).render();
-          new AddController(services, stations, timeseriesData.get('currentTimeseries'), historyTimeseries);
-          new ChartController(timeseriesData);
+          new AddController(services, stations, currentTimeseries, historyTimeseries);
+          new ChartController(currentTimeseries);
 
-          legend = new LegendView({'collection': timeseriesData.get('currentTimeseries')});
+          legend = new LegendView({'collection': currentTimeseries});
           $('#legend-content').empty().html(legend.render().el)
 
           //fetching data
-          timeseriesData.get('currentTimeseries').fetch();
+          currentTimeseries.fetch();
           stations.url = generateStationsUrl(window.settings.get('currentProvider'));
           stations.fetch({reset: true});
           services.fetch();
