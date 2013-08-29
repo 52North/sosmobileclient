@@ -1,12 +1,19 @@
-var MapView = Backbone.View.extend({ 
+var MapView = Backbone.View.extend({
   events: {
-    'click .posBtn': 'locate'
+    'click .posBtn': 'locate',
+    'click .providerBtn': 'openProviderModal',
   },
+
   initialize: function(){
     me = this;
     this.settings = window.settings;
 
+    $(document).on("click", ".availableServiceLink", function(event){
+      me.changeProvider(event);
+    });
+
     me.listenTo(this.collection, 'reset', me.drawStations);
+    me.listenTo(this.options.services, 'sync', me.renderProviderModal);
 
     Backbone.Mediator.subscribe('station:locate', function(timeseries) {
       var pos = new L.LatLng(timeseries.get('station').geometry.coordinates[1], timeseries.get('station').geometry.coordinates[0]);
@@ -30,13 +37,14 @@ var MapView = Backbone.View.extend({
     this.markers = L.markerClusterGroup();
 
     //my position btn
-    posBtnWrapper = $("<div>").addClass('map-buttons');
+    this.btnWrapper = $("<div>").addClass('map-buttons');
     this.posBtn = $("<a>").addClass('btn posBtn btn-primary');
     this.posBtn.html("<i class='icon-screenshot' id='posBtnIcon'></i>");
-    posBtnWrapper.append(this.posBtn);
-
-    this.$el.append(posBtnWrapper);
+    
+    this.btnWrapper.append(this.posBtn);
+    this.$el.append(this.btnWrapper);
   },
+
   drawStations: function() {
     if (this.collection.length > 0) {
       if (this.map.hasLayer(this.markers)) {
@@ -57,6 +65,7 @@ var MapView = Backbone.View.extend({
       this.map.fitBounds(boundingBoxFromStations(this.collection));
     }
   },
+
   locate: function(event) {
     this.posBtn.find('#posBtnIcon').removeClass("icon-screenshot");
     this.posBtn.find('#posBtnIcon').addClass("icon-spinner icon-spin");
@@ -85,14 +94,14 @@ var MapView = Backbone.View.extend({
     me.yourPos = L.marker(new L.LatLng(position.coords.latitude, position.coords.longitude), { title: "You are here.", icon: myIcon });
     me.map.addLayer(me.yourPos);
 
-    me.map.panTo(me.yourPos);
+    me.map.panTo(me.yourPos.getLatLng(), {animate: true});
     me.map.setZoom(12);
   },
   onError: function(error) {
     me.posBtn.find('#posBtnIcon').removeClass("icon-spinner icon-spin");
     me.posBtn.find('#posBtnIcon').addClass("icon-screenshot");
 
-    showErrorMessage("Can't locate you", error.message);
+    showErrorMessage("Positioning error", error.message);
   },
 
   findAndAdd: function (e) {
@@ -104,7 +113,51 @@ var MapView = Backbone.View.extend({
 
     $('#temp-modals').html(stationsView.render().el);
     $(stationsView.el).modal();
+  },
 
+  //** PROIVDER CHANGING **//
+  renderProviderModal: function() {
+    var modalsTemplate = Handlebars.helpers.getTemplate('providerModal');
+    var modalsHtml = modalsTemplate({'availableServices': this.options.services.toJSON()});
+    $('#map-modals').html(modalsHtml);
 
+    var providerBtn = $("<a>").addClass('btn providerBtn btn-primary');
+    providerBtn.html("<i class='icon-cloud-download' id='provider-icon'></i>");
+    this.btnWrapper.prepend(providerBtn);
+  },
+
+  openProviderModal: function() {
+    $('#providerModal').modal('show');
+  },
+
+  changeProvider: function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    $('#providerModal').modal('hide');
+    var newService = $(e.currentTarget).data('station');
+    window.settings.set('currentProvider', newService);
+    me.collection.url = generateStationsUrl(newService);
+    this.refreshStations(e);
+  },
+
+  refreshStations: function(e) {
+    e.preventDefault();
+    $('#provider-icon').removeClass('icon-cloud-download');
+    $('#provider-icon').addClass('icon-spinner icon-spin');
+    me.collection.fetch({'reset': true, 'success': this.finishedStationUpdate});
+  },
+  
+  finishedStationUpdate: function() {
+    $('#provider-icon').removeClass('icon-spinner icon-spin');
+    $('#provider-icon').addClass('icon-ok');
+    setTimeout(function() {
+      $('#provider-icon').removeClass('icon-ok');
+      $('#provider-icon').addClass('icon-cloud-download');
+    }, 750);
+
+    window.settings.set('lastStationUpdate', new Date().toLocaleString());
   }
+
+
 });

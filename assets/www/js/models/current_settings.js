@@ -6,6 +6,7 @@ var CurrentSettings = Backbone.Model.extend({
     'currentProvider': 'PEGELONLINE',
     'lastStationUpdate': 'never',
     'appVersion': 'v0.3 alpha',
+    'timespan': '2013-03-01T13:00:00TZ/2013-05-11T15:30:00TZ',
     'expert': false,
     'timeseries_colors': {}
   },
@@ -13,7 +14,6 @@ var CurrentSettings = Backbone.Model.extend({
   initialize: function() {
     Backbone.Mediator.subscribe('app:booted', function(timeseries) {
       this.listenTo(this, 'change', this.save);
-      this.listenTo(this, 'change', this.sort);
     }, this);
   },
 
@@ -52,7 +52,6 @@ var CurrentSettings = Backbone.Model.extend({
   },
 
   save: function() {
-    console.log('changed!', this.toJSON());
     if (this.devMode) {
       $.totalStorage(this.key, this.toJSON());
     } else {

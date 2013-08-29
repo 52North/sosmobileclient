@@ -5,7 +5,6 @@ AddController = (function() {
   function AddController(services, stations, historyTimeseries) {
     this.services = services;
     this.stations = stations;
-    this.stations = stations;
     this.historyTimeseries = historyTimeseries;
     this.currentTimeseries = window.currentTimeseries;
 
@@ -34,7 +33,7 @@ AddController = (function() {
     bv.setElement($('#tab-browser-content'));
     bv.render();
 
-    mv = new MapView({'collection': this.stations, 'currentTimeseries': currentTimeseries});
+    mv = new MapView({'collection': this.stations, 'services': this.services});
     mv.setElement($('#tab-map-content'));
     mv.render();
     mv.drawStations();

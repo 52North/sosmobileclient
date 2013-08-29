@@ -18,7 +18,9 @@
     <script src="js/libs/modernizr.custom.js"></script>
   </head>
   <body>
-    <div id="global-modals"></div>
+    <div id="global-modals">
+      <div id="map-modals"></div>
+    </div>
     <div id="temp-modals"></div>
 
     <div id="pt-main" class="pt-perspective">
@@ -139,7 +141,7 @@
           historyTimeseries.fetch();
 
           //views
-          new SettingsView({'model': window.settings, 'currentStations': stations, 'availableServices': services}).render();
+          new SettingsView({'model': window.settings}).render();
           new AddController(services, stations, timeseriesData.get('currentTimeseries'), historyTimeseries);
           new ChartController(timeseriesData);
 

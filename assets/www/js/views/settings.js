@@ -3,27 +3,23 @@ var SettingsView = Backbone.View.extend({
 
   events: {
     'click .refresh-stations': 'refreshStations',
-    'click .availableServiceLink': 'changeService',
     'click .expert': 'changeExpertMode'
   },
 
   initialize: function(){
     svMe = this;
     this.listenTo(this.model, 'change', this.render);
-    this.listenTo(this.options.availableServices, 'sync', this.render);
-    //$('.availableServiceLink').on('click', this.changeService);
   },
 
   render: function() {
-    template = Handlebars.helpers.getTemplate('settings');
-    listHtml = template(this.model.toJSON());
+    var template = Handlebars.helpers.getTemplate('settings');
+    var listHtml = template(this.model.toJSON());
     
-    settingsModalsTemplate = Handlebars.helpers.getTemplate('settingsModals');
-    settingsModalsHtml = settingsModalsTemplate($.extend(this.model.toJSON(), {'availableServices': this.options.availableServices.toJSON()}));
+    var settingsModalsTemplate = Handlebars.helpers.getTemplate('settingsModals');
+    var settingsModalsHtml = settingsModalsTemplate(this.model.toJSON());
     
     $('#settings-content').empty().html(listHtml);
     this.updateExpertIcon();
-
 
     //modals
     if ($("#global-modals #settings-modals").length != 1) {
@@ -42,35 +38,6 @@ var SettingsView = Backbone.View.extend({
     } else {
       icon.addClass('icon-remove');
     }
-  },
-
-  refreshStations: function(e) {
-    e.preventDefault();
-    svMe.$('.refresh-stations-icon').addClass('icon-spin');
-    svMe.options.currentStations.fetch({'reset': true, 'success': this.finishedStationUpdate});
-  },
-
-  finishedStationUpdate: function() {
-    svMe.$('.refresh-stations-icon').removeClass('icon-refresh');
-    svMe.$('.refresh-stations-icon').removeClass('icon-spin');
-    svMe.$('.refresh-stations-icon').addClass('icon-ok');
-    setTimeout(function() {
-      svMe.$('.refresh-stations-icon').removeClass('icon-ok');
-      svMe.$('.refresh-stations-icon').addClass('icon-refresh');
-    }, 750);
-
-    svMe.model.set('lastStationUpdate', new Date().toLocaleString())
-  },
-
-  changeService: function(e) {
-    e.preventDefault();
-    $('#providerModal').modal('hide');
-    $('body').removeClass('modal-open');
-    $('.modal-backdrop').remove();
-    newService = $(e.currentTarget).data('station');
-    svMe.model.set('currentProvider', newService);
-    svMe.options.currentStations.url = generateStationsUrl(newService);
-    svMe.refreshStations(e);
   },
 
   changeExpertMode: function(e) {
