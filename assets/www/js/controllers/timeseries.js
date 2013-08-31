@@ -5,15 +5,11 @@ var TimeseriesController = (function() {
 
     Backbone.Mediator.subscribe('timeseries:add', this.addTimeseries, this);
     Backbone.Mediator.subscribe('legend:timeseries:delete', this.removeTimeseries, this);
+    Backbone.Mediator.subscribe('legend:timeseries:color:choose', this.showColorDialog, this);
   };
 
-  TimeseriesController.prototype.addTimeseries = function(timeseries) {
-    timeseries.set('addedAt', new Date().getTime());
-    this.currentTimeseries.add(timeseries);
-  };
-
-  TimeseriesController.prototype.removeTimeseries = function(timeseries) {
-    this.currentTimeseries.remove(timeseries);
+  TimeseriesController.prototype.showColorDialog = function(timeseries) {
+    new ColorView({'model': timeseries}).render();
   };
   
   return TimeseriesController;

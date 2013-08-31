@@ -1,4 +1,4 @@
-var TimeseriesListView = Backbone.View.extend({
+var LegendTimeseriesListView = Backbone.View.extend({
   className: 'collapse',
   
   events: {
@@ -10,12 +10,12 @@ var TimeseriesListView = Backbone.View.extend({
   },
 
   render: function() {
-    var list = $("<ul>");
+    list = $("<ul>");
     list.addClass('list sublist');
 
-    var actions = this.options.actions;
+    actions = this.options.actions;
     this.collection.each(function(ts) {
-      var tsView = new TimeserieView({'model': ts, 'actions': actions});
+      tsView = new LegendTimeserieView({'model': ts, 'actions': actions});
       list.append(tsView.render().el);
     });
 
@@ -24,9 +24,9 @@ var TimeseriesListView = Backbone.View.extend({
   }
 });
 
-var TimeserieView = Backbone.View.extend({
+var LegendTimeserieView = Backbone.View.extend({
   tagName: 'li',
-  template: Handlebars.helpers.getTemplate('timeserie-list-entry'),
+  template: Handlebars.helpers.getTemplate('legendTimeserieListEntry'),
   
   events: {
     'click .action': 'perform'
@@ -53,7 +53,7 @@ var TimeserieView = Backbone.View.extend({
 
   perform: function(e) {
     e.preventDefault();
-    var callback = $(e.currentTarget).data('action');
+    callback = $(e.currentTarget).data('action');
 
     //TODO already added?
     Backbone.Mediator.publish(callback, this.model);

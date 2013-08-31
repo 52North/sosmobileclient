@@ -77,7 +77,8 @@
     <script src="js/libs/d3.v3.min.js"></script>
 
     <!-- Helpers -->
-    <script src="js/helpers/handlebars-helper.js"></script>
+    <script src="js/helpers/backbone_extensions.js"></script>
+    <script src="js/helpers/handlebars_helpers.js"></script>
     <script src="js/helpers/util.js"></script>
     
     <!-- Phonegap -->
@@ -107,6 +108,7 @@
     <!-- Controllers -->
     <script src="js/controllers/catalog.js"></script>
     <script src="js/controllers/chart.js"></script>
+    <script src="js/controllers/legend.js"></script>
     <script src="js/controllers/map.js"></script>
     <script src="js/controllers/service.js"></script>
     <script src="js/controllers/timeseries.js"></script>
@@ -118,6 +120,7 @@
     <script src="js/views/chart.js"></script>
     <script src="js/views/settings.js"></script>
     <script src="js/views/legend.js"></script>
+    <script src="js/views/legend_timeseries.js"></script>
     <script src="js/views/stations.js"></script>
     <script src="js/views/timeseries.js"></script>
     <script src="js/views/history.js"></script>
@@ -144,8 +147,7 @@
           new ChartController(currentTimeseries);
           new TimeseriesController(currentTimeseries);
           new ServiceController(services, stations);
-          legend = new LegendView({'collection': currentTimeseries});
-          $('#legend-content').empty().html(legend.render().el)
+          new LegendController(currentTimeseries);
 
           //fetching data
           currentTimeseries.fetch();

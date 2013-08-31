@@ -40,6 +40,7 @@ var ColorView = Backbone.View.extend({
       var colorMap = window.settings.get('timeseries_colors');
       colorMap[this.model.get('id')] = color;
       window.settings.set('timeseries_colors', colorMap);
+      window.settings.save();
     }
     
     //Close and remove

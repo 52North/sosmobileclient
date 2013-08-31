@@ -13,7 +13,7 @@ var LegendView = Backbone.View.extend({
     },
     {
       'icon': 'icon-edit-sign',
-      'callback': 'legend:timeseries:change_color',
+      'callback': 'legend:timeseries:color:choose',
       'color': true
     }
   ],
@@ -24,10 +24,6 @@ var LegendView = Backbone.View.extend({
     this.listenTo(this.collection, 'reset', this.render);
     this.listenTo(this.collection, 'remove', this.render);
     this.listenTo(window.settings, 'change:expert', this.render);
-
-    Backbone.Mediator.subscribe('legend:timeseries:change_color', function(timeseries) {
-      this.showColorDialog(timeseries);
-    }, this);
   },
 
   render: function() {
@@ -37,18 +33,14 @@ var LegendView = Backbone.View.extend({
       this.$el.html("<div class='placeholder'>No current timeseries.<br/>Go on, <a href='#add'>add</a> one.</div>");
     }
 
-    list = this.$el;
-    actions = this.actions;
+    var list = this.$el;
+    var actions = this.actions;
     this.collection.each(function(timeserie){
-      tsView = new TimeserieView({'model': timeserie, 'actions': actions});
+      var tsView = new TimeserieView({'model': timeserie, 'actions': actions});
       list.append(tsView.render().el);
     });
 
     return this;
-  },
-
-  showColorDialog: function(timeseries) {
-    new ColorView({'model': timeseries}).render();
   }
 
 });
