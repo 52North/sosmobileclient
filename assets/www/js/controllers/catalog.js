@@ -31,11 +31,6 @@ var CatalogController = (function() {
     //container to the controller!
     var mapController = new MapController(this.stations, this.services, $('#tab-map-content'))
 
-    var mv = new MapView({'collection': this.stations, 'services': this.services});
-    mv.setElement($('#tab-map-content'));
-    mv.render();
-    mv.drawStations();
-
     var hv = new HistoryView({'collection': this.historyTimeseries});
     $('#tab-history-content').empty().html(hv.render().el);
   };

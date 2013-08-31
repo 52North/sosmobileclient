@@ -126,6 +126,61 @@ a, a:focus, a:active, a:hover, a:visited {
       &:active, &:focus, &:hover {
         text-decoration:none;
       }
+
+      .element {
+        min-width: 50px;
+        margin: 10px 0px;
+        padding: 0px;
+        border-left: 1px solid #d8d8d8;
+        font-size: 26px;
+        color: #7e7e7e;
+        text-align: center;
+        .action {
+          padding: 0;
+          width: 68px;
+          height: 40px;
+          margin: 0px;
+          text-align: center;
+          padding-left: 22px;
+        }
+      }
+      .text {
+        padding-top: 10px;
+        padding-bottom: 14px;
+        -moz-box-flex:1.0; /* Firefox */
+        -webkit-box-flex:1.0; /* Safari and Chrome */
+        -ms-flex:1.0; /* Internet Explorer 10 */
+        box-flex:1.0;
+      }
+
+      &.vertical-elements {
+        display: block;
+        .element {
+          width: 100%;
+          margin: 0px;
+          padding: 0px;
+          font-size: 26px;
+          color: #7e7e7e;
+          text-align: right;
+          border-left: none;
+          .action {
+            width: 45px;
+            padding: 0;
+            height: 40px;
+            margin: 0px;
+            text-align: center;
+            display: inline-block;
+          }
+        }
+        .text {
+          padding-top: 10px;
+          padding-bottom: 0px;
+          -moz-box-flex:1.0; /* Firefox */
+          -webkit-box-flex:1.0; /* Safari and Chrome */
+          -ms-flex:1.0; /* Internet Explorer 10 */
+          box-flex:1.0;
+        }
+      }
     }
   }
   &.sublist li {
@@ -148,38 +203,9 @@ a, a:focus, a:active, a:hover, a:visited {
     color: #8a8a8a;
     word-wrap: break-word;
     word-break: break-all;
-    &:last-child {
-      padding-bottom: 14px; 
-    }
   }
-  .element {
-    min-width: 50px;
-    //margin: 12px 10px 12px 10px;
-    margin: 10px 0px;
-    padding: 0px;
-    border-left: 1px solid #d8d8d8;
-    font-size: 26px;
-    color: #7e7e7e;
-    text-align: center;
-    .action {
-      padding: 0;
-      width: 68px;
-      height: 40px;
-      margin: 0px;
-      text-align: center;
-      padding-left: 22px;
-    }
-    .icon {
+  
 
-    }
-  }
-  .text {
-    padding-top: 10px;
-    -moz-box-flex:1.0; /* Firefox */
-    -webkit-box-flex:1.0; /* Safari and Chrome */
-    -ms-flex:1.0; /* Internet Explorer 10 */
-    box-flex:1.0;
-  }
   .clear {
     clear: right;
   }

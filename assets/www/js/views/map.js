@@ -1,27 +1,21 @@
 var MapView = Backbone.View.extend({
   events: {
-    'click .posBtn': 'locate',
-    'click .providerBtn': 'openProviderModal',
+    'click .posBtn':      'requestUserLocation',
+    'click .providerBtn': 'requestProviderChange',
+  },
+  subscriptions: {
+    'station:locate':           'locateStation',
+    'map:user:locate:success':  'drawUser',
+    'map:user:locate:error':    'locateUserEnd'
   },
 
   initialize: function(){
-    me = this;
     this.settings = window.settings;
-
-    $(document).on("click", ".availableServiceLink", function(event){
-      me.changeProvider(event);
-    });
 
     this.listenTo(this.collection, 'reset', this.drawStations);
     this.listenTo(this.collection, 'sync:start', this.stationUpdateStart);
     this.listenTo(this.collection, 'sync', this.stationUpdateSuccess);
     this.listenTo(this.options.services, 'sync', this.renderProviderModal);
-
-    Backbone.Mediator.subscribe('station:locate', function(timeseries) {
-      var pos = new L.LatLng(timeseries.get('station').geometry.coordinates[1], timeseries.get('station').geometry.coordinates[0]);
-      this.map.setZoom(17);
-      this.map.panTo(pos);
-    }, this);
   },
 
   render: function() {
@@ -62,7 +56,9 @@ var MapView = Backbone.View.extend({
       _.each(this.collection.models, function (elem, index) {
         var geom = elem.get('geometry').coordinates;
         var marker = L.marker(new L.LatLng(geom[1], geom[0]), { /* title: 'station name' */ });
-        marker.on('click', me.findAndAdd);
+        marker.on('click', function(marker) {
+          Backbone.Mediator.publish("map:station:findAndShow", marker.latlng);
+        });
         markers.addLayer(marker);
       });
       this.map.addLayer(this.markers);
@@ -71,58 +67,54 @@ var MapView = Backbone.View.extend({
       this.map.fitBounds(boundingBoxFromStations(this.collection));
     }
   },
+  
+  locateStation: function(timeseries) {
+    var pos = new L.LatLng(timeseries.get('station').geometry.coordinates[1], timeseries.get('station').geometry.coordinates[0]);
+    this.map.setZoom(17);
+    this.map.panTo(pos);
+  },
 
-  locate: function(event) {
+  requestUserLocation: function(event) {
     this.posBtn.find('#posBtnIcon').removeClass("icon-screenshot");
     this.posBtn.find('#posBtnIcon').addClass("icon-spinner icon-spin");
-
-    navigator.geolocation.getCurrentPosition(this.updateLocation, this.onError, { timeout: 5000, enableHighAccuracy: true });
+  
+    Backbone.Mediator.publish("map:user:locate");   
   },
-  updateLocation: function(position) {
-    me.posBtn.find('#posBtnIcon').removeClass("icon-spinner icon-spin");
-    me.posBtn.find('#posBtnIcon').addClass("icon-screenshot");
 
-    if (me.map.hasLayer(me.yourPos)) {
-      me.map.removeLayer(me.yourPos);
+  locateUserEnd: function() {
+    this.posBtn.find('#posBtnIcon').removeClass("icon-spinner icon-spin");
+    this.posBtn.find('#posBtnIcon').addClass("icon-screenshot");
+  },
+
+  drawUser: function(position) {
+    console.log(position);
+    this.locateUserEnd();
+
+    if (this.map.hasLayer(this.userPosition)) {
+      this.map.removeLayer(this.userPosition);
     }
 
     var myIcon = L.icon({
-      iconUrl: 'img/marker.png',
-      shadowUrl: 'img/marker-shadow.png',
+      iconUrl: 'img/user_marker.png',
+      shadowUrl: 'img/user_marker_shadow.png',
 
-      iconSize:     [40, 46], // size of the icon
-      shadowSize:   [41, 41], // size of the shadow
-      iconAnchor:   [20, 46], // point of the icon which will correspond to marker's location
-      shadowAnchor: [10, 41],  // the same for the shadow
+      iconSize:     [36, 57], // size of the icon
+      shadowSize:   [54, 42], // size of the shadow
+      iconAnchor:   [18, 57], // point of the icon which will correspond to marker's location
+      shadowAnchor: [10, 42],  // the same for the shadow
       popupAnchor:  [0, -46] // point from which the popup should open relative to the iconAnchor
     });
 
-    me.yourPos = L.marker(new L.LatLng(position.coords.latitude, position.coords.longitude), { title: "You are here.", icon: myIcon });
-    me.map.addLayer(me.yourPos);
+    this.userPosition = L.marker(new L.LatLng(position.coords.latitude, position.coords.longitude), { title: "You are here.", icon: myIcon });
+    this.map.addLayer(this.userPosition);
 
-    me.map.panTo(me.yourPos.getLatLng(), {animate: true});
-    me.map.setZoom(12);
-  },
-  onError: function(error) {
-    me.posBtn.find('#posBtnIcon').removeClass("icon-spinner icon-spin");
-    me.posBtn.find('#posBtnIcon').addClass("icon-screenshot");
-
-    showErrorMessage("Positioning error", error.message);
+    this.map.panTo(this.userPosition.getLatLng(), {animate: true});
+    this.map.setZoom(12);
   },
 
-  findAndAdd: function (e) {
-    var lat = e.latlng.lat;
-    var lng = e.latlng.lng;
-    matches = me.collection.getByCoordinates([lng, lat]);
-
-    stationsView = new StationsView({'collection': matches});
-
-    $('#temp-modals').html(stationsView.render().el);
-    $(stationsView.el).modal();
-  },
-
-  openProviderModal: function(event) {
+  requestProviderChange: function(event) {
     event.preventDefault();
+    event.stopPropagation();
     Backbone.Mediator.publish("service:choose", event);
   },
 
@@ -139,6 +131,4 @@ var MapView = Backbone.View.extend({
       $('#provider-icon').addClass('icon-cloud-download');
     }, 750);
   }
-
-
 });

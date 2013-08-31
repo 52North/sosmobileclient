@@ -1,4 +1,4 @@
-<div class="wrapper timeseries">
+<div class="wrapper vertical-elements legend-timeseries">
   {{#if synced}}
     <div class="text">
       {{#if parameters.phenomenon.label}}
@@ -22,6 +22,9 @@
       
     </div>
     <div class="element">
+      <a class="action hide-timeseries" data-action="legend:timeseries:hide">
+          <i id="hide-timeseries-icon"></i>
+      </a>
       {{#each actions}}
         <a class="action" data-action="{{callback}}" 
           {{#if navigate}}

@@ -11,6 +11,14 @@ var TimeseriesController = (function() {
   TimeseriesController.prototype.showColorDialog = function(timeseries) {
     new ColorView({'model': timeseries}).render();
   };
+
+  TimeseriesController.prototype.addTimeseries = function(timeseries) {
+    this.currentTimeseries.add(timeseries);
+  };
+
+  TimeseriesController.prototype.removeTimeseries = function(timeseries) {
+    this.currentTimeseries.remove(timeseries);
+  };
   
   return TimeseriesController;
 

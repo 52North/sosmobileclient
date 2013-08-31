@@ -27,7 +27,7 @@ var HistoryView = Backbone.View.extend({
     this.listenTo(window.settings, 'change:expert', this.render);
 
     Backbone.Mediator.subscribe('history:timeseries:delete', function(timeseries) {
-     collection.remove(timeseries);
+     collection.remove(timeseries); //TODO in controller!!
     }, this);
 
   },
@@ -47,5 +47,5 @@ var HistoryView = Backbone.View.extend({
     });
 
     return this;
-  },
+  }
 });

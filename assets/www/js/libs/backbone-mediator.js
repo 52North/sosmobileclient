@@ -56,6 +56,7 @@
      */
     publish: function(channel) {
       if (!channels[channel]) return;
+      console.debug("Mediator pub '" + channel + "'");
 
       var args = [].slice.call(arguments, 1),
           subscription;

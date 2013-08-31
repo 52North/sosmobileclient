@@ -1,29 +1,3 @@
-var LegendTimeseriesListView = Backbone.View.extend({
-  className: 'collapse',
-  
-  events: {
-    
-  },
-
-  initialize: function() {
-    
-  },
-
-  render: function() {
-    list = $("<ul>");
-    list.addClass('list sublist');
-
-    actions = this.options.actions;
-    this.collection.each(function(ts) {
-      tsView = new LegendTimeserieView({'model': ts, 'actions': actions});
-      list.append(tsView.render().el);
-    });
-
-    this.$el.html(list);
-    return this;
-  }
-});
-
 var LegendTimeserieView = Backbone.View.extend({
   tagName: 'li',
   template: Handlebars.helpers.getTemplate('legendTimeserieListEntry'),
@@ -48,6 +22,9 @@ var LegendTimeserieView = Backbone.View.extend({
     model['synced'] = this.model.isSynced();
     this.listenTo(this.model, 'change:color', this.render);
     this.$el.html(this.template(model));
+
+    this.$('#hide-timeseries-icon').addClass('icon-eye-open');
+    
     return this;
   },
 
