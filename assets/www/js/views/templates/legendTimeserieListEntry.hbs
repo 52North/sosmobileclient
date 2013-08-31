@@ -3,7 +3,11 @@
     <div class="text">
       {{#if parameters.phenomenon.label}}
         <h1 style='color: #{{color}}'>
-          {{parameters.phenomenon.label}}
+          {{#if hidden}}
+            <s>{{parameters.phenomenon.label}}</s>
+          {{else}}
+            {{parameters.phenomenon.label}}
+          {{/if}}
         </h1>
       {{else}}
         <h1>
@@ -26,7 +30,7 @@
           <i id="hide-timeseries-icon"></i>
       </a>
       {{#each actions}}
-        <a class="action" data-action="{{callback}}" 
+        <a class="action perform" data-action="{{callback}}" 
           {{#if navigate}}
             data-navigate="{{navigate}}"
           {{/if}}
