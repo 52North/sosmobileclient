@@ -12,10 +12,8 @@ var ChartView = Backbone.View.extend({
     this.$el.empty();
     if (this.collection.anythingVisible()) {
       //Todo loading screen!
-      this.initialRenderChart();
     } else {
-      //TODO message for the user
-      console.log("graph blank");
+      //TODO message for the user, that there is nothing to display
     }
 
     return this;
@@ -26,8 +24,7 @@ var ChartView = Backbone.View.extend({
    */
   addDataSerie: function(data) {
     if (this.graph) {
-      //add
-      
+      //add 
     } else {
       //render with this
       initialRenderChart(data);
@@ -35,44 +32,7 @@ var ChartView = Backbone.View.extend({
   },
 
   initialRenderChart: function() {
-      var data = {
-  "xScale": "ordinal",
-  "yScale": "linear",
-  "type": "bar",
-  "main": [
-    {
-      "className": ".pizza",
-      "data": [
-        {
-          "x": "Pepperoni",
-          "y": 12
-        },
-        {
-          "x": "Cheese",
-          "y": 8
-        }
-      ]
-    }
-  ],
-  "comp": [
-    {
-      "className": ".pizza",
-      "type": "line-dotted",
-      "data": [
-        {
-          "x": "Pepperoni",
-          "y": 10
-        },
-        {
-          "x": "Cheese",
-          "y": 4
-        }
-      ]
-    }
-  ]
-};
-
-      var myChart = new xChart('line', data, this.el);
 
   }
+     
 });
