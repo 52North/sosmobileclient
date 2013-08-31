@@ -12,20 +12,22 @@ var MapView = Backbone.View.extend({
       me.changeProvider(event);
     });
 
-    me.listenTo(this.collection, 'reset', me.drawStations);
-    me.listenTo(this.options.services, 'sync', me.renderProviderModal);
+    this.listenTo(this.collection, 'reset', this.drawStations);
+    this.listenTo(this.collection, 'sync:start', this.stationUpdateStart);
+    this.listenTo(this.collection, 'sync', this.stationUpdateSuccess);
+    this.listenTo(this.options.services, 'sync', this.renderProviderModal);
 
     Backbone.Mediator.subscribe('station:locate', function(timeseries) {
       var pos = new L.LatLng(timeseries.get('station').geometry.coordinates[1], timeseries.get('station').geometry.coordinates[0]);
-      me.map.setZoom(17);
-      me.map.panTo(pos);
+      this.map.setZoom(17);
+      this.map.panTo(pos);
     }, this);
   },
 
   render: function() {
-    map = $("<div>");
-    map.attr("id", "map");
-    this.$el.empty().append(map);
+    this.map = $("<div>");
+    this.map.attr("id", "map");
+    this.$el.empty().append(this.map);
 
     var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png',
       cloudmadeAttribution = '&copy; OpenStreetMap &amp; Contributors',
@@ -41,6 +43,10 @@ var MapView = Backbone.View.extend({
     this.posBtn = $("<a>").addClass('btn posBtn btn-primary');
     this.posBtn.html("<i class='icon-screenshot' id='posBtnIcon'></i>");
     
+    var providerBtn = $("<a>").addClass('btn providerBtn btn-primary');
+    providerBtn.html("<i class='icon-cloud-download' id='provider-icon'></i>");
+    this.btnWrapper.prepend(providerBtn);
+
     this.btnWrapper.append(this.posBtn);
     this.$el.append(this.btnWrapper);
   },
@@ -115,48 +121,23 @@ var MapView = Backbone.View.extend({
     $(stationsView.el).modal();
   },
 
-  //** PROIVDER CHANGING **//
-  renderProviderModal: function() {
-    var modalsTemplate = Handlebars.helpers.getTemplate('providerModal');
-    var modalsHtml = modalsTemplate({'availableServices': this.options.services.toJSON()});
-    $('#map-modals').html(modalsHtml);
-
-    var providerBtn = $("<a>").addClass('btn providerBtn btn-primary');
-    providerBtn.html("<i class='icon-cloud-download' id='provider-icon'></i>");
-    this.btnWrapper.prepend(providerBtn);
+  openProviderModal: function(event) {
+    event.preventDefault();
+    Backbone.Mediator.publish("service:choose", event);
   },
 
-  openProviderModal: function() {
-    $('#providerModal').modal('show');
-  },
-
-  changeProvider: function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-
-    $('#providerModal').modal('hide');
-    var newService = $(e.currentTarget).data('station');
-    window.settings.set('currentProvider', newService);
-    me.collection.url = generateStationsUrl(newService);
-    this.refreshStations(e);
-  },
-
-  refreshStations: function(e) {
-    e.preventDefault();
+  stationUpdateStart: function() {
     $('#provider-icon').removeClass('icon-cloud-download');
     $('#provider-icon').addClass('icon-spinner icon-spin');
-    me.collection.fetch({'reset': true, 'success': this.finishedStationUpdate});
   },
-  
-  finishedStationUpdate: function() {
+
+  stationUpdateSuccess: function() {
     $('#provider-icon').removeClass('icon-spinner icon-spin');
     $('#provider-icon').addClass('icon-ok');
     setTimeout(function() {
       $('#provider-icon').removeClass('icon-ok');
       $('#provider-icon').addClass('icon-cloud-download');
     }, 750);
-
-    window.settings.set('lastStationUpdate', new Date().toLocaleString());
   }
 
 

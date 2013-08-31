@@ -18,9 +18,7 @@
     <script src="js/libs/modernizr.custom.js"></script>
   </head>
   <body>
-    <div id="global-modals">
-      <div id="map-modals"></div>
-    </div>
+    <div id="global-modals"></div>
     <div id="temp-modals"></div>
 
     <div id="pt-main" class="pt-perspective">
@@ -54,7 +52,7 @@
       <div class="mf-panel" data-alignment="right" id="settings-panel">
         <header role="banner" class="top app-navbar">
           <a class="nav-btn nav-btn-left" href="javascript:history.back()"><i class="icon-remove"></i></a>
-          <h1></h1>
+          <h1>App settings</h1>
         </header>
         <div class="full-content" id="settings-content">
         </div>
@@ -107,8 +105,11 @@
     <script src="js/collections/current_timeseries.js"></script>
 
     <!-- Controllers -->
-    <script src="js/controllers/add.js"></script>
+    <script src="js/controllers/catalog.js"></script>
     <script src="js/controllers/chart.js"></script>
+    <script src="js/controllers/map.js"></script>
+    <script src="js/controllers/service.js"></script>
+    <script src="js/controllers/timeseries.js"></script>
 
     <!-- Views -->
     <script src="js/views/browser.js"></script>
@@ -120,6 +121,7 @@
     <script src="js/views/stations.js"></script>
     <script src="js/views/timeseries.js"></script>
     <script src="js/views/history.js"></script>
+    <script src="js/views/services.js"></script>
 
     <script>
       $(function() {
@@ -138,9 +140,10 @@
 
           //views
           new SettingsView({'model': window.settings}).render();
-          new AddController(services, stations, currentTimeseries, historyTimeseries);
+          new CatalogController(services, stations, historyTimeseries);
           new ChartController(currentTimeseries);
-
+          new TimeseriesController(currentTimeseries);
+          new ServiceController(services, stations);
           legend = new LegendView({'collection': currentTimeseries});
           $('#legend-content').empty().html(legend.render().el)
 
