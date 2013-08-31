@@ -5,6 +5,7 @@ var MapView = Backbone.View.extend({
   },
   subscriptions: {
     'station:locate':           'locateStation',
+    'service:fetch:error':      'stationUpdateSuccess',
     'map:user:locate:success':  'drawUser',
     'map:user:locate:error':    'locateUserEnd'
   },

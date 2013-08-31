@@ -3,11 +3,7 @@
     <div class="text">
       {{#if parameters.phenomenon.label}}
         <h1 style='color: #{{color}}'>
-          {{#if hidden}}
-            <s>{{parameters.phenomenon.label}}</s>
-          {{else}}
-            {{parameters.phenomenon.label}}
-          {{/if}}
+          {{parameters.phenomenon.label}}
         </h1>
       {{else}}
         <h1>

@@ -35,8 +35,8 @@ var CurrentTimeseries = Backbone.Collection.extend({
     if (this.isSet()) {
       var current_timeseries_json = $.totalStorage('currentTimeseries');
       current = this;
-      $.each(current_timeseries_json, function(index, ts) {
-        var ts = new Timeseries(ts);
+      $.each(current_timeseries_json, function(index, id) {
+        var ts = new Timeseries(id);
         ts.fetch();
         current.add(ts);
       });
@@ -46,10 +46,16 @@ var CurrentTimeseries = Backbone.Collection.extend({
     }
   },
 
+  anythingVisible: function() {
+    return !this.some(function(elem) {
+      return elem.get('hidden');
+    });
+  },
+
   save: function() {
     current_timeseries_json = [];
     this.each(function (elem) {
-      current_timeseries_json.push(elem.get('id'));
+      current_timeseries_json.push(elem.id);
     });
     $.totalStorage('currentTimeseries', current_timeseries_json);
   },
