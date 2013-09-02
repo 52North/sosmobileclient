@@ -18,7 +18,7 @@ var ServiceController = (function() {
 
   ServiceController.prototype.changeService = function(newServiceName) {
     window.settings.set('currentProvider', newServiceName);
-    this.stations.url = generateStationsUrl(newServiceName);
+    this.stations.url = Helpers.generateStationsUrl(newServiceName);
     
     this.stations.fetch({'reset': true});
     //Todo after sync event!! window.settings.set('lastStationUpdate', new Date().toLocaleString());

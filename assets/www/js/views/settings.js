@@ -1,52 +1,56 @@
-var SettingsView = Backbone.View.extend({
-  el: $(document),
+var SettingsView = (function() {
+  
+  return Backbone.View.extend({
+    el: $(document),
 
-  events: {
-    'click .expert': 'changeExpertMode',
-    'click .reset': 'reset'
-  },
+    events: {
+      'click .expert': 'changeExpertMode',
+      'click .reset': 'reset'
+    },
 
-  initialize: function(){
-    svMe = this;
-    this.listenTo(this.model, 'change', this.render);
-  },
+    initialize: function(){
+      svMe = this;
+      this.listenTo(this.model, 'change', this.render);
+    },
 
-  render: function() {
-    var template = Handlebars.helpers.getTemplate('settings');
-    var listHtml = template(this.model.toJSON());
-    
-    var settingsModalsTemplate = Handlebars.helpers.getTemplate('settingsModals');
-    var settingsModalsHtml = settingsModalsTemplate(this.model.toJSON());
-    
-    $('#settings-content').empty().html(listHtml);
-    this.updateExpertIcon();
+    render: function() {
+      var template = Handlebars.helpers.getTemplate('settings');
+      var listHtml = template(this.model.toJSON());
+      
+      var settingsModalsTemplate = Handlebars.helpers.getTemplate('settingsModals');
+      var settingsModalsHtml = settingsModalsTemplate(this.model.toJSON());
+      
+      $('#settings-content').empty().html(listHtml);
+      this.updateExpertIcon();
 
-    //modals
-    if ($("#global-modals #settings-modals").length != 1) {
-      $("#global-modals").append($("<div>").attr("id","settings-modals"));
-    } else {
-      $("#global-modals #settings-modals").empty();
+      //modals
+      if ($("#global-modals #settings-modals").length != 1) {
+        $("#global-modals").append($("<div>").attr("id","settings-modals"));
+      } else {
+        $("#global-modals #settings-modals").empty();
+      }
+      $("#global-modals #settings-modals").append(settingsModalsHtml);
+    },
+
+    updateExpertIcon: function() {
+      icon = this.$('#expert-icon');
+      icon.removeClass();
+      if (this.model.get('expert')) {
+        icon.addClass('icon-ok ');
+      } else {
+        icon.addClass('icon-remove');
+      }
+    },
+
+    changeExpertMode: function(e) {
+      e.preventDefault();
+      this.model.set('expert', !this.model.get('expert'));
+    },
+
+    reset: function(e) {
+      e.preventDefault();
+      Backbone.Mediator.publish('app:reset');
     }
-    $("#global-modals #settings-modals").append(settingsModalsHtml);
-  },
+  });
 
-  updateExpertIcon: function() {
-    icon = this.$('#expert-icon');
-    icon.removeClass();
-    if (this.model.get('expert')) {
-      icon.addClass('icon-ok ');
-    } else {
-      icon.addClass('icon-remove');
-    }
-  },
-
-  changeExpertMode: function(e) {
-    e.preventDefault();
-    this.model.set('expert', !this.model.get('expert'));
-  },
-
-  reset: function(e) {
-    e.preventDefault();
-    Backbone.Mediator.publish('app:reset');
-  }
-});
+})();

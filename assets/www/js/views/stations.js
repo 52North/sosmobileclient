@@ -1,56 +1,60 @@
-var StationsView = Backbone.View.extend({
-  id: 'map-choose-station-dialog',
-  className: 'modal fade',
-  template: Handlebars.helpers.getTemplate('station-list'),
+var StationsView = (function() {
+  return Backbone.View.extend({
+    id: 'map-choose-station-dialog',
+    className: 'modal fade',
+    template: Handlebars.helpers.getTemplate('station-list'),
 
-  initialize: function(){
-  },
+    initialize: function(){
+    },
 
-  render: function() {
-    $(this.el).html(this.template({'stationsCount': this.collection.size()}));
+    render: function() {
+      $(this.el).html(this.template({'stationsCount': this.collection.size()}));
 
-    sationsList = this.$el.find('.list');
-    this.collection.each(function(station){
-      stationView = new StationView({'model': station});
-      sationsList.append(stationView.render().el);
-    });
-    
-    //Close and remove
-    var _this = this
-    this.$el.on('hidden.bs.modal', function() {
-      _this.remove();
-    });
+      sationsList = this.$el.find('.list');
+      this.collection.each(function(station){
+        stationView = new StationView({'model': station});
+        sationsList.append(stationView.render().el);
+      });
+      
+      //Close and remove
+      var _this = this
+      this.$el.on('hidden.bs.modal', function() {
+        _this.remove();
+      });
 
-    return this;
-  }
-});
+      return this;
+    }
+  });
+})();
 
-var StationView = Backbone.View.extend({
-  tagName: 'li',
-  template: Handlebars.helpers.getTemplate('station-list-entry'),
-  events: {
-    'click .station-header': 'togglePhenomenons'
-  },
-  timeSeriesActions: [
-    {
-      'icon': 'icon-plus',
-      'callback': 'timeseries:add',
-      'navigate': '#chart'
-    }    
-  ],
+var StationView = (function() {
+  return Backbone.View.extend({
+    tagName: 'li',
+    template: Handlebars.helpers.getTemplate('station-list-entry'),
+    events: {
+      'click .station-header': 'togglePhenomenons'
+    },
+    timeSeriesActions: [
+      {
+        'icon': 'icon-plus',
+        'callback': 'timeseries:add',
+        'navigate': '#chart'
+      }    
+    ],
 
-  render: function() {
+    render: function() {
 
-    this.$el.html(this.template(this.model.toJSON()));
+      this.$el.html(this.template(this.model.toJSON()));
 
-    tsLv = new TimeseriesListView({'collection': this.model.timeseries, 'actions': this.timeSeriesActions});
-    this.$el.append(tsLv.render().el);
-    
-    this.collapse = this.$('.collapse');
-    return this;
-  },
-  togglePhenomenons: function(e) {
-    e.preventDefault();
-    this.collapse.collapse('toggle');
-  }
-});
+      tsLv = new TimeseriesListView({'collection': this.model.timeseries, 'actions': this.timeSeriesActions});
+      this.$el.append(tsLv.render().el);
+      
+      this.collapse = this.$('.collapse');
+      return this;
+    },
+    togglePhenomenons: function(e) {
+      e.preventDefault();
+      this.collapse.collapse('toggle');
+    }
+  });
+})();

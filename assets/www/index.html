@@ -75,7 +75,7 @@
 
     <!-- Flot -->
     <script src="js/libs/flot/jquery.flot.min.js"></script>
-    <script src="js/libs/flot/jquery.flot.navigate.min.js"></script>
+    <script src="js/libs/flot/jquery.flot.navigate.js"></script>
     
 
     <!-- Phonegap -->
@@ -153,7 +153,7 @@
 
           //fetching data
           currentTimeseries.fetch();
-          stations.url = generateStationsUrl(window.settings.get('currentProvider'));
+          stations.url = Helpers.generateStationsUrl(window.settings.get('currentProvider'));
           stations.fetch({reset: true});
           services.fetch();
 

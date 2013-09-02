@@ -35,7 +35,7 @@ var MapController = (function() {
     };
     var geolocationError = function(error) {
       Backbone.Mediator.publish('map:user:locate:error', error);
-      showErrorMessage("Positioning error", error.message);
+      Helpers.showErrorMessage("Positioning error", error.message);
     };
 
     navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationError, { timeout: 5000, enableHighAccuracy: true });

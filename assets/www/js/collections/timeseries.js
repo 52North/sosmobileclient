@@ -1,8 +1,8 @@
-var TimeseriesCollection = Backbone.Collection.extend({
-
-  model: Timeseries,
-  fetch: function() {
-    //no fetch
-  }
-
-});
+var TimeseriesCollection = (function() {
+  return Backbone.Collection.extend({
+    model: Timeseries,
+    fetch: function() {
+      //no fetch
+    }
+  });
+})();

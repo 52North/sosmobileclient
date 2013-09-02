@@ -1,3 +1,5 @@
-var Service = Backbone.Model.extend({
+var Service = (function() {
+  return Backbone.Model.extend({
 
-});
+  });
+})();
