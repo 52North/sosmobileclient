@@ -32,7 +32,7 @@ var StationView = (function() {
     tagName: 'li',
     template: Handlebars.helpers.getTemplate('station-list-entry'),
     events: {
-      'click .station-header': 'togglePhenomenons'
+      //'click .station-header': 'togglePhenomenons'
     },
     timeSeriesActions: [
       {
@@ -49,7 +49,7 @@ var StationView = (function() {
       tsLv = new TimeseriesListView({'collection': this.model.timeseries, 'actions': this.timeSeriesActions});
       this.$el.append(tsLv.render().el);
       
-      this.collapse = this.$('.collapse');
+      //this.collapse = this.$('.collapse');
       return this;
     },
     togglePhenomenons: function(e) {

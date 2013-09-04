@@ -1,6 +1,6 @@
 var TimeseriesListView = (function() {
   return Backbone.View.extend({
-    className: 'collapse',
+    className: 'collapse in',
     
     events: {
       

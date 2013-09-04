@@ -11,8 +11,11 @@ var Timeseries = (function() {
       return "http://sensorweb.demo.52north.org/sensorwebclient-webapp-stable/api/v1/timeseries/" + this.id;
     },
 
-    data: function(form, till) {
-    	//ajax request on initialize
+    data: function(span) {
+      //1. is there data in storage for this span and id?
+      //true - set('data' from storage )
+      //false - load data from SOS
+      //graph horcht auf change:data
     },
 
     parse: function (response) {
