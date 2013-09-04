@@ -1,7 +1,6 @@
 var CurrentSettings = (function() {
   return Backbone.Model.extend({
 
-    devMode: true,
     key: 'current_settings',
     defaultValues: {
       'currentProvider': 'PEGELONLINE',
@@ -11,6 +10,7 @@ var CurrentSettings = (function() {
       'expert': false,
       'timeseries_colors': {}
     },
+    storage: new StorageService(),
 
     initialize: function() {
       csMe = this;
@@ -24,33 +24,12 @@ var CurrentSettings = (function() {
     },
 
     isSet: function() {
-      //return false; //reset
-
-      if (this.devMode) {
-        if ($.totalStorage('current_settings')) {
-          return true;
-        } else {
-          return false;
-        }
-      } else {
-        var key = window.localStorage.key(0);
-        if (!key) {
-          return false;
-        } else {
-          return true;
-        }
-      }
+      return this.storage.isSet();
     },
     
     fetch: function() {
-      if (this.isSet()) {
-        var cs;
-        if (this.devMode) {
-          cs = $.totalStorage(this.key);
-        } else {
-          cs = window.localStorage.getItem(this.key);
-        }
-        this.set(cs);
+      if (this.storage.isSet(this.key)) {
+        this.set(this.storage.load(this.key));
       } else {
         this.set(this.defaultValues);
         this.save();
@@ -58,11 +37,7 @@ var CurrentSettings = (function() {
     },
 
     save: function() {
-      if (this.devMode) {
-        $.totalStorage(this.key, this.toJSON());
-      } else {
-        window.localStorage.setItem(this.key, this.toJSON());
-      }
+      this.storage.save(this.key, this.toJSON());
     }
   });
 })();
