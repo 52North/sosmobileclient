@@ -55,8 +55,8 @@
      * @params N Extra parametter to pass to handler
      */
     publish: function(channel) {
-      if (!channels[channel]) return;
       console.debug("Mediator pub '" + channel + "'");
+      if (!channels[channel]) return;
 
       var args = [].slice.call(arguments, 1),
           subscription;

@@ -55,17 +55,7 @@ var TimeserieView = (function() {
     },
 
     perform: function(e) {
-      e.preventDefault();
-      var callback = $(e.currentTarget).data('action');
-
-      //TODO already added?
-      Backbone.Mediator.publish(callback, this.model);
-
-      navigate = $(e.currentTarget).data('navigate');
-      if (navigate) {
-        $('.modal').modal('hide');
-        window.location.href = navigate;
-      }
+      Helpers.performElementAction(e, this.model);
     }
   });
 })();

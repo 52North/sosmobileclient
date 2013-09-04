@@ -105,6 +105,21 @@ var Helpers = (function() {
         });
         return [[parseFloat(bottommost), parseFloat(leftmost)], [parseFloat(topmost), parseFloat(rightmost)]];
       }
+    },
+
+    performElementAction: function(event, model) {
+      event.preventDefault();
+      event.stopPropagation();
+      var el = $(event.currentTarget);
+      var callback = el.data('action');
+
+      Backbone.Mediator.publish(callback, model);
+
+      navigate = el.data('navigate');
+      if (navigate) {
+        $('.modal').modal('hide');
+        window.location.href = navigate;
+      }
     }
   };
 })();

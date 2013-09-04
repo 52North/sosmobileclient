@@ -80,7 +80,7 @@ The UI will be Android-oriented. It consists of 3 main pages/panels:
     which clusteres markers on a map layer, zooming to fit the bounds on click. Provides usability for my map with lots of stations.
 11. [shutterstock/rickshaw](https://github.com/shutterstock/rickshaw) (MIT Open Source License)
     This charting library only comes with bar and line charts but is incredible easy to use and lightweight. I works completely on the client.
-
+12. [jQuery touchIt](https://github.com/danielglyde/TouchIt) (MIT License)
 ### Removed frameworks
 Those frameworks were removed due to changes in requirements.
 

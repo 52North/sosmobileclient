@@ -4,12 +4,11 @@ var LegendTimeserieView = (function() {
     template: Handlebars.helpers.getTemplate('legendTimeserieListEntry'),
     
     events: {
-      'click .perform': 'perform',
+      'click .action': 'perform',
       'click .hide-timeseries': 'hideTimeseries'
     },
 
     initialize: function() {
-      var _this = this;
       this.listenTo(this.model, 'sync', this.render);
       this.listenTo(this.model, 'change:hidden', this.updateHideState);
 
@@ -43,26 +42,17 @@ var LegendTimeserieView = (function() {
       }
     },
 
-    perform: function(e) {
-      e.preventDefault();
-      callback = $(e.currentTarget).data('action');
-
-      //TODO already added?
-      Backbone.Mediator.publish(callback, this.model);
-
-      navigate = $(e.currentTarget).data('navigate');
-      if (navigate) {
-        $('.modal').modal('hide');
-        window.location.href = navigate;
-      }
-    },
-
     hideTimeseries: function() {
       if (this.model.get('hidden')) {
         this.model.set('hidden', false);
       } else {
         this.model.set('hidden', true);
       }
+    },
+
+    perform: function(e) {
+      Helpers.performElementAction(e, this.model);
     }
+
   });
 })();

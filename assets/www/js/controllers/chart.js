@@ -1,28 +1,31 @@
 var ChartController = (function() {
 
-  function ChartController(currentTimeseries) {
+   function ChartController(currentTimeseries) {
     this.currentTimeseries = currentTimeseries;
 
     this.build();
-    //Backbone.Mediator.subscribe('timeseries:add', this.addTimeseries, this);
-
   };
 
   ChartController.prototype.build = function(param) {
-    tabs = {
+    var tabs = {
       id: 'chart-tabs',
       tabs: [
         { 'name': 'CHART', 'id': 'chart1-content', "active": "active", 'content-class': 'full-content'},
-        { 'name': 'CONFIG', 'id': 'chart-settings-content'}
-      ]};
+        { 'name': 'RANGE', 'icon': 'icon-time', 'id': 'chart-settings-content'},
+        { 'name': 'VIEW', 'icon': 'icon-eye-open', 'id': 'chart-settings-content'}
+      ]
+    };
 
-    template = Handlebars.helpers.getTemplate('tabs');
-    html = template(tabs);
+    var template = Handlebars.helpers.getTemplate('tabs');
+    var html = template(tabs);
 
     this.el = $("#chart-content");
     this.el.empty().html(html);
-    
-    cv = new ChartView({'collection': this.currentTimeseries});
+
+    var ccv = new ChartControlsView();
+    $('ul#chart-tabs').append(ccv.render().$el);
+
+    var cv = new ChartView({'collection': this.currentTimeseries});
     cv.setElement($('#tab-chart1-content'));
     cv.render();
   };

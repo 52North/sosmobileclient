@@ -154,7 +154,7 @@ a, a:focus, a:active, a:hover, a:visited {
       }
 
       &.hidden-ts {
-        .text, .perform {
+        .text, .action:not(.always-visible) {
           opacity: 0.5;
         }
       }
@@ -257,4 +257,18 @@ a, a:focus, a:active, a:hover, a:visited {
 }
 .default-color-btn {
   margin-top: 0px;
+}
+
+li.controls a.highlight {
+    -webkit-animation: highlight 1s ease-out;
+    -webkit-animation-iteration-count: 1; 
+}
+@-webkit-keyframes highlight {
+    0% {background: white;}
+    50% {background: orange;}
+    100% {background: white;}
+}
+li.controls .bigTabBtn {
+  font-size: 28px;
+  padding: 0px 10px;
 }
