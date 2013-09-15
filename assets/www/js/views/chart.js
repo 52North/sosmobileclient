@@ -1,7 +1,7 @@
 var ChartView = (function() {
 
   return Backbone.View.extend({
-
+    className: "chart-wrapper",
     events: {
       'plotselected': 'zoomToSelection'
     },

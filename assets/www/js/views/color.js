@@ -5,7 +5,8 @@ var ColorView = (function() {
     template: Handlebars.helpers.getTemplate('colorModal'),
     
     events: {
-      'click button': 'changeColor'
+      'click button': 'changeColor',
+      'hidden.bs.modal': 'remove'
     },
 
     render: function() {
@@ -44,12 +45,8 @@ var ColorView = (function() {
         window.settings.save();
       }
       
-      //Close and remove
+      //Close
       this.$el.modal('hide');
-      var _this = this
-      this.$el.on('hidden.bs.modal', function() {
-        _this.remove();
-      });
     }
   });
 })();
