@@ -286,13 +286,18 @@ a, a:focus, a:active, a:hover, a:visited {
     display: inline-block;
 
     min-width: 40px;
-    padding: 5px;
-    margin: 0;
+    padding: 0px 8px;
+    margin: 5px 0px;
     border-radius: 0;
     border: none;
+    border-right: 1px solid #ccc;
     line-height: 25px;
     i {
       font-size: 20px;
+    }
+    &.pull-right {
+      border-right: none;
+      border-left: 1px solid #ccc;
     }
     &.highlight {
       -webkit-animation: highlight 1s ease-out;
