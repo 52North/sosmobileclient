@@ -6,9 +6,8 @@ var CurrentSettings = (function() {
       'currentProvider': 'PEGELONLINE',
       'lastStationUpdate': 'never',
       'appVersion': 'v0.3 alpha',
-      'timespan': '2013-03-01T13:00:00TZ/2013-05-11T15:30:00TZ',
+      'timespan': Helpers.isoTimespan('lastXhours', 24), //ob: {start, end, din, label}
       'expert': false,
-      'timeseries_colors': {}
     },
     storage: new StorageService(),
 

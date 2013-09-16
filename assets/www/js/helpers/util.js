@@ -120,6 +120,70 @@ var Helpers = (function() {
         $('.modal').modal('hide');
         window.location.href = navigate;
       }
+    },
+
+    isoTimespanFromTill: function(from, till) {
+      from = moment(from);
+      till = moment(till);
+      din = from.format() + "/" + till.format();
+      label = 'custom'; //from.format("YYYY-MM-DD") + " till " + till.format("YYYY-MM-DD");
+
+      var span = {
+        'from': from,
+        'till': till,
+        'din': din,
+        'label': label
+      };
+      return span;
+    },
+
+    isoTimespan: function(type, param) {
+      /*
+        a) Start and end, such as "2007-03-01T13:00:00Z/2008-05-11T15:30:00Z"
+        b) Start and duration, such as "2007-03-01T13:00:00Z/P1Y2M10DT2H30M"
+        c) Duration and end, such as "P1Y2M10DT2H30M/2008-05-11T15:30:00Z"
+      */
+      //return obj: {from, till, din, label}
+      var from = moment();
+      var till = moment();
+      var label = type;
+      var din;
+      
+      switch (type) {
+        case 'today':
+          from = from.startOf('day');
+          din = from.format() + "/" + till.format();
+          break;
+        case 'yesterday':
+          from = from.subtract('days', 1).startOf('day');
+          till = till.subtract('days', 1).endOf('day');
+          din = from.format() + "/" + till.format();
+          break;
+        case 'lastXhours':
+          label = "last " + param + " hours"
+          din = from.format() + "/" + till.format();
+          break;
+        case 'lastWeek':
+          break;
+        case 'thisWeek':
+          break;
+        case 'lastMonth':
+          break;
+        case 'thisMonth':
+          break;
+        case 'thisYear':
+          break;
+      }
+      
+      var span = {
+        'from': from,
+        'till': till,
+        'din': din,
+        'label': label
+      };
+      return span;
     }
+
+
   };
 })();

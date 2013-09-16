@@ -9,11 +9,19 @@ var ChartControlsView = (function() {
       'click .range-settings-btn': 'openRangeSettings',
     },
     subscriptions: {
-      'chart:zoom:changed': 'highlight'
+      'chart:zoom:changed': 'highlight',
+    },
+
+    initialize: function() {
+      this.listenTo(window.settings, 'change:timespan', this.render);
     },
 
     render: function() {
-      this.$el.html(this.template());
+      var data = {
+        timespan: window.settings.get('timespan')
+      };
+
+      this.$el.html(this.template(data));
       
       return this;
     },
@@ -29,7 +37,7 @@ var ChartControlsView = (function() {
     openRangeSettings: function(e) {
       e.preventDefault();
       
-      new ChartRangeSettingsView().render();
+      new ChartRangeSettingsView({model: window.settings}).render();
     },
 
     openViewSettings: function(e) {

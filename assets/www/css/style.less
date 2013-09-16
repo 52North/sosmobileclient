@@ -249,14 +249,19 @@ a, a:focus, a:active, a:hover, a:visited {
     color: white;
   }
   width: 100%;
-  height: 80px;
   margin-top: 30px;
+  height: 80px;
   &:lastChild {
     margin-right: 0px;
   }
 }
 .default-color-btn {
   margin-top: 0px;
+}
+
+.multiline-button {
+  width: 100%;
+  margin: 0px 10px 10px 0px;
 }
 
 .chart-wrapper, .fullscreen-with-top-btns {
@@ -267,11 +272,9 @@ a, a:focus, a:active, a:hover, a:visited {
   right: 0;
 }
 
-#chart-controls {
-  width: 100%;
-  background: white;
-  padding: 10px;
-}
+/***************
+ * CONTROL BAR *
+***************/
 
 .controls {
   position: relative;
@@ -290,14 +293,14 @@ a, a:focus, a:active, a:hover, a:visited {
     margin: 5px 0px;
     border-radius: 0;
     border: none;
-    border-right: 1px solid #ccc;
+    border-right: 1px solid #777;
     line-height: 25px;
     i {
       font-size: 20px;
     }
     &.pull-right {
       border-right: none;
-      border-left: 1px solid #ccc;
+      border-left: 1px solid #777;
     }
     &.highlight {
       -webkit-animation: highlight 1s ease-out;
@@ -308,6 +311,6 @@ a, a:focus, a:active, a:hover, a:visited {
 
 @-webkit-keyframes highlight {
     0% {/*background: white;*/}
-    50% {background: orange;}
+    50% {color: red;}
     100% {/*background: white;*/}
 }
