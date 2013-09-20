@@ -6,13 +6,12 @@ var CurrentSettings = (function() {
       'currentProvider': 'PEGELONLINE',
       'lastStationUpdate': 'never',
       'appVersion': 'v0.3 alpha',
-      'timespan': Helpers.isoTimespan('lastXhours', 24), //ob: {start, end, din, label}
+      'timespan': Helpers.isoTimespan('yesterday'),
       'expert': false,
     },
     storage: new StorageService(),
 
     initialize: function() {
-      csMe = this;
       Backbone.Mediator.subscribe('app:booted', function(timeseries) {
         this.listenTo(this, 'change', this.save);
       }, this);
@@ -23,7 +22,7 @@ var CurrentSettings = (function() {
     },
 
     isSet: function() {
-      return this.storage.isSet();
+      return this.storage.isSet(key);
     },
     
     fetch: function() {

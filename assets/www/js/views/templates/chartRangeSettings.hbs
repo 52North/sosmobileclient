@@ -3,7 +3,7 @@
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       <h1 class="modal-title"><i class="icon-time"></i> Time Range</h1>
-      ISO8601-TIMESPAN: <b>{{current.din}}</b>
+      ISO8601: <b>{{current.din}}</b>
       <br/>
       FROM: <b>{{current.from}}</b> UNTILL: <b>{{current.till}}</b>
     </div>
@@ -20,15 +20,11 @@
           </div>
           <div id="timerange-type-preset" class="accordion-body collapse in">
             <div class="accordion-inner">
-              <div class="row">
-                {{#each presets}}
-                  <div class="col-4">
-                    <button class="btn btn-default multiline-button preset-btn" data-preset-value="{{value}}" data-preset-param="{{param}}">
-                      {{label}}
-                    </button>
-                  </div>
-                {{/each}}
-              </div>
+              {{#each presets}}
+                <button class="btn btn-default multiline-button preset-btn" data-preset-value="{{value}}">
+                  {{label}}
+                </button>
+              {{/each}}
             </div>
           </div>
         </div>
@@ -42,38 +38,17 @@
             </h4>
           </div>
           <div id="timerange-type-custom" class="accordion-body collapse">
-            
-            <div class="accordeon" id="from-till-accordeon" style="margin: 10px;">
-              <div class="accordion-group">
-                <div class="accordion-heading">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#from-till-accordeon" href="#from-accordeon-panel">
-                      <i class="icon-step-backward"></i> from <span class="custom-range-from-label"></span> 
-                    </a>
-                </div>
-                <div id="from-accordeon-panel" class="accordion-body collapse">
-                  <div class="accordion-inner">
-                    <input type="hidden" name="customRangeFromPicker" id="customRangeFromPicker" class="i-txt" />
-                  </div>
-                </div>
-              </div>
+            <button class="custom-range-from-picker-btn btn btn-default">
+              <i class="icon-step-backward"></i> from <span class="custom-range-from-label"></span> 
+            </button>
 
-              <div class="accordion-group">
-                <div class="accordion-heading">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#from-till-accordeon" href="#till-accordeon-panel">
-                      <i class="icon-step-forward"></i> untill <span class="custom-range-till-label"></span> 
-                    </a>
-                </div>
-                <div id="till-accordeon-panel" class="accordion-body collapse">
-                  <div class="accordion-inner">
-                    <input type="hidden" name="customRangeTillPicker" id="customRangeTillPicker" class="i-txt" />
-                  </div>
-                </div>
-              </div>
-            </div>
+            <button class="custom-range-till-picker-btn btn btn-default">
+              <i class="icon-step-forward"></i> untill <span class="custom-range-till-label"></span>
+            </button>
 
             <div class="text-right">
               <button class="btn btn-primary custom-range-ok" style="margin: 0 10px 10px 0px;">
-                <i class="icon-ok"></i> <b>OK</b>
+                <i class="icon-ok"></i> OK
               </button>
             </div>
           </div>

@@ -1,5 +1,6 @@
 var Timeseries = (function() {
   return Backbone.Model.extend({
+    storage: new StorageService(),
 
     initialize: function(id) {
       this.id = id;
@@ -13,8 +14,13 @@ var Timeseries = (function() {
 
     data: function(span) {
       //1. is there data in storage for this span and id?
-      //true - set('data' from storage )
-      //false - load data from SOS
+      if (this.storage.isSet()) {
+        //true - set('data' from storage )
+        //this.set('current_timeline_data')
+      } else {
+        //false - load data from SOS
+        
+      }
       //graph horcht auf change:data
     },
 

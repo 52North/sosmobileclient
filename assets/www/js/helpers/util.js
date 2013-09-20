@@ -123,10 +123,10 @@ var Helpers = (function() {
     },
 
     isoTimespanFromTill: function(from, till) {
-      from = moment(from);
-      till = moment(till);
-      din = from.format() + "/" + till.format();
-      label = 'custom'; //from.format("YYYY-MM-DD") + " till " + till.format("YYYY-MM-DD");
+      from = moment(from).format("YYYY-MM-DD");
+      till = moment(till).format("YYYY-MM-DD");
+      din = from.format("YYYY-MM-DD") + "/" + till.format("YYYY-MM-DD");
+      label = din;
 
       var span = {
         'from': from,
@@ -137,7 +137,7 @@ var Helpers = (function() {
       return span;
     },
 
-    isoTimespan: function(type, param) {
+    isoTimespan: function(type) {
       /*
         a) Start and end, such as "2007-03-01T13:00:00Z/2008-05-11T15:30:00Z"
         b) Start and duration, such as "2007-03-01T13:00:00Z/P1Y2M10DT2H30M"
@@ -152,32 +152,47 @@ var Helpers = (function() {
       switch (type) {
         case 'today':
           from = from.startOf('day');
-          din = from.format() + "/" + till.format();
+          label = from.format("MMM D.");
           break;
         case 'yesterday':
           from = from.subtract('days', 1).startOf('day');
           till = till.subtract('days', 1).endOf('day');
-          din = from.format() + "/" + till.format();
-          break;
-        case 'lastXhours':
-          label = "last " + param + " hours"
-          din = from.format() + "/" + till.format();
+          label = from.format("MMM D.");
           break;
         case 'lastWeek':
+          from = from.subtract('weeks', 1).startOf('week');
+          till = till.subtract('weeks', 1).endOf('week');          
+          label = "last week (" + from.week() + ")";
           break;
         case 'thisWeek':
+          from = from.startOf('week');
+          label = "this week (" + from.week() + ")";
           break;
         case 'lastMonth':
+          from = from.subtract('months', 1).startOf('month');
+          till = till.subtract('months', 1).endOf('month');
+          label = from.format("MMM YYYY");
           break;
         case 'thisMonth':
+          from = from.startOf('month');
+          label = from.format("MMM YYYY");
           break;
         case 'thisYear':
+          from = from.startOf('year');
+          label = "year " + from.format("YYYY");
+          break;
+        case 'lastYear':
+          from = from.subtract('months', 1).startOf('month');
+          till = till.subtract('months', 1).endOf('month');
+          label = "year " + from.format("YYYY");
           break;
       }
       
+      var din = from.format('YYYY-MM-DD') + "/" + till.format('YYYY-MM-DD');
+      
       var span = {
-        'from': from,
-        'till': till,
+        'from': from.format('YYYY-MM-DD'),
+        'till': till.format('YYYY-MM-DD'),
         'din': din,
         'label': label
       };

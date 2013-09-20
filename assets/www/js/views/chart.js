@@ -33,7 +33,7 @@ var ChartView = (function() {
     render: function() {   
       this.$el.empty();
       if (this.plot) {
-        console.log("shutdown");
+        //Important: Disables all obsolete listeners and destroys the plot before redraw.
         this.plot.shutdown();
       }
 
