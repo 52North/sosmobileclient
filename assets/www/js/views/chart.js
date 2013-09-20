@@ -27,24 +27,30 @@ var ChartView = (function() {
       this.listenTo(this.collection, 'add', this.render);
       this.listenTo(this.collection, 'change', this.render);
       this.listenTo(this.collection, 'remove', this.render);
+      this.listenTo(window.settings, 'change:timespan', this.render);
     },
 
     render: function() {   
       this.$el.empty();
-      this.initialRenderChart();
-
+      if (this.plot) {
+        console.log("shutdown");
+        this.plot.shutdown();
+      }
 
       if (this.collection.anythingVisible()) {
         //Todo loading screen!
+        
+        this.renderChart();
       } else {
         //TODO message for the user, that there is nothing to display
+        this.$el.html("<div class='placeholder'>No current timeseries.<br/>Go on, <a href='#add'>add</a> one.</div>");
       }
 
       return this;
     },
 
     reset: function() {
-      this.graph.draw();
+      this.render();
       console.log("reset view");
     },
 
@@ -64,7 +70,7 @@ var ChartView = (function() {
       return res;
     },
 
-    initialRenderChart: function() {
+    renderChart: function() {
       var d1 = [];
       for (var t = 0; t <= 2 * Math.PI; t += 0.01) {
         d1.push([this.sumf(Math.cos, t, 10), this.sumf(Math.sin, t, 10)]);
@@ -73,7 +79,7 @@ var ChartView = (function() {
       this.data = [ d1 ];
 
       this.$el.append(this.graph);
-      var plot = $.plot(this.graph, this.data, this.options);
+      this.plot = $.plot(this.graph, this.data, this.options);
 
       $( "canvas.flot-overlay" ).touchit(); //enable touch
     },
