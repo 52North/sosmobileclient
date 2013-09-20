@@ -21,6 +21,7 @@ This project is attended at the [University of Hamburg](http://www.uni-hamburg.d
   - Clean and modular JavaScript
   - Lots of new and improved services and controllers
   - stopped pullution of global namespaces
+  
 ### 8/20/2013
 - Frameworks
   - JQuery Geo replaced by Leaflet JS, much easier, better API, better docs, lots of extensions
@@ -81,12 +82,12 @@ The UI will be Android-oriented. It consists of 3 main pages/panels:
     is the de-facto standard for client-side web apps. It is lightweight and provides an intuitive DOM manipulation API. It is an requirement for most of the libraries used in this project. JQuery Migration 1.2.1 is included.
 3. [Backbone.js 1.0.0](http://backbonejs.org/) (MIT Open Source License) and [underscore.js](http://underscorejs.org/)
     is a thin client-MVC framework which also handles the routing of the app. Since the Mobile SWC comes with no own server and only the [REST API](https://wiki.52north.org/bin/view/SensorWeb/SensorWebClientRESTInterface) there was a need for a flexible MVC-architecture style.
-4. [Bootstrap 3](http://getbootstrap.com/) (Apache Licence v2.0) Since Bootstrap has become flat, I'm glad to use it again. Not to mention its great JavaScript API.
+4. [Bootstrap 3](http://getbootstrap.com/) (Apache License v2.0) Since Bootstrap has become flat, I'm glad to use it again. Not to mention its great JavaScript API.
 5. [Handlebars](http://handlebarsjs.com/) (MIT Open Source License)
    is a templating engine that works well with backbone.js.
 6. [Less](http://lesscss.org/) (Apache License Version 2.0)
    compiles .less stylesheets at the beginning of an application. Less code is way cleaner than CSS and provides variables and nested rules.
-7. [jQuery total storage](https://github.com/jarednova/jquery-total-storage) (MIT Open Source Licence)
+7. [jQuery total storage](https://github.com/jarednova/jquery-total-storage) (MIT Open Source License)
     is a small plugin that guarantees local storage of data - if HTML5 is not supported it falls automatically back to cookies. With total storage its easy to save and retrieve strings, numbers and even complex json objects in one line.
 8. [chalbert/Backbone-Mediator](https://github.com/chalbert/Backbone-Mediator) (MIT Open Source License)
    an ultra small mediator-pattern plugin for backbone.js.
@@ -108,7 +109,7 @@ Those frameworks were removed due to changes in requirements.
 
 1. ~~[Require.js 2.1.6](http://requirejs.org/)~~
    This project comes to a size where the different javascript files become difficult to handle. Require.js priovides some functions to manage the structured loading of those files. *Removed. I need to load everything on startup.*
-2. ~~[Gumby](http://gumbyframework.com/) (MIT Open Source License)~~
+2. ~~[Gumby](http://gumbyframework.com/)~~ (MIT Open Source License)
    is a beautiful flat designed responsive theme, that detects the type of device and loads the JQuery Mobile essentials, if needed. *Removed. JavaScript functions are not as good as in Twitter Bootstrap and since v3 Bootstrap is finally flat, too.*
 3. ~~[JQuery Mobile 1.3.1](http://jquerymobile.com/)~~
    is mostly used as a complete mobile HTML5 framework. It provides lots of mobile elements such as popups, buttons, pages, navigation bars etc. Although it has its own navigation it is downgraded to a view- enhancing frontend framework. The "backend" of this javascript app will be Backbone.js. *Removed. It is to heavy. I want my own styles and behaviour.*
