@@ -5,6 +5,22 @@ This project is under development. The target is a mobile client for the Sensor 
 This project is attended at the [University of Hamburg](http://www.uni-hamburg.de), Germany, dep. [VSIS](http://vsis-www.informatik.uni-hamburg.de/?lang=en).
 
 ## Status 
+### 9/20/2013
+- Frameworks
+  - MobiScroll Datepicker for choosing the timespans "Android Style"
+  - Moment.js as helper library for working with times
+  - Rickshaw was replaced by XCharts which was immediately replaced by Flotcharts - which is the best charting library for me, for now.
+  - Migrates to JQuery 2
+- Features
+  - comes with demo graph with zooming, reset, redraw
+  - new timespan picker menu
+  - color chooser for timeseries in legend
+  - provider button now inside the map
+  - funtion to hide timeseries temporarily
+- Architecture
+  - Clean and modular JavaScript
+  - Lots of new and improved services and controllers
+  - stopped pullution of global namespaces
 ### 8/20/2013
 - Frameworks
   - JQuery Geo replaced by Leaflet JS, much easier, better API, better docs, lots of extensions
@@ -55,14 +71,14 @@ The UI will be Android-oriented. It consists of 3 main pages/panels:
 - "data view"
   This is the main page. It shows the data in different ways (eg. as table data or line chart)
 - "add"
-  You can add new time series in four different ways: via a map, a browser, a search or your personal time series history. Additionally you have a settings panel to choose from the list of sensor data providers or update the stations.
-![target l+f](https://raw.github.com/marfnk/sosmobileclient/master/target_app.PNG "Target look and feel")
+  You can add new time series in four different ways: via a map, a browser, a search or your personal time series history. Additionally you are able to choose from a list of sensor data providers to update the stations.
+![target l+f](https://raw.github.com/marfnk/sosmobileclient/master/target_app.PNG "Initially skeched Target look and feel")
 
 ## Frameworks
 1. [Phonegap 1.9.0](http://phonegap.com/) (Apache License Version 2.0)
     is wrapper for HTML5 web apps, that bundles and desploys the code as native app for nearly every device. It also provides access to the native phone API to enable features like camera, geolocation and data storage.
-2. [JQuery 1.7.2](http://jquery.com/) (MIT Open Source License)
-    is the de-facto standard for client-side web apps. It is lightweight and provides an intuitive DOM manipulation API. It is an requirement for most of the libraries used in this project. **Version Info:** For now Phonegap needs the deprecated functions of the 1.7.2 JQuery. JQuery Migration 1.2.1 is included, but muted.
+2. [JQuery 2.0.2](http://jquery.com/) (MIT Open Source License)
+    is the de-facto standard for client-side web apps. It is lightweight and provides an intuitive DOM manipulation API. It is an requirement for most of the libraries used in this project. JQuery Migration 1.2.1 is included.
 3. [Backbone.js 1.0.0](http://backbonejs.org/) (MIT Open Source License) and [underscore.js](http://underscorejs.org/)
     is a thin client-MVC framework which also handles the routing of the app. Since the Mobile SWC comes with no own server and only the [REST API](https://wiki.52north.org/bin/view/SensorWeb/SensorWebClientRESTInterface) there was a need for a flexible MVC-architecture style.
 4. [Bootstrap 3](http://getbootstrap.com/) (Apache Licence v2.0) Since Bootstrap has become flat, I'm glad to use it again. Not to mention its great JavaScript API.
@@ -78,9 +94,15 @@ The UI will be Android-oriented. It consists of 3 main pages/panels:
    This is a great mobile-first map plugin with lots of extensions, like...
 10. [Leaflet.markercluster](https://github.com/Leaflet/Leaflet.markercluster) (MIT Open Source License)
     which clusteres markers on a map layer, zooming to fit the bounds on click. Provides usability for my map with lots of stations.
-11. [shutterstock/rickshaw](https://github.com/shutterstock/rickshaw) (MIT Open Source License)
-    This charting library only comes with bar and line charts but is incredible easy to use and lightweight. I works completely on the client.
-12. [jQuery touchIt](https://github.com/danielglyde/TouchIt) (MIT License)
+11. [jQuery touchIt](https://github.com/danielglyde/TouchIt) (MIT License)
+12. [mobiscroll 2.7.0](https://github.com/acidb/mobiscroll) (MIT License)
+    provides beautiful date picker in native phone styles.
+13. [moment.js 2.2.1](http://momentjs.com/) (MIT License)
+    is a small but helpful date formatting and editing library.
+14. [Flotcharts 0.8.1](http://www.flotcharts.org/) (MIT License)
+    beautiful and with lots of docs, functions and plugins. For now its the best MIT licensed charting library I've worked with. I had to do some fixes for mobile, though. But as [announced](https://github.com/flot/flot/issues/783) it comes with the next versions.
+
+
 ### Removed frameworks
 Those frameworks were removed due to changes in requirements.
 
@@ -93,8 +115,11 @@ Those frameworks were removed due to changes in requirements.
 4. ~~[JQuery Geo 1.0b1](http://jquerygeo.com/)~~ (MIT Open Source License)
    is a JQuery plug-in and basically provides a map with with access to a tile server API. This project uses [OpenStreetMap](http://www.openstreetmap.org/) to display its location data. It has a very easy-to-use API with many functions. You can easily add a map to any JQuery enhanced page with only about 28 characters. Ryan Westphal discusses the different [map plug-ins](http://trippingthebits.com/geopres/). *Removed. This was an easy entry into the world of maps but there are no extensions and the docs don't feed my requirements.*
 5. ~~[Highcharts 3.0.4](http://www.highcharts.com/)~~ (Creative Commons BY-NC 3.0)
-   one of the best charting APIs and compatible with legacy systems and browsers. Includes the full code which means that no data transfer  is required.
-   *Removed. BY-NC is incompatible. Besides, Highcharts is to heavy.*
+   one of the best charting APIs and compatible with legacy systems and browsers. Includes the full code which means that no data transfer  is required. *Removed. BY-NC is incompatible. Besides, Highcharts is to heavy.*
+11. ~~[shutterstock/rickshaw](https://github.com/shutterstock/rickshaw)~~ (MIT Open Source License)
+    This charting library only comes with bar and line charts but is incredible easy to use and lightweight. I works completely on the client. 
+   *Removed. Too less possibilities to work with.*
+
 
 ## MF-Mobile
 The MF mobile script is an ultra lightweight CSS and JQuery library that allows page oriented navigation with GPU enhancement through CSS3. It requires JQuery and LESS CSS. It is based upon an [codrops](http://tympanus.net/codrops/2013/05/07/a-collection-of-page-transitions/) example.
