@@ -39,9 +39,9 @@ var ColorView = (function() {
       
       if (color != this.model.get('color')) {
         this.model.set('color', color);
-        var colorMap = window.settings.get('timeseries_colors');
+        var colorMap = window.settings.get('timeseriesColors');
         colorMap[this.model.get('id')] = color;
-        window.settings.set('timeseries_colors', colorMap);
+        window.settings.set('timeseriesColors', colorMap);
         window.settings.save();
       }
       

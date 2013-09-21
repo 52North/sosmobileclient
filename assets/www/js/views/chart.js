@@ -7,7 +7,8 @@ var ChartView = (function() {
     },
     subscriptions: {
       'screen:change:ratio': 'render',
-      'chart:view:reset': 'render'
+      'chart:view:reset': 'render',
+      'chart:currentTimeseries:fetchingData': 'showLoadingScreen'
     },
     graph: $("<div style='width: 100%; height: 100%'>"),
     data: [],
@@ -24,56 +25,56 @@ var ChartView = (function() {
     },
 
     initialize: function(){
-      this.listenTo(this.collection, 'add', this.render);
-      this.listenTo(this.collection, 'change', this.render);
-      this.listenTo(this.collection, 'remove', this.render);
-      this.listenTo(window.settings, 'change:timespan', this.render);
+      this.listenTo(this.collection, 'sync', this.render);
+      this.listenTo(this.collection, 'reset', this.render);
     },
 
     render: function() {   
+      this.hideLoadingScreen();
       this.$el.empty();
       if (this.plot) {
         //Important: Disables all obsolete listeners and destroys the plot before redraw.
         this.plot.shutdown();
       }
 
-      if (this.collection.anythingVisible()) {
-        //Todo loading screen!
+
+
+      if (this.collection.length > 0) {
         
         this.renderChart();
       } else {
+        //Todo loading screen!
+        this.$el.html("<div class='placeholder'>No current timeseries visible.<br/>Go on, <a href='#add'>add</a> one.</div>");
         //TODO message for the user, that there is nothing to display
-        this.$el.html("<div class='placeholder'>No current timeseries.<br/>Go on, <a href='#add'>add</a> one.</div>");
       }
+
+      this.$el.append(JSON.stringify(this.collection.toJSON()));
 
       return this;
     },
 
-    reset: function() {
-      this.render();
-      console.log("reset view");
+    showLoadingScreen: function() {
+      //console.log('start loading');
     },
 
-    addDataSerie: function(data) {
-      if (this.graph) {
-        //add 
-      } else {
-        //render with this
-      }
+    hideLoadingScreen: function() {
+      //console.log("end loading");
     },
 
-    sumf: function(f, t, m) {
-      var res = 0;
-      for (var i = 1; i < m; ++i) {
-        res += f(i * i * t) / (i * i);
-      }
-      return res;
-    },
+
 
     renderChart: function() {
+      var sumf = function(f, t, m) {
+        var res = 0;
+        for (var i = 1; i < m; ++i) {
+          res += f(i * i * t) / (i * i);
+        }
+        return res;
+      };
+
       var d1 = [];
       for (var t = 0; t <= 2 * Math.PI; t += 0.01) {
-        d1.push([this.sumf(Math.cos, t, 10), this.sumf(Math.sin, t, 10)]);
+        d1.push([sumf(Math.cos, t, 10), sumf(Math.sin, t, 10)]);
       }
 
       this.data = [ d1 ];

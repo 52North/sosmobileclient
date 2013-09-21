@@ -22,7 +22,7 @@ var MapController = (function() {
     var lat = latlng.lat;
     var lng = latlng.lng;
     
-    var matches = stations.getByCoordinates([lng, lat]);
+    var matches = this.stations.getByCoordinates([lng, lat]);
     var stationsView = new StationsView({'collection': matches});
 
     $('#temp-modals').html(stationsView.render().el);

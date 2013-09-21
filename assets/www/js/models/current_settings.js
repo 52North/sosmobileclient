@@ -8,6 +8,9 @@ var CurrentSettings = (function() {
       'appVersion': 'v0.3 alpha',
       'timespan': Helpers.isoTimespan('yesterday'),
       'expert': false,
+      'timeseriesColors': {
+          'timeseriesId': 'color'
+      }
     },
     storage: new StorageService(),
 
@@ -22,11 +25,11 @@ var CurrentSettings = (function() {
     },
 
     isSet: function() {
-      return this.storage.isSet(key);
+      return this.storage.isSet(this.key);
     },
     
     fetch: function() {
-      if (this.storage.isSet(this.key)) {
+      if (this.isSet(this.key)) {
         this.set(this.storage.load(this.key));
       } else {
         this.set(this.defaultValues);

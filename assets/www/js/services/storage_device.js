@@ -1,11 +1,11 @@
 var StorageService = (function() {
 
   function StorageService() {
-    indow.localStorage.getItem(this.key);
+    window.localStorage.getItem(this.key);
   };
 
   StorageService.prototype.save = function(key, value) {
-    window.localStorage.setItem(this.key, this.toJSON());
+    window.localStorage.setItem(this.key, value);
   };
 
   StorageService.prototype.load = function(key) {

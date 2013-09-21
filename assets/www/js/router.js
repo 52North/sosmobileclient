@@ -45,7 +45,7 @@ var AppRouter = Backbone.Router.extend({
   },
   closeOnChart: function() {
     if (Backbone.history.fragment == "chart") {
-      alert("exit");
+      //alert("exit");
       navigator.app.exitApp()
     } else {
       window.history.back();

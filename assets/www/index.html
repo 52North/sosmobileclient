@@ -112,13 +112,15 @@
       <script src="js/models/station.js"></script>
       <script src="js/models/current_settings.js"></script>
       <script src="js/models/timeseries.js"></script>
+      <script src="js/models/timeseries_data.js"></script>
       
       <!-- Collections -->
+      <script src="js/collections/current_timeseries.js"></script>
+      <script src="js/collections/history_timeseries.js"></script>
       <script src="js/collections/services.js"></script>
       <script src="js/collections/stations.js"></script>
       <script src="js/collections/timeseries.js"></script>
-      <script src="js/collections/history_timeseries.js"></script>
-      <script src="js/collections/current_timeseries.js"></script>
+      <script src="js/collections/timeseries_data_collection.js"></script>
 
       <!-- Controllers -->
       <script src="js/controllers/catalog.js"></script>
@@ -146,17 +148,17 @@
 
     <script>
       $(function() {
-        //document.addEventListener("deviceready", function() { //wait for phonegap //TURN OFF ON COMPUTER IN DEV MODE!
+      //  document.addEventListener("deviceready", function() { //wait for phonegap //TURN OFF ON COMPUTER IN DEV MODE!
           jQuery.migrateMute = true;
 
           window.settings = new CurrentSettings(); //globally
           window.settings.fetch();
           
           //models and collections
-          stations = new Stations();
-          services = new Services();
-          currentTimeseries = new CurrentTimeseries();
-          historyTimeseries = new HistoryTimeseries();
+          var stations = new Stations();
+          var services = new Services();
+          var currentTimeseries = new CurrentTimeseries();
+          var historyTimeseries = new HistoryTimeseries();
           historyTimeseries.fetch();
 
           //views
@@ -174,13 +176,13 @@
           services.fetch();
 
           //router
-          router = new AppRouter();
+          var router = new AppRouter();
           Backbone.history.start();
 
           //No calls after boot
           Backbone.Mediator.publish('app:booted', false);
 
-        //}, false);
+      //  }, false);
       });
 
     </script>

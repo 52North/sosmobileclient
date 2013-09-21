@@ -12,25 +12,6 @@ var Timeseries = (function() {
       return "http://sensorweb.demo.52north.org/sensorwebclient-webapp-stable/api/v1/timeseries/" + this.id;
     },
 
-    data: function(span) {
-      //1. is there data in storage for this span and id?
-      if (this.storage.isSet()) {
-        //true - set('data' from storage )
-        //this.set('current_timeline_data')
-      } else {
-        //false - load data from SOS
-        
-      }
-      //graph horcht auf change:data
-    },
-
-    parse: function (response) {
-      //console.log(response);
-      //if stored in settings/color hash -> take color
-      //else generate color
-      return response;
-    },
-
     isSynced: function() {
       return (!(this.get('parameters') === undefined));
     },
@@ -40,8 +21,8 @@ var Timeseries = (function() {
     },
 
     parseColor: function() {
-      if (this.get('id') in window.settings.get('timeseries_colors')) {
-        return window.settings.get('timeseries_colors')[this.get('id')];
+      if (this.id in window.settings.get('timeseriesColors')) {
+        return window.settings.get('timeseriesColors')[this.id];
       } else {
         return this.defaultColor();
       }
