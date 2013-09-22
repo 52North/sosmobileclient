@@ -14,6 +14,7 @@ var Helpers = (function() {
   });
 
   return  {
+
     generateStationsUrl: function(provider) {
       if (!provider) {
         var provider = "PEGELONLINE";
@@ -197,8 +198,24 @@ var Helpers = (function() {
         'label': label
       };
       return span;
-    }
+    },
 
+    addDateOfTimeseries: function(id) {
+      var addDates = window.settings.get('timeseriesAddDates');
+      var value = addDates[id];
+      if (value) {
+        return new Date(value); 
+      } else {
+        return new Date(0);
+      }
+    },
+
+    updateAddDate: function(id) {
+      var addDates = window.settings.get('timeseriesAddDates');
+      addDates[id] = new Date().getTime();
+      window.settings.set('timeseriesAddDates', addDates);
+      window.settings.save();
+    }
 
   };
 })();

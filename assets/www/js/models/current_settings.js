@@ -9,7 +9,10 @@ var CurrentSettings = (function() {
       'timespan': Helpers.isoTimespan('yesterday'),
       'expert': false,
       'timeseriesColors': {
-          'timeseriesId': 'color'
+        'timeseriesId': 'color'
+      },
+      'timeseriesAddDates': {
+        'timeseriesId': 'javascriptTimestamp'
       }
     },
     storage: new StorageService(),
@@ -29,7 +32,7 @@ var CurrentSettings = (function() {
     },
     
     fetch: function() {
-      if (this.isSet(this.key)) {
+      if (this.isSet()) {
         this.set(this.storage.load(this.key));
       } else {
         this.set(this.defaultValues);
