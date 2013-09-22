@@ -20,13 +20,11 @@ var TimeseriesData = (function() {
         url: "http://sensorweb.demo.52north.org/sensorwebclient-webapp-stable/api/v1/timeseries/" + timeseriesId + "/getData",
         data: { timespan: timespan} //, expanded: false}
       }).done(function(data) {
-        console.log("loaded " + timeseriesId + " data", data);
         context.trigger("sync", context);
       }).fail(function() {
-        console.log( "error" );
+        Helpers.showErrorMessage('Server error', 'Could not fetch the timeseries data fot the timeseries with ID: ' + timeseriesId + ". PLease try again later...");
         context.trigger("sync", context);
       });
-
     }
    
   });

@@ -11,7 +11,6 @@ var ChartView = (function() {
       'chart:currentTimeseries:fetchingData': 'showLoadingScreen'
     },
     graph: $("<div style='width: 100%; height: 100%'>"),
-    data: [],
     options: {
       series: {
         lines: {
@@ -21,6 +20,17 @@ var ChartView = (function() {
       },
       selection: {
         mode: "xy"
+      },
+      xaxis: {
+        mode: "time",
+        tickLength: 5
+      },
+      yaxis: {
+        show: false
+      },
+      grid: {
+        borderWidth: 0,
+        margin: 0
       }
     },
 
@@ -30,6 +40,7 @@ var ChartView = (function() {
     },
 
     render: function() {   
+      //Clean up
       this.hideLoadingScreen();
       this.$el.empty();
       if (this.plot) {
@@ -37,15 +48,12 @@ var ChartView = (function() {
         this.plot.shutdown();
       }
 
-
-
+      //Draw
       if (this.collection.length > 0) {
         
         this.renderChart();
       } else {
-        //Todo loading screen!
         this.$el.html("<div class='placeholder'>No current timeseries visible.<br/>Go on, <a href='#add'>add</a> one.</div>");
-        //TODO message for the user, that there is nothing to display
       }
 
       this.$el.append(JSON.stringify(this.collection.toJSON()));
@@ -59,30 +67,34 @@ var ChartView = (function() {
 
     hideLoadingScreen: function() {
       //console.log("end loading");
+      //not necessary - this.$el.empty in render
     },
 
 
 
     renderChart: function() {
-      var sumf = function(f, t, m) {
-        var res = 0;
-        for (var i = 1; i < m; ++i) {
-          res += f(i * i * t) / (i * i);
-        }
-        return res;
-      };
-
-      var d1 = [];
-      for (var t = 0; t <= 2 * Math.PI; t += 0.01) {
-        d1.push([sumf(Math.cos, t, 10), sumf(Math.sin, t, 10)]);
-      }
-
-      this.data = [ d1 ];
+      this.data = this.convertData();
 
       this.$el.append(this.graph);
       this.plot = $.plot(this.graph, this.data, this.options);
 
       $( "canvas.flot-overlay" ).touchit(); //enable touch
+    },
+
+    convertData: function() {
+
+
+
+      var data = [{
+      label: "USA",
+          data: [[1988, 483994], [1989, 479060], [1990, 457648], [1991, 401949], [1992, 424705], [1993, 402375], [1994, 377867], [1995, 357382], [1996, 337946], [1997, 336185], [1998, 328611], [1999, 329421], [2000, 342172], [2001, 344932], [2002, 387303], [2003, 440813], [2004, 480451], [2005, 504638], [2006, 528692]]
+        },        
+        {
+          label: "Russia",
+          data: [[1988, 218000], [1989, 203000], [1990, 171000], [1992, 42500], [1993, 37600], [1994, 36600], [1995, 21700], [1996, 19200], [1997, 21300], [1998, 13600], [1999, 14000], [2000, 19100], [2001, 21300], [2002, 23600], [2003, 25100], [2004, 26100], [2005, 31100], [2006, 34700]]
+        }];
+
+      return data;
     },
 
     zoomToSelection: function (event, ranges) {
