@@ -13,9 +13,8 @@ var ChartView = (function() {
     graph: $("<div style='width: 100%; height: 100%'>"),
     options: {
       series: {
-        lines: {
-          show: true
-        },
+        lines: { show: true, fill: true, fillColor: "rgba(255, 255, 255, 0.8)" },
+        points: { show: true, fill: false },
         shadowSize: 0
       },
       selection: {
@@ -82,17 +81,14 @@ var ChartView = (function() {
     },
 
     convertData: function() {
+      var data = [];
 
-
-
-      var data = [{
-      label: "USA",
-          data: [[1988, 483994], [1989, 479060], [1990, 457648], [1991, 401949], [1992, 424705], [1993, 402375], [1994, 377867], [1995, 357382], [1996, 337946], [1997, 336185], [1998, 328611], [1999, 329421], [2000, 342172], [2001, 344932], [2002, 387303], [2003, 440813], [2004, 480451], [2005, 504638], [2006, 528692]]
-        },        
-        {
-          label: "Russia",
-          data: [[1988, 218000], [1989, 203000], [1990, 171000], [1992, 42500], [1993, 37600], [1994, 36600], [1995, 21700], [1996, 19200], [1997, 21300], [1998, 13600], [1999, 14000], [2000, 19100], [2001, 21300], [2002, 23600], [2003, 25100], [2004, 26100], [2005, 31100], [2006, 34700]]
-        }];
+      this.collection.each(function(elem) {
+        data.push({
+          label: elem.get('timeseriesMetaData').get('id'),
+          data: elem.get('values')
+        });
+      });
 
       return data;
     },
