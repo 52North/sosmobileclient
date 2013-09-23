@@ -124,10 +124,10 @@ var Helpers = (function() {
     },
 
     isoTimespanFromTill: function(from, till) {
-      from = moment(from).format("YYYY-MM-DD");
-      till = moment(till).format("YYYY-MM-DD");
-      din = from.format("YYYY-MM-DD") + "/" + till.format("YYYY-MM-DD");
-      label = din;
+      var from = moment(from).format("YYYY-MM-DD");
+      var till = moment(till).format("YYYY-MM-DD");
+      var din = from.format("YYYY-MM-DD") + "T00:00:00Z/" + till.format("YYYY-MM-DD") + "T23:59:59Z";
+      var label = din;
 
       var span = {
         'from': from,
@@ -189,7 +189,7 @@ var Helpers = (function() {
           break;
       }
       
-      var din = from.format('YYYY-MM-DD') + "/" + till.format('YYYY-MM-DD');
+      din = from.format("YYYY-MM-DD") + "T00:00:00Z/" + till.format("YYYY-MM-DD") + "T23:59:59Z";
       
       var span = {
         'from': from.format('YYYY-MM-DD'),
