@@ -7,14 +7,17 @@ var ChartView = (function() {
     },
     subscriptions: {
       'screen:change:ratio': 'render',
+      'chart:currentTimeseries:color:change': 'render',
       'chart:view:reset': 'render',
       'chart:currentTimeseries:fetchingData': 'showLoadingScreen'
     },
     graph: $("<div style='width: 100%; height: 100%'>"),
     options: {
       series: {
-        lines: { show: true, fill: true, fillColor: "rgba(255, 255, 255, 0.8)" },
-        points: { show: true, fill: false },
+        lines: {
+          show: true,
+          fill: true
+        },
         shadowSize: 0
       },
       selection: {
@@ -25,17 +28,17 @@ var ChartView = (function() {
         tickLength: 5
       },
       yaxis: {
-        show: false
+        show: true
       },
-      grid: {
-        borderWidth: 0,
-        margin: 0
+      legend: {
+        //show: false
       }
     },
 
     initialize: function(){
       this.listenTo(this.collection, 'sync', this.render);
       this.listenTo(this.collection, 'reset', this.render);
+      this.listenTo(this.collection, 'remove', this.render);
     },
 
     render: function() {   
@@ -54,8 +57,6 @@ var ChartView = (function() {
       } else {
         this.$el.html("<div class='placeholder'>No current timeseries visible.<br/>Go on, <a href='#add'>add</a> one.</div>");
       }
-
-      this.$el.append(JSON.stringify(this.collection.toJSON()));
 
       return this;
     },
@@ -86,7 +87,8 @@ var ChartView = (function() {
       this.collection.each(function(elem) {
         data.push({
           label: elem.get('timeseriesMetaData').get('id'),
-          data: elem.get('values')
+          data: elem.get('values'),
+          color: "#" + elem.get('timeseriesMetaData').get('color')
         });
       });
 
