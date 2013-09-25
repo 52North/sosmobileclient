@@ -86,7 +86,7 @@ var ChartView = (function() {
 
       this.collection.each(function(elem) {
         data.push({
-          label: elem.get('timeseriesMetaData').get('id'),
+          label: elem.get('timeseriesMetaData').get('uom'),
           data: elem.get('values'),
           color: "#" + elem.get('timeseriesMetaData').get('color')
         });

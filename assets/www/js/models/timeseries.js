@@ -17,7 +17,7 @@ var Timeseries = (function() {
     },
 
     defaultColor: function() {
-      return Helpers.stringToColor(this.get('id'));
+      return ColorHelpers.stringToColor(this.get('id'));
     },
 
     parseColor: function() {

@@ -4,6 +4,7 @@
       {{#if parameters.phenomenon.label}}
         <h1 style='color: #{{color}}'>
           {{parameters.phenomenon.label}}
+          ({{uom}})
         </h1>
       {{else}}
         <h1>
@@ -11,7 +12,6 @@
         </h1>
       {{/if}}
       <h2><i class="icon-building"></i> {{station.properties.label}}</h2>
-      <h2>Unit: {{uom}}</h2>
       {{#if expert}}
           <h2 style="font-size: 9px;">ID: {{id}}</h2>
           <h2>{{parameters.procedure.label}}</h2>
