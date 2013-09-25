@@ -18,6 +18,8 @@
     <link rel="stylesheet/less" href="css/map.less">
     <!-- Modernizer -->
     <script src="js/libs/modernizr.custom.js"></script>
+    <!-- REQUIRE ME!!! -->
+   
   </head>
   <body>
     <div id="global-modals"></div>
@@ -99,7 +101,8 @@
       <!-- Helpers -->
       <script src="js/helpers/backbone_extensions.js"></script>
       <script src="js/helpers/handlebars_helpers.js"></script>
-      <script src="js/helpers/util.js"></script>
+      <script src="js/helpers/utils.js"></script>
+      <script src="js/helpers/color_utils.js"></script>
 
       <!-- Services -->
       <script src="js/services/storage_dev.js"></script>
@@ -147,11 +150,15 @@
       <script src="js/views/history.js"></script>
       <script src="js/views/services.js"></script>
 
+       <script src="js/libs/one-color.js"></script>
+
     <script>
       $(function() {
       //  document.addEventListener("deviceready", function() { //wait for phonegap //TURN OFF ON COMPUTER IN DEV MODE!
           jQuery.migrateMute = true;
 
+           alert('Hello, ' + one.color('#650042').lightness(.3).green(.4).hex() + ' world!');
+          
           window.settings = new CurrentSettings(); //globally
           window.settings.fetch();
           

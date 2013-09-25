@@ -22,33 +22,6 @@ var Helpers = (function() {
       return "http://sensorweb.demo.52north.org/sensorwebclient-webapp-stable/api/v0/services/" + provider.toString() + "/stations.json?show=expanded";
     },
 
-    stringToColor: function(string) {
-      if (string == undefined)
-        return "000000";
-      //luminance is: (0.2126*R) + (0.7152*G) + (0.0722*B)  has to be > 50 ??
-      return this.intToRGB(this.hashCode(string));
-    },
-
-    //M. Jessup, http://stackoverflow.com/questions/2464745/compute-hex-color-code-for-an-arbitrary-string
-    hashCode: function (str) {
-      var hash = 0;
-      for (var i = 0; i < str.length; i++) {
-         hash = str.charCodeAt(i) + ((hash << 5) - hash);
-      }
-      return hash;
-    },
-
-    intToRGB: function(i){
-      var rgb = ((i>>16)&0xFF).toString(16) + 
-             ((i>>8)&0xFF).toString(16) + 
-             (i&0xFF).toString(16);
-      rgb = rgb.toString();
-      while (rgb.length < 6) {
-        rgb = "0" + rgb;
-      }
-      return rgb;
-    },
-
     showErrorMessage: function(title, message) {
       var id = 'error' + errorId++;
       var template = Handlebars.helpers.getTemplate('errorMessage');
@@ -65,16 +38,6 @@ var Helpers = (function() {
       modal.on('hidden.bs.modal', function () {
         modal.remove();
       });
-    },
-
-    calcLuminance: function(hex) { 
-      var c = hex.substring(1);
-      var rgb = parseInt(c, 16);   // convert rrggbb to decimal
-      var r = (rgb >> 16) & 0xff;  // extract red
-      var g = (rgb >>  8) & 0xff;  // extract green
-      var b = (rgb >>  0) & 0xff;  // extract blue
-
-      return 0.2126 * r + 0.7152 * g + 0.0722 * b;
     },
 
     /**
