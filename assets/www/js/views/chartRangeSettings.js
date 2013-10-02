@@ -4,8 +4,8 @@ var ChartRangeSettingsView = (function() {
     className: 'modal fade',
     template: Handlebars.helpers.getTemplate('chartRangeSettings'),
     events: {
-      'click .preset-btn': 'usePreset',
-      'click .custom-range-ok': 'useFromTill',
+      'click .preset-btn': 'setPeset',
+      'click .confirm-range-btn': 'confirmRange',
       'click .custom-range-from-picker-btn': 'showDateTimeInput',
       'click .custom-range-till-picker-btn': 'showDateTimeInput'
     },
@@ -15,6 +15,7 @@ var ChartRangeSettingsView = (function() {
       "chart_range:custom_date:from:cancel": 'hidePicker',
       "chart_range:custom_date:till:cancel": 'hidePicker'
     },
+
 
     initialize: function() {
     },
@@ -27,10 +28,10 @@ var ChartRangeSettingsView = (function() {
           {label: 'yesterday', value: 'yesterday'},
           {label: 'this week', value: 'thisWeek'},
           {label: 'last week', value: 'lastWeek'},
-          {label: 'this month', value: 'thisMonth'},
-          {label: 'last month', value: 'lastMonth'},
-          {label: 'this year', value: 'thisYear'},
-          {label: 'last year', value: 'thisYear'},
+          //{label: 'this month', value: 'thisMonth'},
+          //{label: 'last month', value: 'lastMonth'},
+          //{label: 'this year', value: 'thisYear'},
+          //{label: 'last year', value: 'thisYear'},
         ]
       };
 
@@ -44,7 +45,9 @@ var ChartRangeSettingsView = (function() {
       //initial date
       $(".custom-range-from-label").html(this.customFromDate);
       $(".custom-range-till-label").html(this.customTillDate);
-      
+
+      this.changeOkBtnState();
+
       //Show modal!
       this.$el.modal('show');
 
@@ -53,8 +56,9 @@ var ChartRangeSettingsView = (function() {
 
     showDateTimeInput: function(e) {
       e.preventDefault();
+      e.stopPropagation();
 
-      this.$el.modal('hide');
+      this.$el.hide();
       var type;
 
       var picker = $("<div>");
@@ -71,63 +75,118 @@ var ChartRangeSettingsView = (function() {
 
       if ($(e.currentTarget).hasClass("custom-range-from-picker-btn")) {
         type = "from";
-        picker.mobiscroll('setDate', moment(this.model.get("timespan").from).toDate(), false, 0);
-      } else {
+        picker.mobiscroll('setDate', moment(this.model.get("timespan").from).toDate(), true, 0);
+      } else if ($(e.currentTarget).hasClass("custom-range-till-picker-btn")) {
         type = "till";
 
-        picker.mobiscroll('setDate',           moment(this.model.get("timespan").till).toDate(), false, 0);
-        picker.mobiscroll('option', 'minDate', moment(this.model.get("timespan").from).toDate());
+        picker.mobiscroll('setDate',           moment(this.customTillDate, "YYYY-MM-DD").toDate(), true, 0);
+        picker.mobiscroll('option', 'minDate', moment(this.customFromDate, "YYYY-MM-DD").toDate());
+      } else {
+        return;
       }
 
       picker.mobiscroll('option', 'onClose', function(txt, btn, inst) {
-        Backbone.Mediator.publish('chart_range:custom_date:' + type + ':' + btn, txt, inst);
+        
+        console.log("\""+txt+"\"");
+        var date = moment(txt, "MM-DD-YYYY"); //workaround
+        debugger
+        Backbone.Mediator.publish('chart_range:custom_date:' + type + ':' + btn, date);
+        //inst.destroy();
       });
       picker.mobiscroll('option', 'headerText', type + ': {value}');
 
       picker.mobiscroll('show'); 
     },
 
-    fromDateSet: function(txt, inst) {
-      this.customFromDate = moment(inst.getDate()).format("YYYY-MM-DD");
+    fromDateSet: function(date) {
+      this.customFromDate = date.format("YYYY-MM-DD");
       $(".custom-range-from-label").html(this.customFromDate);
-      this.hidePicker(txt, inst);
+      this.hidePicker();
+
+      this.presetSelected = false;
+      this.customRangeOk = true;
+      this.highlightCustomBtn('from', true);
+      this.highlightCustomBtn('till', true);
+      this.unhighlightPesetBtns();
+      this.changeOkBtnState();
     },
 
-    tillDateSet: function(txt, inst) {
-      this.customTillDate = moment(inst.getDate()).format("YYYY-MM-DD");
-      console.log(txt, inst, this.customTillDate);
+    tillDateSet: function(date) {
+      this.customTillDate = date.format("YYYY-MM-DD");
       $(".custom-range-till-label").html(this.customTillDate);
-      this.hidePicker(txt, inst);
+      this.hidePicker();
+      
+      this.presetSelected = false;
+      this.customRangeOk = true;
+      this.highlightCustomBtn('from', true);
+      this.highlightCustomBtn('till', true);
+      this.unhighlightPesetBtns();
+      this.changeOkBtnState();
     },
 
-    hidePicker: function(txt, inst) {
-      inst.destroy();
+    hidePicker: function() {
       $(".tempPicker").remove();
-      this.$el.modal('show');
+      this.$el.show();
     },
 
-    usePreset: function(e) {
-      var method = $(e.currentTarget).data('preset-value');
-      var span = Helpers["isoTimespan"](method);
-      this.model.set('timespan', span);
-
-      this.$el.modal('hide');
-      this.$el.on('hidden.bs.modal', function() {
-        Backbone.Mediator.pub("timespan:date_picking:finished")
-      });
+    highlightCustomBtn: function(which, highlight) {
+      var btn = this.$(".custom-range-" + which + "-picker-btn");
+      if (highlight) {
+        btn.removeClass('btn-default');
+        btn.addClass('btn-success');
+      } else {
+        btn.removeClass('btn-success');
+        btn.addClass('btn-default');
+      }
     },
 
-    useFromTill: function(e) {
+    unhighlightPesetBtns: function() {
+      var btns = this.$('.preset-btn');
+      btns.removeClass('btn-success');
+      btns.addClass('btn-default');
+    },
+
+    setPeset: function(e) {
+      var btn = $(e.currentTarget);
+      this.choosenPreset = Helpers["isoTimespan"](btn.data('preset-value'));
+
+      this.unhighlightPesetBtns();
+      this.highlightCustomBtn('from', false);
+      this.highlightCustomBtn('till', false);
+
+      btn.addClass('btn-success');
+      btn.removeClass('btn-default');
+
+      this.presetSelected = true;
+      this.customRangeOk = false;
+      this.changeOkBtnState();
+    },
+
+    changeOkBtnState: function() {
+      var btn = this.$('.confirm-range-btn');
+      if (this.customRangeOk || this.presetSelected) {
+        btn.removeClass('disabled');
+        btn.removeAttr('disabled', 'disabled');
+      } else {
+        btn.addClass('disabled');
+        btn.attr('disabled', 'disabled');
+      }
+    },
+
+    confirmRange: function(e) {
       e.preventDefault();
 
-      var span = Helpers.isoTimespanFromTill(this.customFromDate, this.customTillDate);
-      this.model.set('timespan', span);
+      if (this.customRangeOk) {
+        var span = Helpers.isoTimespanFromTill(this.customFromDate, this.customTillDate);
+        this.model.set('timespan', span);
+      } else if (this.presetSelected) {
+        this.model.set('timespan', this.choosenPreset);
+      }
       
       this.$el.modal('hide');
       this.$el.on('hidden.bs.modal', function() {
         Backbone.Mediator.pub("timespan:date_picking:finished")
       });
-    }    
-      
+    }
   });
 })();

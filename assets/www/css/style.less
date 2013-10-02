@@ -107,7 +107,9 @@ a, a:focus, a:active, a:hover, a:visited {
   font-size: 13px;
 }
 
-/* lists */
+/****************
+ * ANDROID LISTS *
+ ****************/
 .list {
   list-style: none outside none;
   padding: 0px;
@@ -220,16 +222,22 @@ a, a:focus, a:active, a:hover, a:visited {
   padding-top: 40px;
 }
 
-/* modals */
+/********************
+ * BOOTSTRAP MODALS *
+ ********************/
 .modal-header {
   border-bottom: none;
 }
 .modal-footer {
   border-top: none;
 }
+.modal-backdrop {
+  z-index: 1000; //conflict with mobiscroll
+}
 
-
-/*tabs */
+/***************
+ *     TABS    *
+ ***************/
 .full-content {
   position: absolute;
   overflow-y: auto;
@@ -241,8 +249,9 @@ a, a:focus, a:active, a:hover, a:visited {
     top: 103px;
   }
 }
-
-/* COLOR modal */
+/***************
+ * COLOR MODAL *
+ ***************/
 .default-color-btn, .color-btn {
   color: white;
   &:active, &:hover, &:link, &:focus, &:visited {
@@ -273,7 +282,7 @@ a, a:focus, a:active, a:hover, a:visited {
 
 /***************
  * CONTROL BAR *
-***************/
+ ***************/
 
 .controls {
   position: relative;
@@ -288,14 +297,16 @@ a, a:focus, a:active, a:hover, a:visited {
     display: inline-block;
 
     min-width: 40px;
-    padding: 0px 8px;
+    padding: 0px 1px;
     margin: 5px 0px;
     border-radius: 0;
     border: none;
-    border-right: 1px solid #777;
+    //border-right: 1px solid #777;
     line-height: 25px;
     i {
       font-size: 20px;
+      position: relative;
+      bottom: -1px;
     }
     &.pull-right {
       border-right: none;
@@ -310,6 +321,25 @@ a, a:focus, a:active, a:hover, a:visited {
 
 @-webkit-keyframes highlight {
     0% {/*background: white;*/}
-    50% {color: red;}
+    25% {background: red;}
+    75% {background: red;}
     100% {/*background: white;*/}
+}
+
+/****************
+ * RANGE PICKER *
+ ****************/
+
+.custom-range-button-wrapper {
+  margin-top: -20px;
+  margin-bottom: 20px;
+  text-align: center;
+  .custom-range-from-picker-btn, .custom-range-till-picker-btn {
+    width: 100px;
+    height: 80px;
+    i {
+      font-size: 40px;
+      display: block;
+    }
+  }
 }

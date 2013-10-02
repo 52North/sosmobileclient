@@ -25,6 +25,7 @@ var ChartView = (function() {
       },
       xaxis: {
         mode: "time",
+        //timeformat: "%Y/%m/%d",
         tickLength: 5
       },
       yaxis: {

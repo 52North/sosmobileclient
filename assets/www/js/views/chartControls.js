@@ -40,12 +40,6 @@ var ChartControlsView = (function() {
       new ChartRangeSettingsView({model: window.settings}).render();
     },
 
-    openViewSettings: function(e) {
-      e.preventDefault();
-      
-      new ChartViewSettingsView().render();
-    },
-
     perform: function(e) {
       Helpers.performElementAction(e, false);
     }

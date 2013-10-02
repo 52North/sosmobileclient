@@ -3,22 +3,36 @@
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       <h1 class="modal-title"><i class="icon-time"></i> Time Range</h1>
-      ISO8601: <b>{{current.din}}</b>
-      <br/>
-      FROM: <b>{{current.from}}</b> UNTILL: <b>{{current.till}}</b>
+      <!--
+        ISO8601: <b>{{current.din}}</b>
+        <br/>
+        FROM: <b>{{current.from}}</b> UNTILL: <b>{{current.till}}</b>
+      -->
     </div>
     <div class="modal-body">
+      <div class="custom-range-button-wrapper">
+
+        <button class="custom-range-from-picker-btn btn btn-default">
+          <i class="icon-step-backward"></i>
+          <span class="custom-range-from-label"></span> 
+        </button>
+
+        <button class="custom-range-till-picker-btn btn btn-default">
+          <i class="icon-step-forward"></i>
+          <span class="custom-range-till-label"></span>
+        </button>
+      </div>
 
       <div class="accordion" id="accordion-timerange-type">
         <div class="accordion-group">
           <div class="accordion-heading">
             <h4 class="panel-title" style="background: #f5f5f5">
               <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-timerange-type" href="#timerange-type-preset">
-                Presets
+                or one of the presets
               </a>
             </h4>
           </div>
-          <div id="timerange-type-preset" class="accordion-body collapse in">
+          <div id="timerange-type-preset" class="accordion-body collapse">
             <div class="accordion-inner">
               {{#each presets}}
                 <button class="btn btn-default multiline-button preset-btn" data-preset-value="{{value}}">
@@ -28,34 +42,10 @@
             </div>
           </div>
         </div>
-
-        <div class="accordion-group">
-          <div class="accordion-heading">
-            <h4 class="panel-title" style="background: #f5f5f5">
-              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-timerange-type" href="#timerange-type-custom">
-                Custom range
-              </a>
-            </h4>
-          </div>
-          <div id="timerange-type-custom" class="accordion-body collapse">
-            <button class="custom-range-from-picker-btn btn btn-default">
-              <i class="icon-step-backward"></i> from <span class="custom-range-from-label"></span> 
-            </button>
-
-            <button class="custom-range-till-picker-btn btn btn-default">
-              <i class="icon-step-forward"></i> untill <span class="custom-range-till-label"></span>
-            </button>
-
-            <div class="text-right">
-              <button class="btn btn-primary custom-range-ok" style="margin: 0 10px 10px 0px;">
-                <i class="icon-ok"></i> OK
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
     <div class="modal-footer">
+      <button type="button" class="btn btn-primary confirm-range-btn" data-dismiss="modal">OK</button>
       <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
     </div>
   </div>

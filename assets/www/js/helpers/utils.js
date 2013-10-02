@@ -87,10 +87,8 @@ var Helpers = (function() {
     },
 
     isoTimespanFromTill: function(from, till) {
-      var from = moment(from).format("YYYY-MM-DD");
-      var till = moment(till).format("YYYY-MM-DD");
-      var din = from.format("YYYY-MM-DD") + "T00:00:00Z/" + till.format("YYYY-MM-DD") + "T23:59:59Z";
-      var label = din;
+      var din = from + "T00:00:00Z/" + till + "T23:59:59Z";
+      var label = from + " - " + till;
 
       var span = {
         'from': from,

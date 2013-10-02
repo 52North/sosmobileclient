@@ -1,14 +1,19 @@
-  <a href='#' class="btn btn-default view-settings-btn">
-    <i class ='icon-eye-open'></i> view
+
+  <a class="action btn btn-default">
+    <i class="icon-chevron-left"></i>
   </a>
 
   <a href='#' class="btn btn-default range-settings-btn">
-    <i class ='icon-time'></i> 
+    <i class ='icon-calendar'></i> 
       {{#if timespan.label}}
         {{timespan.label}}
       {{else}}
         {{timespan.din}}
       {{/if}}
+  </a>
+
+  <a class="action btn btn-default">
+    <i class="icon-chevron-right"></i>
   </a>
 
   <a href='#' data-action='chart:view:reset' class="action btn btn-default pull-right reset-btn">
