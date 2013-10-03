@@ -89,16 +89,14 @@ var ChartRangeSettingsView = (function() {
         
         console.log("\""+txt+"\"");
         var date = moment(txt, "MM-DD-YYYY"); //workaround
-        debugger
-        Backbone.Mediator.publish('chart_range:custom_date:' + type + ':' + btn, date);
-        //inst.destroy();
+        Backbone.Mediator.publish('chart_range:custom_date:' + type + ':' + btn, date, inst);
       });
       picker.mobiscroll('option', 'headerText', type + ': {value}');
 
       picker.mobiscroll('show'); 
     },
 
-    fromDateSet: function(date) {
+    fromDateSet: function(date, inst) {
       this.customFromDate = date.format("YYYY-MM-DD");
       $(".custom-range-from-label").html(this.customFromDate);
       this.hidePicker();
@@ -109,9 +107,11 @@ var ChartRangeSettingsView = (function() {
       this.highlightCustomBtn('till', true);
       this.unhighlightPesetBtns();
       this.changeOkBtnState();
+
+      inst.destroy();
     },
 
-    tillDateSet: function(date) {
+    tillDateSet: function(date, inst) {
       this.customTillDate = date.format("YYYY-MM-DD");
       $(".custom-range-till-label").html(this.customTillDate);
       this.hidePicker();
@@ -122,6 +122,8 @@ var ChartRangeSettingsView = (function() {
       this.highlightCustomBtn('till', true);
       this.unhighlightPesetBtns();
       this.changeOkBtnState();
+
+      inst.destroy();
     },
 
     hidePicker: function() {
