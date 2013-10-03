@@ -87,14 +87,18 @@ var Helpers = (function() {
     },
 
     isoTimespanFromTill: function(from, till) {
-      var din = from + "T00:00:00Z/" + till + "T23:59:59Z";
-      var label = from + " - " + till;
+      from = moment(from, "YYYY-MM-DD").startOf('day');
+      till = moment(till, "YYYY-MM-DD").startOf('day');
+      din = from.format("YYYY-MM-DDTHH:mm:ss\\Z") + "/" + till.format("YYYY-MM-DDTHH:mm:ss\\Z");
+
+      var label = from.format("YYYY-MM-DD") + " - " + till.format("YYYY-MM-DD");
 
       var span = {
         'from': from,
         'till': till,
         'din': din,
-        'label': label
+        'label': label,
+        'mode': 'range'
       };
       return span;
     },
@@ -106,59 +110,126 @@ var Helpers = (function() {
         c) Duration and end, such as "P1Y2M10DT2H30M/2008-05-11T15:30:00Z"
       */
       //return obj: {from, till, din, label}
-      var from = moment();
-      var till = moment();
+      var from = moment().startOf('day');
+      var till = moment().endOf('day');
       var label = type;
       var din;
-      
+      var mode;
+
       switch (type) {
+        case 'live':
+          from = moment().subtract('hours', 1);
+          till = moment();
+          label = "live";
+          mode = "live";
+          break;
         case 'today':
           from = from.startOf('day');
           label = from.format("MMM D.");
+          mode = "day";
           break;
         case 'yesterday':
           from = from.subtract('days', 1).startOf('day');
           till = till.subtract('days', 1).endOf('day');
           label = from.format("MMM D.");
+          mode = "day";
           break;
         case 'lastWeek':
           from = from.subtract('weeks', 1).startOf('week');
           till = till.subtract('weeks', 1).endOf('week');          
           label = "last week (" + from.week() + ")";
+          mode = "week";
           break;
         case 'thisWeek':
           from = from.startOf('week');
           label = "this week (" + from.week() + ")";
+          mode = "week";
           break;
         case 'lastMonth':
           from = from.subtract('months', 1).startOf('month');
           till = till.subtract('months', 1).endOf('month');
           label = from.format("MMM YYYY");
+          mode = "month";
           break;
         case 'thisMonth':
           from = from.startOf('month');
           label = from.format("MMM YYYY");
+          mode = "month";
           break;
         case 'thisYear':
           from = from.startOf('year');
           label = "year " + from.format("YYYY");
+          mode = "year"
           break;
         case 'lastYear':
           from = from.subtract('months', 1).startOf('month');
           till = till.subtract('months', 1).endOf('month');
           label = "year " + from.format("YYYY");
+          mode = "year"
           break;
       }
-      
-      din = from.format("YYYY-MM-DD") + "T00:00:00Z/" + till.format("YYYY-MM-DD") + "T23:59:59Z";
-      
+
+      din = from.format("YYYY-MM-DDTHH:mm:ss\\Z") + "/" + till.format("YYYY-MM-DDTHH:mm:ss\\Z");
+
       var span = {
-        'from': from.format('YYYY-MM-DD'),
-        'till': till.format('YYYY-MM-DD'),
+        'from': from,
+        'till': till,
         'din': din,
-        'label': label
+        'label': label,
+        'mode': mode
       };
       return span;
+    },
+
+    getNearbyPeriode: function(method) {
+      var timespan = window.settings.get('timespan');
+      var mode = timespan.mode;
+      var from = moment(timespan.from);
+      var till = moment(timespan.till);
+
+      var newFrom, newTill, newLabel;
+
+      switch (mode) {
+        case 'range':
+          var diff = till.diff(from); 
+          newFrom = from[method](diff).startOf('day');
+          newTill = till[method](diff).endOf('day');
+          newLabel = newFrom.format("YYYY-MM-DD") + " - " + newTill.format("YYYY-MM-DD");
+          break;
+        case 'day':
+          newFrom = from[method]('days', 1).startOf('day');
+          newTill = till[method]('days', 1).endOf('day');
+          newLabel = newFrom.format("MMM D.");
+          break;
+        case 'month':
+          newFrom = from[method]('months', 1).startOf('month');
+          newTill = till[method]('months', 1).endOf('month');
+          newLabel = newFrom.format("MMM YYYY");
+          break;
+        case 'week':
+          newFrom = from[method]('weeks', 1).startOf('week');
+          newTill = till[method]('weeks', 1).endOf('week');
+          newLabel = "c-week " + newFrom.week();
+          break;
+        case 'year':
+          newFrom = from[method]('years', 1).startOf('year');
+          newTill = till[method]('years', 1).endOf('year');
+          newLabel = "year " + newFrom.format("YYYY");
+          break;
+        default:
+          newFrom = from;
+          newTill = till;
+          newLabel = timespan.label;
+          break;
+      }
+
+      return {
+        'from': newFrom,
+        'till': newTill,
+        'din': newFrom.format("YYYY-MM-DDTHH:mm:ss\\Z") + "/" + newTill.format("YYYY-MM-DDTHH:mm:ss\\Z"),
+        'label': newLabel,
+        'mode': mode
+      };
     },
 
     addDateOfTimeseries: function(id) {

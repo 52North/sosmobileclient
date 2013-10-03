@@ -26,11 +26,13 @@ var ChartControlsView = (function() {
 
       this.$el.html(this.template(data));
 
-      if (window.settings.get('timespan').till == moment().format("YYYY-MM-DD")) {
+      if (window.settings.get('timespan').label == "live") {
+        this.$('.btn-prev-periode').hide();
         this.$('.btn-next-periode').hide();
-        //this.$('.btn-refresh').show();
+      } else if (moment(window.settings.get('timespan').till).format("YYYY-MM-DD") == moment().format("YYYY-MM-DD")) {
+        this.$('.btn-next-periode').hide();
+        this.$('.btn-refresh').hide();
       } else {
-        //this.$('.btn-next-periode').show();
         this.$('.btn-refresh').hide();
       }
 
@@ -38,15 +40,15 @@ var ChartControlsView = (function() {
     },
 
     fireRefreshRequest: function() {
-      
+      window.settings.trigger('change:timespan'); 
     },
 
     prevPeriode: function() {
-      //Helpers.getPreviousPeriode()
+      window.settings.set('timespan', Helpers.getNearbyPeriode('subtract'));
     },
 
     nextPeriode: function() {
-
+      window.settings.set('timespan', Helpers.getNearbyPeriode('add'));
     },
 
     highlight: function(ranges) {

@@ -3,24 +3,29 @@
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       <h1 class="modal-title"><i class="icon-time"></i> Time Range</h1>
-      <!--
-        ISO8601: <b>{{current.din}}</b>
-        <br/>
-        FROM: <b>{{current.from}}</b> UNTILL: <b>{{current.till}}</b>
-      -->
     </div>
     <div class="modal-body">
       <div class="custom-range-button-wrapper">
 
-        <button class="custom-range-from-picker-btn btn btn-default">
+        <button class="custom-range-from-picker-btn btn btn-default big-btn">
           <i class="icon-step-backward"></i>
           <span class="custom-range-from-label"></span> 
         </button>
 
-        <button class="custom-range-till-picker-btn btn btn-default">
+        <button class="custom-range-till-picker-btn btn btn-default big-btn">
           <i class="icon-step-forward"></i>
           <span class="custom-range-till-label"></span>
         </button>
+
+        or
+
+        <button class="preset-btn btn btn-default big-btn" data-preset-value="live">
+          <i class="icon-refresh"></i>
+          <span>live data</span>
+        </button>
+
+        
+
       </div>
 
       <div class="accordion" id="accordion-timerange-type">

@@ -7,7 +7,7 @@ var ChartRangeSettingsView = (function() {
       'click .preset-btn': 'setPeset',
       'click .confirm-range-btn': 'confirmRange',
       'click .custom-range-from-picker-btn': 'showDateTimeInput',
-      'click .custom-range-till-picker-btn': 'showDateTimeInput'
+      'click .custom-range-from-picker-btn': 'showDateTimeInput'
     },
     subscriptions: {
       "chart_range:custom_date:from:set": 'fromDateSet',
@@ -21,8 +21,10 @@ var ChartRangeSettingsView = (function() {
     },
 
     render: function() {
+      this.customFromDate = moment(this.model.get("timespan").from).format("YYYY-MM-DD");
+      this.customTillDate = moment(this.model.get("timespan").till).format("YYYY-MM-DD");
+      
       var data = {
-        current: this.model.get('timespan'),
         presets: [
           {label: 'today', value: 'today'},
           {label: 'yesterday', value: 'yesterday'},
@@ -34,10 +36,6 @@ var ChartRangeSettingsView = (function() {
           //{label: 'last year', value: 'thisYear'},
         ]
       };
-
-      this.customFromDate = this.model.get("timespan").from;
-      this.customTillDate = this.model.get("timespan").till;
-
       this.$el.html(this.template(data));
 
       $("#temp-modals").html(this.$el);
