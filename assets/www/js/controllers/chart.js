@@ -39,7 +39,6 @@ var ChartController = (function() {
         //data list contains this?
         if (!tsData.any(function(elem) {return elem.get('timeseriesMetaData').get('id') == meta.get('id');})) {
           //no: create, fetch, add
-          Backbone.Mediator.publish('chart:currentTimeseries:fetchingData');
           var tsd = new TimeseriesData({'timeseriesMetaData': meta, 'timespan': window.settings.get('timespan')});
           tsData.add(tsd);
           tsd.fetch();
@@ -59,19 +58,23 @@ var ChartController = (function() {
       return !inMetaListAndVisible;
     }));
 
+    console.log("update coll");
+    Backbone.Mediator.publish('chart:currentTimeseries:updated');
+
   };
 
   /**
    * Adds a timeseries without affecting the rest
    */
   ChartController.prototype.addTimeseries = function(meta) {
-    Backbone.Mediator.publish('chart:currentTimeseries:fetchingData');
 
     if (!meta.get('hidden')) {
       var tsd = new TimeseriesData({'timeseriesMetaData': meta, 'timespan': window.settings.get('timespan')});
       this.currentTimeseriesDataCollection.add(tsd);
       tsd.fetch();
     }
+
+    Backbone.Mediator.publish('chart:currentTimeseries:updated');
   };
 
   /**

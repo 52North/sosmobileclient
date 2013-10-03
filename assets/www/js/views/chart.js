@@ -9,7 +9,7 @@ var ChartView = (function() {
       'screen:change:ratio': 'render',
       'chart:currentTimeseries:color:change': 'render',
       'chart:view:reset': 'render',
-      'chart:currentTimeseries:fetchingData': 'showLoadingScreen'
+      'chart:currentTimeseries:updated': 'showLoadingScreen'
     },
     graph: $("<div style='width: 100%; height: 100%'>"),
     options: {
@@ -39,7 +39,11 @@ var ChartView = (function() {
     initialize: function(){
       this.listenTo(this.collection, 'sync', this.render);
       this.listenTo(this.collection, 'reset', this.render);
-      this.listenTo(this.collection, 'remove', this.render);
+      this.listenTo(this.collection, 'remove', this.render);   
+      
+      //this.listenTo(this.collection, 'add', this.showLoadingScreen);
+
+      var loadingView = new LoadingView({el: this.el, collection: this.collection});
     },
 
     render: function() {   
@@ -63,12 +67,18 @@ var ChartView = (function() {
     },
 
     showLoadingScreen: function() {
+      this.hideLoadingScreen();
+
+
+
       //console.log('start loading');
+      //console.log(this.collection.toJSON());
     },
 
     hideLoadingScreen: function() {
       //console.log("end loading");
       //not necessary - this.$el.empty in render
+      //console.log('done screen');
     },
 
 
