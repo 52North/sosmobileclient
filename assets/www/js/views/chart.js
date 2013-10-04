@@ -43,7 +43,7 @@ var ChartView = (function() {
       
       //this.listenTo(this.collection, 'add', this.showLoadingScreen);
 
-      var loadingView = new LoadingView({el: this.el, collection: this.collection});
+      this.loadingView = new LoadingView({collection: this.collection});
     },
 
     render: function() {   
@@ -60,8 +60,10 @@ var ChartView = (function() {
         
         this.renderChart();
       } else {
-        this.$el.html("<div class='placeholder'>No current timeseries visible.<br/>Go on, <a href='#add'>add</a> one.</div>");
+        this.$el.html("<div class='placeholder'>No timeseries are currently visible.<br/>Go on, <a href='#add'>add</a> one.</div>");
       }
+
+      this.$el.append(this.loadingView.$el);
 
       return this;
     },
