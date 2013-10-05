@@ -15,6 +15,11 @@ var LoadingView = (function() {
     },
 
     render: function() {
+      if (this.collection.size() == 0  || this.collection.everythingSynced()) {
+        this.hide();
+        return;
+      }
+
       this.$el.html($("<h2>").html("Fetching data..."));
       var table = $("<span>").addClass("loading-state");
 
@@ -26,9 +31,6 @@ var LoadingView = (function() {
         table.append(single.render().$el);
       }, this);
 
-      if (this.collection.size() == 0) {
-        this.hide();
-      }
     }
   });
 })();
