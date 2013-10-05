@@ -77,13 +77,17 @@ var Helpers = (function() {
       var el = $(event.currentTarget);
       var callback = el.data('action');
 
-      Backbone.Mediator.publish(callback, model);
-
-      navigate = el.data('navigate');
+      var navigate = el.data('navigate');
       if (navigate) {
         $('.modal').modal('hide');
         window.location.href = navigate;
+
       }
+
+      //This has to be in another thread due to leaflet + bootstrap issues.
+      setTimeout(function() {
+        Backbone.Mediator.publish(callback, model); 
+      }, 0);
     },
 
     isoTimespanFromTill: function(from, till) {

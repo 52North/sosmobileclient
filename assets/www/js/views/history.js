@@ -28,7 +28,7 @@ var HistoryView = (function() {
       this.listenTo(window.settings, 'change:expert', this.render);
 
       Backbone.Mediator.subscribe('history:timeseries:delete', function(timeseries) {
-       collection.remove(timeseries); //TODO in controller!!
+       collection.remove(timeseries);
       }, this);
 
     },
@@ -40,10 +40,10 @@ var HistoryView = (function() {
         this.$el.html("<div class='placeholder'>No history entries found.<br/>Go on, <a href='#add'>add</a> one.</div>");
       }
 
-      list = this.$el;
-      actions = this.actions;
+      var list = this.$el;
+      var actions = this.actions;
       this.collection.each(function(timeserie){
-        tsView = new TimeserieView({'model': timeserie, 'actions': actions});
+        var tsView = new TimeserieView({'model': timeserie, 'actions': actions});
         list.append(tsView.render().el);
       });
 
