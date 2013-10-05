@@ -81,7 +81,6 @@ var Helpers = (function() {
       if (navigate) {
         $('.modal').modal('hide');
         window.location.href = navigate;
-
       }
 
       //This has to be in another thread due to leaflet + bootstrap issues.

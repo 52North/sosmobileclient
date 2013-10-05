@@ -5,12 +5,14 @@ var LegendTimeserieView = (function() {
     
     events: {
       'click .action': 'perform',
-      'click .hide-timeseries': 'hideTimeseries'
+      'click .hide-timeseries': 'hideTimeseries',
+      'click .no-current-data': 'showNoDataInfo'
     },
 
     initialize: function() {
       this.listenTo(this.model, 'sync', this.render);
       this.listenTo(this.model, 'change:hidden', this.updateHideState);
+      this.listenTo(this.model, 'change:noCurrentData', this.render);
 
       if (!this.model.isSynced()) {
         this.model.fetch();
@@ -52,6 +54,13 @@ var LegendTimeserieView = (function() {
 
     perform: function(e) {
       Helpers.performElementAction(e, this.model);
+    },
+
+    showNoDataInfo: function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      Helpers.showErrorMessage("No data available", "We are sorry but there is no timeseries data for this item in the given range.");
     }
 
   });

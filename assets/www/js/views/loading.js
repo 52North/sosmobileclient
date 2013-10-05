@@ -30,7 +30,6 @@ var LoadingView = (function() {
         var single = new LoadingSingleTimeseriesView({model: ts});
         table.append(single.render().$el);
       }, this);
-
     }
   });
 })();

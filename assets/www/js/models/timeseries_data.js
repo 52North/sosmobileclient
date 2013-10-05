@@ -13,7 +13,8 @@ var TimeseriesData = (function() {
       //Caching goes here!
 
       var timespan = this.get('timespan').din;
-      var timeseriesId = this.get('timeseriesMetaData').get('id');
+      var timeseriesMetaData = this.get('timeseriesMetaData');
+      var timeseriesId = timeseriesMetaData.get('id');
       var context = this;
 
       $.ajax({
@@ -26,9 +27,17 @@ var TimeseriesData = (function() {
           values.push([elem.timestamp, elem.value]);
         }, context)
 
+        //if no data available - meta.set('noData', true) - else set to false!
+        if (data.values.length == 0) {
+          timeseriesMetaData.set('noCurrentData', true);
+        } else {
+          timeseriesMetaData.set('noCurrentData', false);
+        }
+
         context.set('values', values);
         context.set('synced', true);
         context.trigger("sync", context);
+
       }).fail(function() {
         Helpers.showErrorMessage('Server error', 'Could not fetch the timeseries data fot the timeseries with ID: ' + timeseriesId + ". Please try again later...");
         this.set('synced', true);

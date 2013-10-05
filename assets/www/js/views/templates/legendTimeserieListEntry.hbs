@@ -22,6 +22,11 @@
       
     </div>
     <div class="element">
+      {{#if noCurrentData}}
+        <a class="no-action no-current-data">
+          <i class="icon-warning-sign text-warning blink"></i>
+        </a>
+      {{/if}}
       <a class="action hide-timeseries always-visible" data-action="legend:timeseries:hide">
           <i id="hide-timeseries-icon"></i>
       </a>

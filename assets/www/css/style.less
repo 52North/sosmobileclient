@@ -152,7 +152,7 @@ a, a:focus, a:active, a:hover, a:visited {
         font-size: 26px;
         color: #7e7e7e;
         text-align: center;
-        .action {
+        .action, .no-action {
           padding: 0;
           width: 68px;
           height: 40px;
@@ -171,7 +171,7 @@ a, a:focus, a:active, a:hover, a:visited {
       }
 
       &.hidden-ts {
-        .text, .action:not(.always-visible) {
+        .text, .action:not(.always-visible), .no-action:not(.always-visible) {
           opacity: 0.5;
         }
       }
@@ -185,7 +185,7 @@ a, a:focus, a:active, a:hover, a:visited {
           color: #7e7e7e;
           text-align: right;
           border-left: none;
-          .action {
+          .action, .no-action {
             width: 45px;
             padding: 0;
             height: 40px;
@@ -338,6 +338,17 @@ a, a:focus, a:active, a:hover, a:visited {
     25% {background: red;}
     75% {background: red;}
     100% {/*background: white;*/}
+}
+
+.blink {
+  -webkit-animation: blink 0.8s ease-out;
+  -webkit-animation-iteration-count: infinite; 
+}
+
+@-webkit-keyframes blink {
+    0% {}
+    50% {opacity: 0.3;}
+    100% {}
 }
 
 /****************
