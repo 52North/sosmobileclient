@@ -13,7 +13,6 @@ var CatalogController = (function() {
       id: "add-tabs",
       tabs: [
         { 'name': 'MAP', 'id': 'map-content', "active": "active"},
-        { 'name': 'BROWSER', 'id': 'browser-content', 'content-class': 'full-content'},
         { 'name': 'SEARCH', 'id': 'search-content', 'content-class': 'full-content'},
         { 'name': 'HISTORY', 'id': 'history-content', 'content-class': 'full-content'}
       ]};
@@ -24,10 +23,6 @@ var CatalogController = (function() {
     this.el = $("#add-content");
     this.el.empty().html(html);
     
-    var bv = new BrowserView(this.services);
-    bv.setElement($('#tab-browser-content'));
-    bv.render();
-
     //container to the controller!
     var mapController = new MapController(this.stations, this.services, $('#tab-map-content'))
 
