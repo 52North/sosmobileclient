@@ -85,7 +85,6 @@ var ChartRangeSettingsView = (function() {
 
       picker.mobiscroll('option', 'onClose', function(txt, btn, inst) {
         
-        console.log("\""+txt+"\"");
         var date = moment(txt, "MM-DD-YYYY"); //workaround
         Backbone.Mediator.publish('chart_range:custom_date:' + type + ':' + btn, date, inst);
       });

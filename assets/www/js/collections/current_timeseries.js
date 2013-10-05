@@ -9,10 +9,8 @@ var CurrentTimeseries = (function() {
       this.listenTo(this, 'add', this.sort);
       this.listenTo(this, 'add', this.save);
 
-      Backbone.Mediator.subscribe('timeseries:add', function(timeseries) {
-        Helpers.updateAddDate(timeseries.get('id')); //first!
-        this.add(timeseries);
-      }, this);
+      //info: Add+Remove of Timeseries is located in timeseries controller
+      
       Backbone.Mediator.subscribe('app:reset', function() {
         this.reset();
         this.save();

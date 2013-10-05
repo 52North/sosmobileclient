@@ -4,10 +4,6 @@ var HistoryView = (function() {
     className: 'list timeseries',
     actions: [
       {
-          'icon': 'icon-plus',
-          'callback': 'timeseries:add'
-      },
-      {
           'icon': 'icon-trash',
           'callback': 'history:timeseries:delete'
       },
@@ -17,6 +13,10 @@ var HistoryView = (function() {
         'navigate': '#add/map'
       }
     ],
+    subscriptions: {
+      'timeseries:removed': 'render',
+      'timeseries:added': 'render'
+    },
 
     initialize: function(){
       var collection = this.collection;
@@ -26,11 +26,6 @@ var HistoryView = (function() {
       this.listenTo(this.collection, 'remove', this.render);
       this.listenTo(this.collection, 'reset', this.render);
       this.listenTo(window.settings, 'change:expert', this.render);
-
-      Backbone.Mediator.subscribe('history:timeseries:delete', function(timeseries) {
-       collection.remove(timeseries);
-      }, this);
-
     },
 
     render: function() {

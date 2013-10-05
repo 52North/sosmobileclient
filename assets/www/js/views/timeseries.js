@@ -38,6 +38,7 @@ var TimeserieView = (function() {
     initialize: function() {
       var _this = this;
       this.listenTo(this.model, 'sync', this.render);
+      this.listenTo(this.model, 'change:active', this.render);
 
       if (!this.model.isSynced()) {
         this.model.fetch();
@@ -46,7 +47,12 @@ var TimeserieView = (function() {
 
     render: function() {
       var model = this.model.toJSON();
-      model['actions'] = this.options.actions;
+
+      if (Helpers.listContainsId(window.currentTimeseries, model['id'])) {
+        model['active'] = true;
+      }
+
+      model['additionalActions'] = this.options.actions;
       model['expert'] = window.settings.get('expert');
       model['synced'] = this.model.isSynced();
       this.listenTo(this.model, 'change:color', this.render);

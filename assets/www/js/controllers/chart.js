@@ -58,7 +58,6 @@ var ChartController = (function() {
       return !inMetaListAndVisible;
     }));
 
-    console.log("update coll");
     Backbone.Mediator.publish('chart:currentTimeseries:updated');
 
   };

@@ -34,12 +34,7 @@ var StationView = (function() {
     events: {
       //'click .station-header': 'togglePhenomenons'
     },
-    timeSeriesActions: [
-      {
-        'icon': 'icon-plus',
-        'callback': 'timeseries:add',
-        'navigate': '#chart'
-      }    
+    timeSeriesActions: [  
     ],
 
     render: function() {

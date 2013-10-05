@@ -98,7 +98,7 @@ var MapView = (function() {
       this.map.addLayer(this.stationMarker);
 
       this.map.panTo(this.stationMarker.getLatLng(), {animate: true});
-      this.map.setZoom(12);
+      this.map.setZoom(16);
     },
 
     deleteLocateStationMarker: function() {

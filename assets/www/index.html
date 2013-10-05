@@ -165,14 +165,15 @@
           var stations = new Stations();
           var services = new Services();
           var currentTimeseries = new CurrentTimeseries();
+          window.currentTimeseries = currentTimeseries;
           var historyTimeseries = new HistoryTimeseries();
           historyTimeseries.fetch();
 
           //views
           new SettingsView({'model': window.settings}).render();
-          new CatalogController(services, stations, historyTimeseries);
+          new CatalogController(services, stations, historyTimeseries, currentTimeseries);
           new ChartController(currentTimeseries);
-          new TimeseriesController(currentTimeseries);
+          new TimeseriesController(currentTimeseries, historyTimeseries);
           new ServiceController(services, stations);
           new LegendController(currentTimeseries);
 

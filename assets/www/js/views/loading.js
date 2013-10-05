@@ -3,16 +3,14 @@ var LoadingView = (function() {
     className: "loading-screen",
 
     initialize: function() {
-      console.log(this.$el);
-
       this.listenTo(this.collection, 'add', this.render);
       this.listenTo(this.collection, 'remove', this.render);
       this.listenTo(this.collection, 'reset', this.render);
 
-      this.listenTo(this.collection, 'synced:all', this.what);
+      this.listenTo(this.collection, 'synced:all', this.hide);
     },
 
-    what: function() {
+    hide: function() {
       this.$el.hide();
     },
 
@@ -23,11 +21,14 @@ var LoadingView = (function() {
       this.$el.append(table);
       this.$el.show();
 
-      console.log("rerender " + this.collection.size());
       this.collection.each(function(ts) {
         var single = new LoadingSingleTimeseriesView({model: ts});
         table.append(single.render().$el);
       }, this);
+
+      if (this.collection.size() == 0) {
+        this.hide();
+      }
     }
   });
 })();

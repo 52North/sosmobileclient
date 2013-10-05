@@ -251,6 +251,10 @@ var Helpers = (function() {
       addDates[id] = new Date().getTime();
       window.settings.set('timeseriesAddDates', addDates);
       window.settings.save();
+    },
+
+    listContainsId: function(list, id) {
+      return list.any(function(elem) {return elem.get('id') == id || elem.id == id});
     }
 
   };

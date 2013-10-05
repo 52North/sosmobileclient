@@ -29,7 +29,7 @@ var AppRouter = Backbone.Router.extend({
   },
   legend: function() {
     MfMobile.navigateToPage("#chart-page");
-    MfMobile.openPanel("#legend-panel");
+    MfMobile.openPanel("#legend-panel"); //TODO wait
   },
   settings: function() {
     MfMobile.openPanel("#settings-panel");

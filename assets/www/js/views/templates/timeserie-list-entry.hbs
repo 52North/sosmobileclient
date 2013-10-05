@@ -10,6 +10,9 @@
           <i>[unknown phenomenon]</i>
         </h1>
       {{/if}}
+      {{#if active}}
+        <h2>(in your list)</h2>
+      {{/if}} 
       <h2><i class="icon-building"></i> {{station.properties.label}}</h2>
       <h2>Unit: {{uom}}</h2>
       {{#if expert}}
@@ -22,7 +25,17 @@
       
     </div>
     <div class="element">
-      {{#each actions}}
+      {{#if active}}
+        <a class="action text-muted" data-action="dummy" data-navigate="#legend">
+          <i class="icon-ok"></i>
+        </a>
+      {{else}}
+        <a class="action" data-action="timeseries:add" data-navigate="#chart">
+          <i class="icon-plus"></i>
+        </a>
+      {{/if}}
+
+      {{#each additionalActions}}
         <a class="action" data-action="{{callback}}" 
           {{#if navigate}}
             data-navigate="{{navigate}}"

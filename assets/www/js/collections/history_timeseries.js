@@ -9,14 +9,10 @@ var HistoryTimeseries = (function() {
       this.listenTo(this, 'add', this.sort);
       this.listenTo(this, 'add', this.save);
 
-      Backbone.Mediator.subscribe('timeseries:add', function(timeseries) {
-        this.add(timeseries);
-      }, this);
       Backbone.Mediator.subscribe('app:reset', function() {
         this.reset();
         this.save();
       }, this);
-
     },
 
   });

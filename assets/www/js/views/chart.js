@@ -8,8 +8,7 @@ var ChartView = (function() {
     subscriptions: {
       'screen:change:ratio': 'render',
       'chart:currentTimeseries:color:change': 'render',
-      'chart:view:reset': 'render',
-      'chart:currentTimeseries:updated': 'showLoadingScreen'
+      'chart:view:reset': 'render'
     },
     graph: $("<div style='width: 100%; height: 100%'>"),
     options: {
@@ -41,14 +40,12 @@ var ChartView = (function() {
       this.listenTo(this.collection, 'reset', this.render);
       this.listenTo(this.collection, 'remove', this.render);   
       
-      //this.listenTo(this.collection, 'add', this.showLoadingScreen);
-
       this.loadingView = new LoadingView({collection: this.collection});
+      this.loadingView.render(); //initially reńder to hide it
     },
 
     render: function() {   
       //Clean up
-      this.hideLoadingScreen();
       this.$el.empty();
       if (this.plot) {
         //Important: Disables all obsolete listeners and destroys the plot before redraw.
@@ -57,7 +54,6 @@ var ChartView = (function() {
 
       //Draw
       if (this.collection.length > 0) {
-        
         this.renderChart();
       } else {
         this.$el.html("<div class='placeholder'>No timeseries are currently visible.<br/>Go on, <a href='#add'>add</a> one.</div>");
@@ -67,23 +63,6 @@ var ChartView = (function() {
 
       return this;
     },
-
-    showLoadingScreen: function() {
-      this.hideLoadingScreen();
-
-
-
-      //console.log('start loading');
-      //console.log(this.collection.toJSON());
-    },
-
-    hideLoadingScreen: function() {
-      //console.log("end loading");
-      //not necessary - this.$el.empty in render
-      //console.log('done screen');
-    },
-
-
 
     renderChart: function() {
       this.data = this.convertData();
