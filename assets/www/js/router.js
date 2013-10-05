@@ -17,21 +17,21 @@ var AppRouter = Backbone.Router.extend({
   },
 
   chart: function() {
-    navigateToPage("#chart-page");
+    MfMobile.navigateToPage("#chart-page");
   },
   add: function() {
-    navigateToPage("#add-page");
+    MfMobile.navigateToPage("#add-page");
   },
   addTab: function(tab) {
-    navigateToPage("#add-page");
-    $('#addTabs a[data-target="#tab-' + tab + '-content"]').tab('show');
+    MfMobile.navigateToPage("#add-page");
+    $('#add-tabs a[data-target="#tab-' + tab + '-content"]').tab('show');
   },
   legend: function() {
-    navigateToPage("#chart-page");
-    openPanel("#legend-panel");
+    MfMobile.navigateToPage("#chart-page");
+    MfMobile.openPanel("#legend-panel");
   },
   settings: function() {
-    openPanel("#settings-panel");
+    MfMobile.openPanel("#settings-panel");
     rtMe.settingsOpened = true;
   },
   toggleSettings: function() {
