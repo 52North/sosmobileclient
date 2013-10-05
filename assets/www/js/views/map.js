@@ -3,6 +3,7 @@ var MapView = (function() {
     events: {
       'click .posBtn':      'requestUserLocation',
       'click .providerBtn': 'requestProviderChange',
+      'click .delete-marker-btn': 'deleteLocateStationMarker'
     },
     subscriptions: {
       'station:locate':           'locateStation',
@@ -71,9 +72,39 @@ var MapView = (function() {
     },
     
     locateStation: function(timeseries) {
-      var pos = new L.LatLng(timeseries.get('station').geometry.coordinates[1], timeseries.get('station').geometry.coordinates[0]);
-      this.map.setZoom(17);
-      this.map.panTo(pos);
+      var station = timeseries.get('station');
+      var position = new L.LatLng(station.geometry.coordinates[1], station.geometry.coordinates[0]);
+    
+      this.deleteLocateStationMarker();
+
+      var myIcon = L.icon({
+        iconUrl: 'img/hand45.png',
+        shadowUrl: null,
+        iconSize:     [40, 50], // size of the icon
+        shadowSize:   [0, 0], // size of the shadow
+        iconAnchor:   [35, 0], // point of the icon which will correspond to marker's location
+        shadowAnchor: [0, 0],  // the same for the shadow
+        popupAnchor:  [0, -40] // point from which the popup should open relative to the iconAnchor
+      });
+
+      this.stationMarker = L.marker(position, { icon: myIcon });
+
+      var popup = L.popup()
+        .setLatLng(position)
+        .setContent("<h2>Station</h2>" + station.properties.label + "<p class='text-center'><button class='btn btn-xs btn-danger delete-marker-btn'>remove this info</button></p>")
+        .openOn(this.map);
+
+      this.stationMarker.bindPopup(popup);
+      this.map.addLayer(this.stationMarker);
+
+      this.map.panTo(this.stationMarker.getLatLng(), {animate: true});
+      this.map.setZoom(12);
+    },
+
+    deleteLocateStationMarker: function() {
+      if (this.map.hasLayer(this.stationMarker)) {
+        this.map.removeLayer(this.stationMarker);
+      }
     },
 
     requestUserLocation: function(event) {
@@ -89,7 +120,6 @@ var MapView = (function() {
     },
 
     drawUser: function(position) {
-      console.log(position);
       this.locateUserEnd();
 
       if (this.map.hasLayer(this.userPosition)) {
@@ -97,17 +127,17 @@ var MapView = (function() {
       }
 
       var myIcon = L.icon({
-        iconUrl: 'img/user_marker.png',
-        shadowUrl: 'img/user_marker_shadow.png',
+        iconUrl: 'img/marker-icon-user.png',
+        shadowUrl: 'img/marker-shadow.png',
 
-        iconSize:     [36, 57], // size of the icon
-        shadowSize:   [54, 42], // size of the shadow
-        iconAnchor:   [18, 57], // point of the icon which will correspond to marker's location
+        iconSize:     [25, 41], // size of the icon
+        shadowSize:   [41, 41], // size of the shadow
+        iconAnchor:   [12, 41], // point of the icon which will correspond to marker's location
         shadowAnchor: [10, 42],  // the same for the shadow
         popupAnchor:  [0, -46] // point from which the popup should open relative to the iconAnchor
       });
 
-      this.userPosition = L.marker(new L.LatLng(position.coords.latitude, position.coords.longitude), { title: "You are here.", icon: myIcon });
+      this.userPosition = L.marker(new L.LatLng(position.coords.latitude, position.coords.longitude), { icon: myIcon });
       this.map.addLayer(this.userPosition);
 
       this.map.panTo(this.userPosition.getLatLng(), {animate: true});
