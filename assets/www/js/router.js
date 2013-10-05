@@ -25,6 +25,7 @@ var AppRouter = Backbone.Router.extend({
   addTab: function(tab) {
     MfMobile.navigateToPage("#add-page");
     $('#add-tabs a[data-target="#tab-' + tab + '-content"]').tab('show');
+    this.navigate("add", {trigger: false, replace: true}); //open silently
   },
   legend: function() {
     MfMobile.navigateToPage("#chart-page");
