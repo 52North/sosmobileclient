@@ -7,7 +7,7 @@ var ChartRangeSettingsView = (function() {
       'click .preset-btn': 'setPeset',
       'click .confirm-range-btn': 'confirmRange',
       'click .custom-range-from-picker-btn': 'showDateTimeInput',
-      'click .custom-range-from-picker-btn': 'showDateTimeInput'
+      'click .custom-range-till-picker-btn': 'showDateTimeInput'
     },
     subscriptions: {
       "chart_range:custom_date:from:set": 'fromDateSet',
@@ -21,8 +21,8 @@ var ChartRangeSettingsView = (function() {
     },
 
     render: function() {
-      this.customFromDate = moment(this.model.get("timespan").from).format("YYYY-MM-DD");
-      this.customTillDate = moment(this.model.get("timespan").till).format("YYYY-MM-DD");
+      this.customFromDate = moment(this.model.get("timespan").from).format("YYYY/MM/DD");
+      this.customTillDate = moment(this.model.get("timespan").till).format("YYYY/MM/DD");
       
       var data = {
         presets: [
@@ -77,8 +77,8 @@ var ChartRangeSettingsView = (function() {
       } else if ($(e.currentTarget).hasClass("custom-range-till-picker-btn")) {
         type = "till";
 
-        picker.mobiscroll('setDate',           moment(this.customTillDate, "YYYY-MM-DD").toDate(), true, 0);
-        picker.mobiscroll('option', 'minDate', moment(this.customFromDate, "YYYY-MM-DD").toDate());
+        picker.mobiscroll('setDate',           moment(this.customTillDate, "YYYY/MM/DD").toDate(), true, 0);
+        picker.mobiscroll('option', 'minDate', moment(this.customFromDate, "YYYY/MM/DD").toDate());
       } else {
         return;
       }
@@ -94,7 +94,7 @@ var ChartRangeSettingsView = (function() {
     },
 
     fromDateSet: function(date, inst) {
-      this.customFromDate = date.format("YYYY-MM-DD");
+      this.customFromDate = date.format("YYYY/MM/DD");
       $(".custom-range-from-label").html(this.customFromDate);
       this.hidePicker();
 
@@ -109,7 +109,7 @@ var ChartRangeSettingsView = (function() {
     },
 
     tillDateSet: function(date, inst) {
-      this.customTillDate = date.format("YYYY-MM-DD");
+      this.customTillDate = date.format("YYYY/MM/DD");
       $(".custom-range-till-label").html(this.customTillDate);
       this.hidePicker();
       

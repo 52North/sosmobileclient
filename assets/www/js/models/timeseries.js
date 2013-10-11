@@ -21,7 +21,7 @@ var Timeseries = (function() {
     },
 
     parseColor: function() {
-      if (this.id in window.settings.get('timeseriesColors')) {
+      if (window.settings.get('timeseriesColors') != undefined && this.id in window.settings.get('timeseriesColors')) {
         return window.settings.get('timeseriesColors')[this.id];
       } else {
         return this.defaultColor();

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.n52.sosmobileclient"
-    android:versionCode="7"
-    android:versionName="0.5.2 beta (bugfix2)" >
+    android:versionCode="9"
+    android:versionName="0.6.0 beta bugfix1" >
 
     <uses-sdk android:minSdkVersion="9" />
 

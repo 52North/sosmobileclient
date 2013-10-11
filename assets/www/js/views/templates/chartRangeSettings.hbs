@@ -17,6 +17,7 @@
           <span class="custom-range-till-label"></span>
         </button>
 
+        <!--
         or
 
         <button class="preset-btn btn btn-default big-btn" data-preset-value="live">
@@ -24,21 +25,21 @@
           <span>live data</span>
         </button>
 
-        
+        -->
 
       </div>
 
-      <div class="accordion" id="accordion-timerange-type">
-        <div class="accordion-group">
-          <div class="accordion-heading">
-            <h4 class="panel-title" style="background: #f5f5f5">
-              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-timerange-type" href="#timerange-type-preset">
+      <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
                 or one of the presets
               </a>
             </h4>
           </div>
-          <div id="timerange-type-preset" class="accordion-body collapse">
-            <div class="accordion-inner">
+          <div id="collapseOne" class="panel-collapse collapse">
+            <div class="panel-body">
               {{#each presets}}
                 <button class="btn btn-default multiline-button preset-btn" data-preset-value="{{value}}">
                   {{label}}

@@ -29,7 +29,7 @@ var ChartControlsView = (function() {
       if (window.settings.get('timespan').label == "live") {
         this.$('.btn-prev-periode').hide();
         this.$('.btn-next-periode').hide();
-      } else if (moment(window.settings.get('timespan').till).format("YYYY-MM-DD") == moment().format("YYYY-MM-DD")) {
+      } else if (moment(window.settings.get('timespan').till).isAfter(moment())) {
         this.$('.btn-next-periode').hide();
         this.$('.btn-refresh').hide();
       } else {
