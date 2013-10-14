@@ -30,7 +30,11 @@ public class MobileSWC extends CordovaActivity
         super.onCreate(savedInstanceState);
         super.init();
         // Set by <content src="index.html" /> in config.xml
+        
+        super.setIntegerProperty("splashscreen", R.drawable.splash);
         super.loadUrl(Config.getStartUrl());
+        
+        //super.loadUrl(Config.getStartUrl());
         //super.loadUrl("file:///android_asset/www/index.html")
     }
 }

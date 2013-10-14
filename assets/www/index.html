@@ -157,7 +157,11 @@
 
     <script>
       $(function() {
-        $(document).on("deviceready", function() { //wait for phonegap //TURN OFF ON COMPUTER IN DEV MODE!
+        $(document).on("deviceready", function() { //wait for phonegap
+          Backbone.Mediator.subscribe('app:booted', function() {
+            navigator.splashscreen.hide();
+          }, this);
+          
           $(document).on("backbutton", function(e) {
             e.preventDefault();
             //alert("back");
@@ -168,6 +172,8 @@
             //alert("menu");
             // this is done in javaBackbone.Mediator.publish('device:button:menu');
           });
+
+          Backbone.Mediator.publish('device:ready', false);
         });
 
         jQuery.migrateMute = true;
@@ -207,7 +213,6 @@
 
         //No calls after boot
         Backbone.Mediator.publish('app:booted', false);
-        Backbone.Mediator.publish('device:ready', false);
 
         Backbone.Mediator.subscribe('app:exit', function() {
           if (confirm("Do you really want to exit the SOS mobile client?")) {

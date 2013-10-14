@@ -7,7 +7,9 @@
     <author email="dev@cordova.apache.org" href="http://cordova.io">
         Apache Cordova Team
     </author>
+    
     <content src="index.html#chart" />
+    
     <feature name="App">
         <param name="android-package" value="org.apache.cordova.App" />
     </feature>
@@ -40,6 +42,6 @@
     <preference name="show-splash-screen-spinner" value="true" />
     <preference name="auto-hide-splash-screen" value="true" />
     <preference name="disable-cursor" value="false" />
-    <preference name="android-minSdkVersion" value="7" />
+    <preference name="android-minSdkVersion" value="7" />    
     <preference name="android-installLocation" value="auto" />
 </widget>
