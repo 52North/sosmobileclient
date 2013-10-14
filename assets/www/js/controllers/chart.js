@@ -53,7 +53,11 @@ var ChartController = (function() {
       //true: remove  -  false: keep
       var inMetaListAndVisible = tsMeta.any(function(meta) {
         return (meta.get('id') == data.get('timeseriesMetaData').get('id')) && !meta.get('hidden');
-      }); 
+      });
+
+      if (!inMetaListAndVisible) {
+        data.abort();
+      }
       
       return !inMetaListAndVisible;
     }));
@@ -82,7 +86,7 @@ var ChartController = (function() {
   ChartController.prototype.loadAll = function() {
     //add to this.currentTimeseriesDataCollection
     var tsData = this.currentTimeseriesDataCollection;
-    tsData.reset();
+    tsData.abortAndReset();
     Backbone.Mediator.publish('chart:currentTimeseries:fetchingData');
     this.currentTimeseries.each(function(meta) {
       if (!meta.get('hidden')) {

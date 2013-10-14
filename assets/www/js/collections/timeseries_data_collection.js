@@ -15,6 +15,13 @@ var TimeseriesDataCollection = (function() {
 
     everythingSynced: function() {
       return this.every(function(elem) {return elem.get('synced')});
+    },
+
+    abortAndReset: function() {
+      this.each(function(tsData) {
+        tsData.abort();
+      });
+      this.reset();
     }
 
   });

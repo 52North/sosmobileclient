@@ -2,6 +2,7 @@ package org.n52.sosmobileclient;
 
 import org.apache.cordova.DroidGap;
 import android.os.Bundle;
+import android.view.Menu;
 
 public class SOSMobileClientActivity extends DroidGap {
     @Override
@@ -10,4 +11,13 @@ public class SOSMobileClientActivity extends DroidGap {
         super.onCreate(savedInstanceState);
         super.loadUrl("file:///android_asset/www/index.html", 2000);
     }
+    private boolean menuOpen = true;
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+    	sendJavascript("Backbone.Mediator.publish('device:button:menu');");
+    	menuOpen = !menuOpen;
+    	
+    	return menuOpen;
+	} 
 }
+

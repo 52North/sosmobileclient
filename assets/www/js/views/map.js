@@ -28,7 +28,7 @@ var MapView = (function() {
 
       var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png',
         cloudmadeAttribution = '&copy; OpenStreetMap &amp; Contributors',
-        cloudmade = L.tileLayer(cloudmadeUrl, {maxZoom: 17, attribution: cloudmadeAttribution}),
+        cloudmade = L.tileLayer(cloudmadeUrl, {maxZoom: 17, attribution: false}),
         latlng = L.latLng(50, 10);
       L.Icon.Default.imagePath = 'img';
 

@@ -30,7 +30,7 @@
     <div id="pt-main" class="pt-perspective">
       <div class="mf-panel"  data-alignment="left" id="legend-panel">
         <header role="banner" class="top app-navbar">
-          <a class="nav-btn nav-btn-right" href="javascript:history.back()"><i class="icon-remove"></i></a>
+          <a class="nav-btn nav-btn-right" href="#chart"><i class="icon-remove"></i></a>
           <h1>Legend</h1>
         </header>
         <div class="full-content" id="legend-content"></div>
@@ -50,19 +50,14 @@
          <header role="banner" class="top app-navbar">
           <a class="nav-btn nav-btn-left page-btn" href="#chart"><i class="icon-bar-chart"></i></a>
           <h1>Catalog</h1>
-          <a class="nav-btn nav-btn-right page-btn" href="#settings"><i class="icon-cogs"></i></a>
+          <a class="nav-btn nav-btn-right android-menu-btn" href="#add"><i class="icon-cogs"></i></a>
         </header>
         <div id="add-content" class="content" ></div>
       </div>
 
-      <div class="mf-panel" data-alignment="right" id="settings-panel">
-        <header role="banner" class="top app-navbar">
-          <a class="nav-btn nav-btn-left" href="javascript:history.back()"><i class="icon-remove"></i></a>
-          <h1>App settings</h1>
-        </header>
-        <div class="full-content" id="settings-content">
-        </div>
+      <div class="mf-panel"  data-alignment="bottom" id="settings-panel">
       </div>
+
     </div>
 
     <!-- JavaScript -->
@@ -81,6 +76,7 @@
       <script src="js/libs/handlebars-1.0.0.js"></script>
       <script src="js/libs/backbone-mediator.js"></script>
       <script src="js/libs/moment-2.2.1.min.js"></script>
+      <script src="js/libs/one-color.js"></script>
 
       <!-- Flot -->
       <script src="js/libs/flot/jquery.flot.min.js"></script>
@@ -88,11 +84,15 @@
       <script src="js/libs/flot/jquery.flot.time.min.js"></script>
       <script src="js/libs/touchit-1.0.0.js"></script>
       
-      <!-- Phonegap -->
+      <!-- Phonegap 
       <script src="js/libs/phonegap/cordova-1.9.0.js"></script>
       <script src="js/libs/phonegap/apis/geolocation.js"></script>
       <script src="js/libs/phonegap/apis/device.js"></script>
-
+      
+      <script type="text/javascript" src="phonegap.js"></script>
+      <script type="text/javascript" src="cordova.js"></script>
+      <script type="text/javascript" src="cordova_plugins.js"></script>-->
+      
       <!-- Bootstrap -->
       <script src="js/libs/bootstrap.js"></script>
 
@@ -110,6 +110,7 @@
 
       <!-- Services -->
       <script src="js/services/storage_dev.js"></script>
+      <script src="js/services/android_button.js"></script>
       
       <!-- Router -->
       <script src="js/router.js"></script>
@@ -148,53 +149,80 @@
       <script src="js/views/legendTimeserie.js"></script>
       <script src="js/views/loading.js"></script>
       <script src="js/views/map.js"></script>
+      <script src="js/views/search.js"></script>
       <script src="js/views/stations.js"></script>
       <script src="js/views/timeseries.js"></script>
       <script src="js/views/history.js"></script>
       <script src="js/views/services.js"></script>
 
-       <script src="js/libs/one-color.js"></script>
-
     <script>
       $(function() {
-      //  document.addEventListener("deviceready", function() { //wait for phonegap //TURN OFF ON COMPUTER IN DEV MODE!
-          jQuery.migrateMute = true;
+        $(document).on("deviceready", function() { //wait for phonegap //TURN OFF ON COMPUTER IN DEV MODE!
+          $(document).on("backbutton", function(e) {
+            e.preventDefault();
+            //alert("back");
+            Backbone.Mediator.publish('device:button:back');
+          });
+          $(document).on("menubutton", function(e) {
+            e.preventDefault();
+            //alert("menu");
+            // this is done in javaBackbone.Mediator.publish('device:button:menu');
+          });
+        });
 
-          // alert('Hello, ' + one.color('#650042').lightness(.3).green(.4).hex() + ' world!');
-          
-          window.settings = new CurrentSettings(); //globally
-          window.settings.fetch();
-          
-          //models and collections
-          var stations = new Stations();
-          var services = new Services();
-          var currentTimeseries = new CurrentTimeseries();
-          window.currentTimeseries = currentTimeseries;
-          var historyTimeseries = new HistoryTimeseries();
-          historyTimeseries.fetch();
+        jQuery.migrateMute = true;
 
-          //views
-          new SettingsView({'model': window.settings}).render();
-          new CatalogController(services, stations, historyTimeseries, currentTimeseries);
-          new ChartController(currentTimeseries);
-          new TimeseriesController(currentTimeseries, historyTimeseries);
-          new ServiceController(services, stations);
-          new LegendController(currentTimeseries);
+        // alert('Hello, ' + one.color('#650042').lightness(.3).green(.4).hex() + ' world!');
+        
+        window.settings = new CurrentSettings(); //globally
+        window.settings.fetch();
+        
+        //models and collections
+        var stations = new Stations();
+        var services = new Services();
+        var currentTimeseries = new CurrentTimeseries();
+        window.currentTimeseries = currentTimeseries;
+        var historyTimeseries = new HistoryTimeseries();
+        historyTimeseries.fetch();
 
-          //fetching data
-          currentTimeseries.fetch();
-          stations.url = Helpers.generateStationsUrl(window.settings.get('currentProvider'));
-          stations.fetch({reset: true});
-          services.fetch();
+        //views
+        var settingsView = new SettingsView({'model': window.settings, 'el': $('#settings-panel')}).render();
 
-          //router
-          var router = new AppRouter();
-          Backbone.history.start();
+        //controllers
+        new CatalogController(services, stations, historyTimeseries, currentTimeseries);
+        new ChartController(currentTimeseries);
+        new TimeseriesController(currentTimeseries, historyTimeseries);
+        new ServiceController(services, stations);
+        new LegendController(currentTimeseries);
 
-          //No calls after boot
-          Backbone.Mediator.publish('app:booted', false);
+        //fetching data
+        currentTimeseries.fetch();
+        stations.url = Helpers.generateStationsUrl(window.settings.get('currentProvider'));
+        stations.fetch({reset: true});
+        services.fetch();
 
-      //  }, false);
+        //router
+        var router = new AppRouter();
+        Backbone.history.start();
+
+        //No calls after boot
+        Backbone.Mediator.publish('app:booted', false);
+        Backbone.Mediator.publish('device:ready', false);
+
+        Backbone.Mediator.subscribe('app:exit', function() {
+          if (confirm("Do you really want to exit the SOS mobile client?")) {
+            Backbone.Mediator.publish('app:exit:immediately');
+          }
+        }, this);
+
+        Backbone.Mediator.subscribe('app:exit:immediately', function() {
+          navigator.app.exitApp();
+        }, this);
+
+        $('.android-menu-btn').click(function() {
+          Backbone.Mediator.publish('device:button:menu');            
+        })
+
       });
 
     </script>

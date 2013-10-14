@@ -13,7 +13,7 @@ var CatalogController = (function() {
       id: "add-tabs",
       tabs: [
         { 'name': 'MAP', 'id': 'map-content', "active": "active"},
-        { 'name': 'SEARCH', 'id': 'search-content', 'content-class': 'full-content'},
+        //{ 'name': 'SEARCH', 'id': 'search-content', 'content-class': 'full-content'},
         { 'name': 'HISTORY', 'id': 'history-content', 'content-class': 'full-content'}
       ]};
 
@@ -28,6 +28,9 @@ var CatalogController = (function() {
 
     var hv = new HistoryView({'collection': this.historyTimeseries});
     $('#tab-history-content').empty().html(hv.render().el);
+
+    var sv = new SearchView({});
+    $('#tab-search-content').empty().html(sv.render().el);
   };
 
   
