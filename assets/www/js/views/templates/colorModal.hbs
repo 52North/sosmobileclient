@@ -8,10 +8,10 @@
       <p>
         <div class="row">
           <div class="col-12">
-            <button class="btn default-color-btn col-12" data-color="{{defaultColor}}" style="background: #{{defaultColor}}">default</button>
+            <button class="btn default-color-btn" data-color="{{defaultColor}}" style="background: #{{defaultColor}}">default</button>
           </div>
           {{#each colors}}
-            <div class="col-4">
+            <div class="col-md-4 col-xs-4 col-sm-4">
               <button class="btn color-btn" data-color="{{this}}" style="background: #{{this}}"></button>   
             </div>
           {{/each}}

@@ -2,7 +2,9 @@ var ServicesView = (function() {
   return Backbone.View.extend({
     id: 'providerModal',
     className: 'modal fade',
-
+    attributes: {
+      'data-backdrop': 'static'
+    },
     events: {
       'click .availableServiceLink': 'changeProvider',
       'hidden.bs.modal': 'render'

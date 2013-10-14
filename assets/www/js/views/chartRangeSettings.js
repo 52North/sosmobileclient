@@ -2,6 +2,9 @@ var ChartRangeSettingsView = (function() {
   return Backbone.View.extend({
     id: 'chart-range-settings',
     className: 'modal fade',
+    attributes: {
+      'data-backdrop': 'static'
+    },
     template: Handlebars.helpers.getTemplate('chartRangeSettings'),
     events: {
       'click .preset-btn': 'setPeset',

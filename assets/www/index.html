@@ -216,7 +216,7 @@
         }, this);
 
         Backbone.Mediator.subscribe('app:exit:immediately', function() {
-          navigator.app.exitApp();
+          App.exitApp();
         }, this);
 
         $('.android-menu-btn').click(function() {

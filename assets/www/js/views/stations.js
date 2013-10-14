@@ -2,6 +2,9 @@ var StationsView = (function() {
   return Backbone.View.extend({
     id: 'map-choose-station-dialog',
     className: 'modal fade',
+    attributes: {
+      'data-backdrop': 'static'
+    },
     template: Handlebars.helpers.getTemplate('station-list'),
 
     initialize: function(){

@@ -18,7 +18,7 @@ var AndroidButtonService = (function() {
       Backbone.Mediator.publish('close:panels');
       MfMobile.closeAllPanels(); //close panel
     } else if (this.currentPage() == "chart") {
-      Backbone.Mediator.publish('app:exit'); //ask for exit
+      //Backbone.Mediator.publish('app:exit'); //ask for exit
     } else {
       this.router.navigate("#chart", {trigger: true, replace: true}); //navigate to chart
     }

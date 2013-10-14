@@ -2,6 +2,9 @@ var ColorView = (function() {
   return Backbone.View.extend({
     id: 'colorPopup',
     className: 'modal fade',
+        attributes: {
+      'data-backdrop': 'static'
+    },
     template: Handlebars.helpers.getTemplate('colorModal'),
     
     events: {
