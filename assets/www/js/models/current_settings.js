@@ -5,8 +5,8 @@ var CurrentSettings = (function() {
     defaultValues: {
       'currentProvider': 'PEGELONLINE',
       'lastStationUpdate': 'never',
-      'appVersion': 'v0.3 alpha',
-      'timespan': Helpers.isoTimespan('yesterday'),
+      'appVersion': 'v1.0.0 beta (bugfix 1)',
+      'timespan': Helpers.isoTimespan('today'),
       'expert': false,
       'timeseriesColors': {
         'timeseriesId': 'color'
@@ -30,9 +30,13 @@ var CurrentSettings = (function() {
     isSet: function() {
       return this.storage.isSet(this.key);
     },
+
+    isUpToDate: function() {
+      return this.defaultValues['appVersion'] == this.storage.load(this.key)['appVersion'];
+    },
     
     fetch: function() {
-      if (this.isSet()) {
+      if (this.isSet() && this.isUpToDate()) {
         this.set(this.storage.load(this.key));
       } else {
         this.set(this.defaultValues);
