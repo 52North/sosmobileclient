@@ -2,10 +2,10 @@
 <widget id="org.n52.sosmobileclient" version="0.6.0_beta_bugfix2" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>MobileSWC</name>
     <description>
-        Hello World sample application that responds to the deviceready event.
+       
     </description>
-    <author email="support@phonegap.com" href="http://phonegap.com">
-        PhoneGap Team
+    <author email="info@mariusfink.org" href="http://52north.com">
+    	Marius Fink in coorporation with 52north
     </author>
     <feature name="http://api.phonegap.com/1.0/device" />
     <preference name="orientation" value="default" />

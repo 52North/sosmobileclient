@@ -9,11 +9,13 @@
 
         <button class="custom-range-from-picker-btn btn btn-default big-btn">
           <i class="icon-step-backward"></i>
+          from:<br/>
           <span class="custom-range-from-label"></span> 
         </button>
 
         <button class="custom-range-till-picker-btn btn btn-default big-btn">
           <i class="icon-step-forward"></i>
+          till:<br/>
           <span class="custom-range-till-label"></span>
         </button>
 
@@ -38,7 +40,7 @@
               </a>
             </h4>
           </div>
-          <div id="collapseOne" class="panel-collapse collapse">
+          <div id="collapseOne" class="panel-collapse collapse in">
             <div class="panel-body">
               {{#each presets}}
                 <button class="btn btn-default multiline-button preset-btn" data-preset-value="{{value}}">

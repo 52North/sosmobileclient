@@ -3,8 +3,8 @@
     package="org.n52.sosmobileclient"
     android:hardwareAccelerated="true"
     android:installLocation="preferExternal"
-    android:versionCode="10"
-    android:versionName="0.6.0_beta_bugfix2"
+    android:versionCode="12"
+    android:versionName="1.0.0 beta (bugfix1)"
     android:windowSoftInputMode="adjustPan" >
 
     <supports-screens

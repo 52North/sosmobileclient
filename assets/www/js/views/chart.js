@@ -35,6 +35,8 @@ var ChartView = (function() {
       }
     },
 
+    template: Handlebars.helpers.getTemplate('chartPlaceholder'),
+
     initialize: function(){
       this.listenTo(this.collection, 'sync', this.render);
       this.listenTo(this.collection, 'reset', this.render);
@@ -56,7 +58,7 @@ var ChartView = (function() {
       if (this.collection.length > 0) {
         this.renderChart();
       } else {
-        this.$el.html("<div class='placeholder'>No timeseries are currently visible.<br/>Go on, <a href='#add'>add</a> one.</div>");
+        this.$el.html(this.template());
       }
 
       this.$el.append(this.loadingView.$el);

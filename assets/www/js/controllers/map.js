@@ -38,7 +38,7 @@ var MapController = (function() {
       Helpers.showErrorMessage("Positioning error", error.message);
     };
 
-    navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationError, { timeout: 5000, enableHighAccuracy: true });
+    navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationError, { timeout: 60000, enableHighAccuracy: true });
   };
 
   

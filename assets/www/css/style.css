@@ -34,6 +34,6 @@ a,a:focus,a:active,a:hover,a:visited{text-decoration:none;cursor:pointer;}
 .controls{position:relative;background:white;width:100%;z-index:100;text-align:left;background:#dedede;padding:0 5px;}.controls .btn{background:inherit;display:inline-block;min-width:40px;padding:0px 7px;margin:5px 0px;border-radius:5;border:1px solid #bbb;line-height:25px;color:#222;}.controls .btn i{font-size:20px;position:relative;bottom:-1px;}
 .controls .btn.highlight{-webkit-animation:highlight 1s ease-out;-webkit-animation-iteration-count:1;}
 @-webkit-keyframes highlight{0%{} 25%{background:red;} 75%{background:red;} 100%{}}.blink{-webkit-animation:blink 0.8s ease-out;-webkit-animation-iteration-count:infinite;}
-@-webkit-keyframes blink{50%{opacity:0.3;}}.custom-range-button-wrapper{margin-top:-20px;margin-bottom:20px;text-align:center;}.custom-range-button-wrapper .big-btn{width:100px;height:80px;}.custom-range-button-wrapper .big-btn i{font-size:40px;display:block;}
+@-webkit-keyframes blink{50%{opacity:0.3;}}.custom-range-button-wrapper{margin-top:-20px;margin-bottom:20px;text-align:center;}.custom-range-button-wrapper .big-btn{width:100px;height:100px;}.custom-range-button-wrapper .big-btn i{font-size:40px;display:block;}
 .loading-screen{position:absolute;top:0px;bottom:0px;left:0px;right:0px;background:rgba(255, 255, 255, 0.7);text-align:center;padding-top:50px;}.loading-screen .loading-state{font-size:28px;border:1px solid #ddd;width:50%;display:inline-block;}
 .loading-screen i{margin:5px;}

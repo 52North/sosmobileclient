@@ -41,8 +41,9 @@ var MapView = (function() {
       this.posBtn.html("<i class='icon-screenshot' id='posBtnIcon'></i>");
       
       var providerBtn = $("<a>").addClass('btn providerBtn btn-primary');
-      providerBtn.html("<i class='icon-cloud-download' id='provider-icon'></i>");
-      this.btnWrapper.prepend(providerBtn);
+      providerBtn.html("<i class='icon-exchange' id='provider-icon'></i>P");
+      this.btnWrapper.append("<br/>");
+      this.btnWrapper.append(providerBtn);
 
       this.btnWrapper.append(this.posBtn);
       this.$el.append(this.btnWrapper);
@@ -151,7 +152,7 @@ var MapView = (function() {
     },
 
     stationUpdateStart: function() {
-      $('#provider-icon').removeClass('icon-cloud-download');
+      $('#provider-icon').removeClass('icon-exchange');
       $('#provider-icon').addClass('icon-spinner icon-spin');
     },
 
@@ -160,7 +161,7 @@ var MapView = (function() {
       $('#provider-icon').addClass('icon-ok');
       setTimeout(function() {
         $('#provider-icon').removeClass('icon-ok');
-        $('#provider-icon').addClass('icon-cloud-download');
+        $('#provider-icon').addClass('icon-exchange');
       }, 750);
     }
   });
