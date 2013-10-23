@@ -41,7 +41,7 @@ var MapView = (function() {
       this.posBtn.html("<i class='icon-screenshot' id='posBtnIcon'></i>");
       
       var providerBtn = $("<a>").addClass('btn providerBtn btn-primary');
-      providerBtn.html("<i class='icon-exchange' id='provider-icon'></i>P");
+      providerBtn.html("<i class='icon-folder-open' id='provider-icon'></i>");
       this.btnWrapper.append("<br/>");
       this.btnWrapper.append(providerBtn);
 
@@ -152,7 +152,7 @@ var MapView = (function() {
     },
 
     stationUpdateStart: function() {
-      $('#provider-icon').removeClass('icon-exchange');
+      $('#provider-icon').removeClass('icon-folder-open');
       $('#provider-icon').addClass('icon-spinner icon-spin');
     },
 
@@ -161,7 +161,7 @@ var MapView = (function() {
       $('#provider-icon').addClass('icon-ok');
       setTimeout(function() {
         $('#provider-icon').removeClass('icon-ok');
-        $('#provider-icon').addClass('icon-exchange');
+        $('#provider-icon').addClass('icon-folder-open');
       }, 750);
     }
   });
