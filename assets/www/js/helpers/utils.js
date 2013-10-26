@@ -17,9 +17,9 @@ var Helpers = (function() {
 
     generateStationsUrl: function(provider) {
       if (!provider) {
-        var provider = "IRCELINE";
+        var provider = "PEGELONLINE";
       }
-      return "http://sosrest.irceline.be/api/v1/services/" + provider.toString() + "/stations.json?show=expanded";
+      return "http://sensorweb.demo.52north.org/sensorwebclient-webapp-stable/api/v0/services/" + provider.toString() + "/stations.json?show=expanded";
     },
 
     showErrorMessage: function(title, message) {
