@@ -9,7 +9,7 @@ a,a:focus,a:active,a:hover,a:visited{text-decoration:none;cursor:pointer;}
 .top .nav-btn-right{right:0px;}
 .top .nav-btn-left{left:0px;}
 .top h1{margin:0;font-size:24px;line-height:24px;text-align:center;white-space:nowrap;color:#fff !important;padding-top:19px;}
-.app-navbar{margin-bottom:0px !important;background:#222222;width:100%;min-height:60px;display:block;margin-bottom:20px;}.app-navbar a:hover,.app-navbar a:active,.app-navbar a:focus{text-decoration:none;}
+.app-navbar{margin-bottom:0px !important;background:#25AAE1;width:100%;min-height:60px;display:block;margin-bottom:20px;}.app-navbar a:hover,.app-navbar a:active,.app-navbar a:focus{text-decoration:none;}
 .tab-nav li a{font-size:13px;}
 .list{list-style:none outside none;padding:0px;}.list li{border-bottom:1px solid #d8d8d8;width:100%;margin:auto;}.list li .wrapper,.list li a{margin:0px 10px 0px 10px;display:-moz-box;display:-webkit-box;display:-ms-flexbox;display:box;text-decoration:none;}.list li .wrapper:active,.list li a:active,.list li .wrapper:focus,.list li a:focus,.list li .wrapper:hover,.list li a:hover{text-decoration:none;}
 .list li .wrapper .element,.list li a .element{min-width:50px;margin:10px 0px;padding:0px;border-left:1px solid #d8d8d8;font-size:26px;color:#7e7e7e;text-align:center;}.list li .wrapper .element .action,.list li a .element .action,.list li .wrapper .element .no-action,.list li a .element .no-action{padding:0;width:68px;height:40px;margin:0px;text-align:center;padding-left:22px;}
