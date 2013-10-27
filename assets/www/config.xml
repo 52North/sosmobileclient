@@ -10,7 +10,7 @@
     <name>Air Quality Belgium</name>
 
     <description>
-        A mobile application based on <a href="https://github.com/52North/sosmobileclient">sosmobileclient</a> to make available both sensor and interpolated/modelled air quality data available in real-time to the public
+        A mobile application based on <a href="https://github.com/52North/sosmobileclient">sosmobileclient</a> to make available both sensor and interpolated/modelled near real-time air quality data to the public in a convenient manner.
     </description>
 
     <author href="https://github.com/irceline/sosmobileclient" email="">
