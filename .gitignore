@@ -20,3 +20,6 @@ local.properties
 .project
 .project.properties
 .settings
+
+# Mac OSX
+.DS_Store

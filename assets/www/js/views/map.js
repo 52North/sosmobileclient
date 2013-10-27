@@ -26,13 +26,13 @@ var MapView = (function() {
       this.map.attr("id", "map");
       this.$el.empty().append(this.map);
 
-      var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png',
-        cloudmadeAttribution = '&copy; OpenStreetMap &amp; Contributors',
-        cloudmade = L.tileLayer(cloudmadeUrl, {maxZoom: 17, attribution: cloudmadeAttribution}),
+      var osmUrl = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+        osmAttribution = '<a href="http://www.openstreetmap.org/">OpenStreetMap</a>',
+        osm = L.tileLayer(osmUrl, {maxZoom: 17, attribution: osmAttribution}),
         latlng = L.latLng(50, 10);
       L.Icon.Default.imagePath = 'img';
 
-      this.map = L.map('map', {center: latlng, zoom: 5, layers: [cloudmade]});
+      this.map = L.map('map', {center: latlng, zoom: 5, layers: [osm]});
       this.markers = L.markerClusterGroup();
 
       //my position btn
