@@ -80,11 +80,11 @@ var MapView = (function() {
 
       var myIcon = L.icon({
         iconUrl: 'img/marker-icon-red.png',
-        shadowUrl: null,
+        shadowUrl: 'img/marker-shadow.png',
         iconSize:     [25, 41], // size of the icon
         shadowSize:   [41, 41], // size of the shadow
         iconAnchor:   [12, 41], // point of the icon which will correspond to marker's location
-        shadowAnchor: [0, 0],  // the same for the shadow
+        shadowAnchor: [12, 41],  // the same for the shadow
         popupAnchor:  [0, -40] // point from which the popup should open relative to the iconAnchor
       });
 
@@ -92,7 +92,7 @@ var MapView = (function() {
 
       var popup = L.popup()
         .setLatLng(position)
-        .setContent("<h2>Station</h2>" + station.properties.label + "<p class='text-center'><button class='btn btn-xs btn-danger delete-marker-btn'>remove this info</button></p>")
+        .setContent("<h3><i class='icon-screenshot'></i> Station</h3>" + station.properties.label + "<p class='text-center'><button class='btn btn-xs btn-danger delete-marker-btn'>remove this info</button></p>")
         .openOn(this.map);
 
       this.stationMarker.bindPopup(popup);
