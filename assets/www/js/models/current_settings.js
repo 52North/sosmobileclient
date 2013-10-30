@@ -5,7 +5,8 @@ var CurrentSettings = (function() {
     defaultValues: {
       'currentProvider': 'PEGELONLINE',
       'lastStationUpdate': 'never',
-      'appVersion': 'v1.0.0 beta (bugfix 1)',
+      'appVersion': 'v1.1.0 beta dev1',
+      'currentViewType': 'dynamic',
       'timespan': Helpers.isoTimespan('today'),
       'expert': false,
       'timeseriesColors': {

@@ -17,6 +17,7 @@ var ChartControlsView = (function() {
 
     initialize: function() {
       this.listenTo(window.settings, 'change:timespan', this.render);
+      this.listenTo(window.settings, 'change:currentViewType', this.render);
     },
 
     render: function() {
@@ -26,20 +27,29 @@ var ChartControlsView = (function() {
 
       this.$el.html(this.template(data));
 
-      if (window.settings.get('timespan').label == "live") {
-        this.$('.btn-prev-periode').hide();
-        this.$('.btn-next-periode').hide();
-      } else if (moment(window.settings.get('timespan').till).isAfter(moment())) {
+      if (moment(window.settings.get('timespan').till).isAfter(moment())) {
         this.$('.btn-next-periode').hide();
         this.$('.btn-refresh').hide();
       } else {
         this.$('.btn-refresh').hide();
       }
 
+      this.$('.view-btn').removeClass('active');
+      if (window.settings.get('currentViewType') == 'static') {
+        this.$('.reset-btn').hide();
+        this.$('.share-btn').show();
+        this.$('.static-view-btn').addClass('active');
+      } else {
+        this.$('.share-btn').hide();
+        this.$('.reset-btn').show();
+        this.$('.dynamic-view-btn').addClass('active');
+      }
+
       return this;
     },
 
     fireRefreshRequest: function() {
+      window.settings.trigger('change:timespan'); 
       window.settings.trigger('change:timespan'); 
     },
 
