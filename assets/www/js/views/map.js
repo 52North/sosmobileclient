@@ -79,16 +79,16 @@ var MapView = (function() {
       this.deleteLocateStationMarker();
 
       var myIcon = L.icon({
-        iconUrl: 'img/hand45.png',
+        iconUrl: 'img/marker-icon-red.png',
         shadowUrl: null,
-        iconSize:     [40, 50], // size of the icon
-        shadowSize:   [0, 0], // size of the shadow
-        iconAnchor:   [35, 0], // point of the icon which will correspond to marker's location
+        iconSize:     [25, 41], // size of the icon
+        shadowSize:   [41, 41], // size of the shadow
+        iconAnchor:   [12, 41], // point of the icon which will correspond to marker's location
         shadowAnchor: [0, 0],  // the same for the shadow
         popupAnchor:  [0, -40] // point from which the popup should open relative to the iconAnchor
       });
 
-      this.stationMarker = L.marker(position, { icon: myIcon });
+      this.stationMarker = L.marker(position, { icon: myIcon, zIndexOffset: 1000 });
 
       var popup = L.popup()
         .setLatLng(position)
@@ -98,8 +98,8 @@ var MapView = (function() {
       this.stationMarker.bindPopup(popup);
       this.map.addLayer(this.stationMarker);
 
-      this.map.panTo(this.stationMarker.getLatLng(), {animate: true});
-      this.map.setZoom(16);
+      this.map.panTo(this.stationMarker.getLatLng(), {animate: false});
+      this.map.setZoom(14);
     },
 
     deleteLocateStationMarker: function() {
