@@ -94,7 +94,7 @@ var Helpers = (function() {
       till = moment(till, "YYYY-MM-DD").startOf('day');
       din = from.format("YYYY-MM-DDTHH:mm:ss\\Z") + "/" + till.format("YYYY-MM-DDTHH:mm:ss\\Z");
 
-      var label = from.format("YYYY/MM/DD") + " - " + till.format("YYYY/MM/DD");
+      var label = Math.abs(from.diff(till, 'days')) + " days";
 
       var span = {
         'from': from,
@@ -120,12 +120,6 @@ var Helpers = (function() {
       var mode;
 
       switch (type) {
-        case 'live':
-          from = moment().subtract('hours', 1);
-          till = moment();
-          label = "live";
-          mode = "live";
-          break;
         case 'today':
           from = from.startOf('day');
           label = from.format("MMM D.");
@@ -197,7 +191,7 @@ var Helpers = (function() {
           var diff = till.diff(from); 
           newFrom = from[method](diff).startOf('day');
           newTill = till[method](diff).endOf('day');
-          newLabel = newFrom.format("YYYY/MM/DD") + " - " + newTill.format("YYYY/MM/DD");
+          newLabel = Math.abs(from.diff(till, 'days')) + " days";
           break;
         case 'day':
           newFrom = from[method]('days', 1).startOf('day');
