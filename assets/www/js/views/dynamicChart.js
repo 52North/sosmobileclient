@@ -1,4 +1,4 @@
-var ChartView = (function() {
+var DynamicChartView = (function() {
 
   return Backbone.View.extend({
     className: "chart-wrapper",
@@ -46,7 +46,8 @@ var ChartView = (function() {
       this.loadingView.render(); //initially reńder to hide it
     },
 
-    render: function() {   
+    render: function() {
+
       //Clean up
       this.$el.empty();
       if (this.plot) {

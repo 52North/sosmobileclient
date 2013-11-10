@@ -25,7 +25,7 @@ var DynamicChartController = (function() {
   DynamicChartController.prototype.build = function() {
      this.currentTimeseriesDataCollection = new TimeseriesDataCollection();
 
-    this.chartView = new ChartView({'collection': this.currentTimeseriesDataCollection});
+    this.chartView = new DynamicChartView({'collection': this.currentTimeseriesDataCollection});
     $(this.el).append(this.chartView.render().el);
   };
 

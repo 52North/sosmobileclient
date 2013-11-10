@@ -2,8 +2,8 @@ var TimeseriesData = (function() {
   return Backbone.Model.extend({
     storage: new StorageService(),
     subscriptions: {
-      'app:exit:immediately': 'abort',
-      'timeseries:delete': 'abortIf'
+      'chart:view:switch:dynamic': 'abort',
+      'chart:view:switch:static': 'abort',
     },
 
     initialize: function() {

@@ -135,7 +135,7 @@ var ChartRangeSettingsView = (function() {
 
       if (!this.customRangeSmallerThanOneYear()) {
         this.$('.warnings').append('<div class="alert alert-danger"><i class="icon-warning-sign"></i> The selected timespan is greater than one year. The SOS standard does not support timespans greater than one year.</div>')
-      } else if (Math.abs(from.diff(till, 'months', true)) > 3) {
+      } else if (this.customRangeGreaterThanThreeMonth) {
         this.$('.warnings').append('<div class="alert alert-warning"><i class="icon-warning-sign"></i> The selected timespan is greater than three months. This could affect loading times and zooming performance. Switch to static image mode if you face wonky behaviour.</div>')
       }
     },
@@ -144,6 +144,12 @@ var ChartRangeSettingsView = (function() {
       var from = moment(this.customFromDate);
       var till = moment(this.customTillDate);
       return (Math.abs(from.diff(till, 'years', true)) < 1)
+    },
+
+    customRangeGreaterThanThreeMonth: function() {
+      var from = moment(this.customFromDate);
+      var till = moment(this.customTillDate);
+      return (Math.abs(from.diff(till, 'months', true)) > 3) 
     },
 
     removeWarnings: function() {
@@ -205,6 +211,10 @@ var ChartRangeSettingsView = (function() {
       e.preventDefault();
 
       if (this.customRangeOk) {
+        if (this.customRangeGreaterThanThreeMonth) {
+          Backbone.Mediator.publish('chart:view:switch:static');
+        }
+
         var span = Helpers.isoTimespanFromTill(this.customFromDate, this.customTillDate);
         this.model.set('timespan', span);
       } else if (this.presetSelected) {

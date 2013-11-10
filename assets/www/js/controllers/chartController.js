@@ -52,15 +52,13 @@ var ChartController = (function() {
     }
 
     if (typeof this.staticController != 'undefined') {
-      //destroy
+      this.staticController.remove();
     }
     
     if (window.settings.get('currentViewType') == 'static') {
-      //this.staticController = new StaticChartController(this.currentTimeseries);
-      console.log("create static contorlle");
+      this.staticController = new StaticChartController(this.currentTimeseries, this.innerChartContent);
     } else {
       this.dynamicController = new DynamicChartController(this.currentTimeseries, this.innerChartContent);
-      console.log("create dynamci contorlle");
     }
   };
   
