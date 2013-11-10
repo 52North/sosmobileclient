@@ -29,13 +29,15 @@ var StaticChartController = (function() {
 
   StaticChartController.prototype.loadImage = function(width, height) {
     var timespan = window.settings.get('timespan').din;
-    console.log(timespan, width, height);
 
     var styleOptions = {};
 
-    this.currentTimeseries.each(function(elem) {
-      console.log(elem);
+    if (this.currentTimeseries.length == 0) { 
+      this.staticView.render();
+      return; 
+    }
 
+    this.currentTimeseries.each(function(elem) {
       styleOptions[elem.get('id')] = {
         "chartType": "line",
         "properties": {

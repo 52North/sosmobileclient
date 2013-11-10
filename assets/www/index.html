@@ -84,15 +84,15 @@
       <script src="js/libs/flot/jquery.flot.time.min.js"></script>
       <script src="js/libs/touchit-1.0.0.js"></script>
       
-      <!-- Phonegap 
+      <!-- Phonegap - remove this block when testing in browser 
       <script src="js/libs/phonegap/cordova-1.9.0.js"></script>
       <script src="js/libs/phonegap/apis/geolocation.js"></script>
       <script src="js/libs/phonegap/apis/device.js"></script>
       
       <script type="text/javascript" src="phonegap.js"></script>
       <script type="text/javascript" src="cordova.js"></script>
-      <script type="text/javascript" src="cordova_plugins.js"></script>
-      -->
+      <script type="text/javascript" src="cordova_plugins.js"></script>-->
+      
       <!-- Bootstrap -->
       <script src="js/libs/bootstrap.js"></script>
 
@@ -167,22 +167,17 @@
           
           $(document).on("backbutton", function(e) {
             e.preventDefault();
-            //alert("back");
             Backbone.Mediator.publish('device:button:back');
           });
           $(document).on("menubutton", function(e) {
             e.preventDefault();
-            //alert("menu");
-            // this is done in javaBackbone.Mediator.publish('device:button:menu');
           });
 
           Backbone.Mediator.publish('device:ready', false);
         });
 
         jQuery.migrateMute = true;
-
-        // alert('Hello, ' + one.color('#650042').lightness(.3).green(.4).hex() + ' world!');
-        
+  
         window.settings = new CurrentSettings(); //globally
         window.settings.fetch();
         

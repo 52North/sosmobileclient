@@ -37,10 +37,8 @@ var ChartControlsView = (function() {
       this.$('.view-btn').removeClass('active');
       if (window.settings.get('currentViewType') == 'static') {
         this.$('.reset-btn').hide();
-        this.$('.share-btn').show();
         this.$('.static-view-btn').addClass('active');
       } else {
-        this.$('.share-btn').hide();
         this.$('.reset-btn').show();
         this.$('.dynamic-view-btn').addClass('active');
       }

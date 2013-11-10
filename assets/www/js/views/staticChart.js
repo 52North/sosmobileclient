@@ -5,7 +5,6 @@ var StaticChartView = (function() {
     },
     subscriptions: {
     },
-
     initialize: function(){
      
     },
