@@ -84,14 +84,14 @@
       <script src="js/libs/flot/jquery.flot.time.min.js"></script>
       <script src="js/libs/touchit-1.0.0.js"></script>
       
-      <!-- Phonegap - remove this block when testing in browser 
+      <!-- Phonegap - remove this block when testing in browser -->
       <script src="js/libs/phonegap/cordova-1.9.0.js"></script>
       <script src="js/libs/phonegap/apis/geolocation.js"></script>
       <script src="js/libs/phonegap/apis/device.js"></script>
       
       <script type="text/javascript" src="phonegap.js"></script>
       <script type="text/javascript" src="cordova.js"></script>
-      <script type="text/javascript" src="cordova_plugins.js"></script>-->
+      <script type="text/javascript" src="cordova_plugins.js"></script>
       
       <!-- Bootstrap -->
       <script src="js/libs/bootstrap.js"></script>
@@ -211,21 +211,6 @@
 
         //No calls after boot
         Backbone.Mediator.publish('app:booted', false);
-
-        Backbone.Mediator.subscribe('app:exit', function() {
-          if (confirm("Do you really want to exit the SOS mobile client?")) {
-            Backbone.Mediator.publish('app:exit:immediately');
-          }
-        }, this);
-
-        Backbone.Mediator.subscribe('app:exit:immediately', function() {
-          App.exitApp();
-        }, this);
-
-        $('.android-menu-btn').click(function() {
-          Backbone.Mediator.publish('device:button:menu');            
-        })
-
       });
 
     </script>
